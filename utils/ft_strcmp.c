@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/24 11:09:35 by helarras         ###   ########.fr       */
+/*   Created: 2024/10/10 10:21:55 by helarras          #+#    #+#             */
+/*   Updated: 2024/10/17 07:55:18 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
 
-int	main() {
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
-		return (EXIT_FAILURE);
-
-	
-	// mlx loop.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			break ;
+	}
+	return (s1[i] - s2[i]);
 }

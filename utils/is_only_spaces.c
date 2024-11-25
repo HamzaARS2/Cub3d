@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   is_only_spaces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/24 11:09:35 by helarras         ###   ########.fr       */
+/*   Created: 2024/10/16 16:27:18 by helarras          #+#    #+#             */
+/*   Updated: 2024/10/16 16:28:14 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "../include/utils.h"
 
-int	main() {
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
-		return (EXIT_FAILURE);
+bool	is_only_spaces(char *str)
+{
+	int	i;
 
-	
-	// mlx loop.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (str && str[i])
+		if (str[i++] != 32)
+			return (false);
+	return (true);
 }

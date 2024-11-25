@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/24 11:09:35 by helarras         ###   ########.fr       */
+/*   Created: 2024/10/09 09:44:35 by helarras          #+#    #+#             */
+/*   Updated: 2024/10/17 07:53:49 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "../include/utils.h"
 
-int	main() {
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
-		return (EXIT_FAILURE);
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
 
-	
-	// mlx loop.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+		write(fd, s + (i++), 1);
 }

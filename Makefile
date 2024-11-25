@@ -1,5 +1,3 @@
-
-
 CFLAGS = 
 MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -12,7 +10,6 @@ HEADERS := $(MLX)/include
 MAIN_FILES = cub4d.c
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)
-
 
 NAME = cub3D
 

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/24 11:09:35 by helarras         ###   ########.fr       */
+/*   Created: 2024/01/15 15:38:02 by helarras          #+#    #+#             */
+/*   Updated: 2024/01/20 13:37:32 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main() {
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
-		return (EXIT_FAILURE);
+# include <stdlib.h>
+# include <unistd.h>
 
-	
-	// mlx loop.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 0
+# endif
+
+char	*get_next_line(int fd);
+size_t	ft_strlen(char *str);
+size_t	is_exists(char *str, char c);
+char	*sclear(char **s);
+char	*strcombine(char *s1, char *s2);
+
+#endif

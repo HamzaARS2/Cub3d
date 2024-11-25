@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   mp_checker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/24 11:09:35 by helarras         ###   ########.fr       */
+/*   Created: 2024/11/25 08:03:44 by helarras          #+#    #+#             */
+/*   Updated: 2024/11/25 08:06:03 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "include/mapscan.h"
 
-int	main() {
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
-		return (EXIT_FAILURE);
+bool	chk_textures(t_maplst *textures)
+{
 
+}
+
+bool	chk_surfaces(t_maplst *surfaces)
+{
 	
-	// mlx loop.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+}
+
+bool	chk_map(char **map)
+{
+	
 }

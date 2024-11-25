@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   substr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/24 11:09:35 by helarras         ###   ########.fr       */
+/*   Created: 2024/08/22 19:15:50 by helarras          #+#    #+#             */
+/*   Updated: 2024/10/17 07:50:54 by ajbari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "../include/minishell.h"
 
-int	main() {
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
-		return (EXIT_FAILURE);
+char	*substr(char *str, int start, int end)
+{
+	char	*newstr;
+	int		strsize;
+	int		i;
 
-	
-	// mlx loop.
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+	i = 0;
+	strsize = end - start;
+	if (strsize <= 0)
+		return (NULL);
+	newstr = malloc((strsize + 1) * sizeof(char));
+	if (!newstr)
+		return (NULL);
+	while (str[start] && strsize > i)
+		newstr[i++] = str[start++];
+	newstr[i] = 0;
+	return (newstr);
 }
