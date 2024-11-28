@@ -3,44 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 11:54:55 by helarras          #+#    #+#             */
-/*   Updated: 2024/10/17 07:55:38 by ajbari           ###   ########.fr       */
+/*   Created: 2023/12/12 12:33:06 by helarras          #+#    #+#             */
+/*   Updated: 2024/01/01 22:15:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-static size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	srclen;
-
-	srclen = ft_strlen(src);
-	i = 0;
-	if (dstsize <= 0)
-		return (srclen);
-	while (src[i] && i < (dstsize - 1))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = 0;
-	return (srclen);
-}
-
-char	*ft_strdup(char *s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	i;
 	size_t	s1_bytes;
 	char	*dest;
 
 	i = 0;
-	if (!s1)
-		return (NULL);
 	s1_bytes = ft_strlen(s1) + 1;
-	dest = malloc(s1_bytes * sizeof(char));
+	dest = (char *)malloc(s1_bytes * sizeof(char));
 	if (!dest)
 		return (0);
 	ft_strlcpy(dest, s1, s1_bytes);

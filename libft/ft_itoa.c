@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 07:53:29 by ajbari            #+#    #+#             */
-/*   Updated: 2024/10/17 07:53:29 by ajbari           ###   ########.fr       */
+/*   Created: 2023/12/17 12:00:53 by helarras          #+#    #+#             */
+/*   Updated: 2023/12/29 19:50:19 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "libft.h"
 
 static int	intlen(long nbr)
 {

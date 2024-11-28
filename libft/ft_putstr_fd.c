@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   substr.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 19:15:50 by helarras          #+#    #+#             */
-/*   Updated: 2024/10/17 07:50:54 by ajbari           ###   ########.fr       */
+/*   Created: 2023/12/29 22:05:00 by helarras          #+#    #+#             */
+/*   Updated: 2023/12/30 11:04:02 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-char	*substr(char *str, int start, int end)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*newstr;
-	int		strsize;
-	int		i;
+	size_t	i;
 
+	if (!s)
+		return ;
 	i = 0;
-	strsize = end - start;
-	if (strsize <= 0)
-		return (NULL);
-	newstr = malloc((strsize + 1) * sizeof(char));
-	if (!newstr)
-		return (NULL);
-	while (str[start] && strsize > i)
-		newstr[i++] = str[start++];
-	newstr[i] = 0;
-	return (newstr);
+	while (s[i])
+		write(fd, s + (i++), 1);
 }

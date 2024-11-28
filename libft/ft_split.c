@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 12:00:26 by helarras          #+#    #+#             */
-/*   Updated: 2024/10/17 07:55:01 by ajbari           ###   ########.fr       */
+/*   Updated: 2023/12/31 15:22:35 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "libft.h"
 
-static int	count_words(char *str, char delimeter)
+static int	count_words(char const *str, char delimeter)
 {
-	int	i;
-	int	count;
+	size_t	i;
+	size_t	count;
 
 	count = 0;
 	i = 0;
@@ -38,11 +38,12 @@ static void	freewords(char **words, int i)
 	free(words);
 }
 
-static char	**strcut(char **words, char *str, char delimeter, int wcount)
+static char	**strcut(char **words, char const *str, char delimeter,
+		size_t wcount)
 {
-	int	i;
-	int	ccount;
-	int	windex;
+	size_t	i;
+	size_t	ccount;
+	size_t	windex;
 
 	i = 0;
 	ccount = 0;
@@ -53,7 +54,7 @@ static char	**strcut(char **words, char *str, char delimeter, int wcount)
 			i++;
 		while (str[i + ccount] && str[i + ccount] != delimeter)
 			ccount++;
-		words[windex] = substr(str, i, i + ccount);
+		words[windex] = ft_substr(str, i, ccount);
 		if (!words[windex])
 		{
 			freewords(words, windex - 1);
@@ -63,13 +64,13 @@ static char	**strcut(char **words, char *str, char delimeter, int wcount)
 		ccount = 0;
 		windex++;
 	}
-	words[windex] = NULL;
+	words[windex] = 0;
 	return (words);
 }
 
-char	**ft_split(char *str, char c)
+char	**ft_split(char const *str, char c)
 {
-	int		wcount;
+	size_t	wcount;
 	char	**words;
 
 	if (!str)

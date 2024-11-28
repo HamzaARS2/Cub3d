@@ -3,43 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 07:56:24 by ajbari            #+#    #+#             */
-/*   Updated: 2024/10/17 07:56:36 by ajbari           ###   ########.fr       */
+/*   Created: 2023/12/14 17:36:17 by helarras          #+#    #+#             */
+/*   Updated: 2023/12/29 19:52:30 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "libft.h"
 
-static int	set_check(char s1, char *set)
+static int	is_exist(char const *str, char const c)
 {
-	size_t	j;
+	size_t	i;
 
-	j = 0;
-	while (set[j] != '\0')
+	i = 0;
+	while (str[i])
 	{
-		if (s1 == set[j])
-		{
+		if (str[i] == c)
 			return (1);
-		}
-		j++;
+		i++;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char *s1, char *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	skip;
-	size_t	ls;
+	size_t	start;
+	size_t	end;
 
-	skip = 0;
 	if (!s1 || !set)
 		return (0);
-	ls = ft_strlen(s1);
-	while (s1[skip] && set_check(s1[skip], set) == 1)
-		skip++;
-	while (ls > skip && set_check(s1[ls - 1], set) == 1)
-		ls--;
-	return (substr(s1, skip, ls));
+	start = 0;
+	end = 0;
+	while (s1[start] && is_exist(set, s1[start]))
+		start++;
+	end = ft_strlen(s1);
+	if (end > 0)
+		end--;
+	while (end > start && is_exist(set, s1[end]))
+		end--;
+	return (ft_substr(s1, start, end - start + 1));
 }

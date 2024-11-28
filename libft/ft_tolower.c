@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajbari <ajbari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 15:08:05 by helarras          #+#    #+#             */
-/*   Updated: 2024/10/17 07:55:50 by ajbari           ###   ########.fr       */
+/*   Created: 2023/12/05 19:07:50 by helarras          #+#    #+#             */
+/*   Updated: 2023/12/26 12:48:21 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlen(char *str)
+int	ft_tolower(int c)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }

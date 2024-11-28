@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 15:38:02 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/28 12:15:53 by helarras         ###   ########.fr       */
+/*   Created: 2023/12/12 11:57:17 by helarras          #+#    #+#             */
+/*   Updated: 2023/12/29 22:14:23 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+void	*ft_calloc(size_t count, size_t size)
+{
+	size_t	i;
+	size_t	bytes;
+	char	*ptr;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-char	*get_next_line(int fd);
-// size_t	ft_strlen(char *str);
-size_t	is_exists(char *str, char c);
-char	*sclear(char **s);
-char	*strcombine(char *s1, char *s2);
-
-#endif
+	i = 0;
+	bytes = count * size;
+	if (size && count != bytes / size)
+		return (0);
+	ptr = (char *)malloc(bytes);
+	if (!ptr)
+		return (0);
+	ft_bzero(ptr, bytes);
+	return ((void *)ptr);
+}

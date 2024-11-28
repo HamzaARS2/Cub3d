@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/25 13:11:06 by helarras         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:21:14 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <fcntl.h>
 # include <stdio.h>
-# include "include/utils.h"
-# include "include/get_next_line.h"
+# include <stdbool.h>
+# include "../libft/libft.h"
+# include "get_next_line.h"
 
 typedef enum e_mperror {
 	NO_ERROR,			// Map is valid
@@ -35,30 +36,26 @@ typedef enum e_mperror {
     ERR_FILE_FORMAT     // Incorrect map file format
 } t_mperror;
 
-
-typedef struct s_maplst {
-	char			*line;
-	struct s_maplst	*next;
-} t_maplst;
+typedef struct s_entry {
+    char    id;
+    char    *value;
+} t_entry;
 
 typedef struct s_mapscan {
-	t_maplst	*textures;
-	t_maplst	*surfaces;
-	t_mperror	error;
-	char		**map;
-	char		*line;
-	int			i;
+	t_list      *textures;
+    char        *floor;
+    char        *ceilling;
+    char		**map;
+	char        mapfd;
+    
 } t_mapscan;
 
 t_mapscan	*init_mapscan(char *mapfile);
 
 // map reader.
-t_maplst	*rdr_readtex(char *mapfile);
-t_maplst	*rdr_readsurfs(char *mapfile);
-bool		rdr_readmap(t_mapscan *mapscan, char *mapfile);
-
-
-
+void	mp_loadmap(t_mapscan *mapscan);
+bool	rdr_readtex(t_mapscan *mapscan, char *line);
+bool	rdr_readsurfs(t_mapscan *mapscan, char *line);
 
 
 
