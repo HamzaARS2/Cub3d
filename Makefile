@@ -11,12 +11,14 @@ LIBFT := $(LIBFT_DIR)/libft.a
 HEADERS := $(MLX)/include
 
 GNL_FILES := gnl/get_next_line.c gnl/get_next_line_utils.c
-MAIN_FILES = cub4d.c mapscan/mapscan.c mapscan/mp_reader.c $(GNL_FILES)
+MAIN_FILES = cub4d.c mapscan/mapscan.c mapscan/mp_reader.c mapscan/mp_utils.c $(GNL_FILES)
 
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)
 
 NAME = cub3D
+
+# ADS := -fsanitize=address -g
 
 all: libmlx $(NAME)
 
@@ -28,14 +30,14 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR) all bonus
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(ADS) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB) -o $@
+	$(CC) $(ADS) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB) -o $@
 
 clean:
 	rm -rf $(OBJS_FILES)
-	rm -rf $(MLX_BUILD)
+#	rm -rf $(MLX_BUILD)
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean

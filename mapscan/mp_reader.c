@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/28 13:37:01 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:34:42 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ bool	rdr_readtex(t_mapscan *mapscan, char *line)
 {
 	t_entry	*entry;
 
-	entry = malloc(sizeof(t_entry));
-	if (!entry)
-		return (false);
 	if (!line  || (ft_strncmp(line, "NO", 2) && ft_strncmp(line, "SO", 2)
 		&& ft_strncmp(line, "WE", 2) && ft_strncmp(line, "EA", 2)))
+		return (false);
+	entry = malloc(sizeof(t_entry));
+	if (!entry)
 		return (false);
 	entry->id = line[0];
 	entry->value = ft_strtrim(line + 2, " \n");
@@ -39,7 +39,48 @@ bool	rdr_readsurfs(t_mapscan *mapscan, char *line)
 	return (true);
 }
 
-void	rdr_readmap(t_mapscan *mapscan, char *line)
+bool	rdr_read_data(t_mapscan *mapscan)
 {
+	char	*line;
+	int		count;
+
+	count = 6;
+	while (count)
+	{
+		line = get_next_line(mapscan->mapfd);
+		if (!line)
+			return (false);
+		if (rdr_readtex(mapscan, line) || rdr_readsurfs(mapscan, line) || ump_is_empty_line(line))
+			count--;
+		free(line);
+		line = NULL;
+	}
+	return (true);
+}
+
+char	**rdr_readmap(t_mapscan *mapscan)
+{
+	t_list	*maplst;
+	char	*line;
+	int		mapsize;
+	bool	mapstarted;
 	
+	mapsize = 0;
+	maplst = NULL;
+	mapstarted = false;
+	while (true)
+	{
+		line = get_next_line(mapscan->mapfd);
+		if (!line)
+			break;
+		if (!mapstarted && ump_is_empty_line(line))
+		{
+			free(line);
+			continue;
+		}
+		mapstarted = true;
+		ft_lstadd_back(&maplst, ft_lstnew(line));
+		mapsize++;
+	}
+	return (ump_create_map(maplst, mapsize));
 }

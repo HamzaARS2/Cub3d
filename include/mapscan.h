@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/28 13:21:14 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:39:35 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ t_mapscan	*init_mapscan(char *mapfile);
 void	mp_loadmap(t_mapscan *mapscan);
 bool	rdr_readtex(t_mapscan *mapscan, char *line);
 bool	rdr_readsurfs(t_mapscan *mapscan, char *line);
-
-
-
+bool	rdr_read_data(t_mapscan *mapscan);
+char	**rdr_readmap(t_mapscan *mapscan);
+// utils
+char	**ump_create_map(t_list *maplst, int mapsize);
+void	ump_clear(void *content);
+bool	ump_is_empty_line(char *line);
 
 #endif

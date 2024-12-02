@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/28 13:39:43 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:01:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,30 @@ t_mapscan	*init_mapscan(char *mapfile)
 
 void	mp_loadmap(t_mapscan *mapscan)
 {
-	char *line;
+	char	*line;
 
-	while (true)
+	if (!rdr_read_data(mapscan))
 	{
-		line = get_next_line(mapscan->mapfd);
-		if (!line)
-			break;
-		if (rdr_readtex(mapscan, line))
-			continue;
-		if (rdr_readsurfs(mapscan, line))
-			continue;
+		
+		return; // TODO: Handle data missing or unexpected error occured.
 	}
-		printf("floor: %s | ceilling: %s\n", mapscan->floor, mapscan->ceilling);
-		t_list *current = mapscan->textures;
-		while (current) {
-			t_entry *entry = current->content; 
-			printf("id: %c | path: %s\n", entry->id, entry->value);
-			current = current->next;
-		}
+	mapscan->map = rdr_readmap(mapscan);
+	printf("floor: %s | ceilling: %s\n", mapscan->floor, mapscan->ceilling);
+	t_list *current = mapscan->textures;
+	while (current) {
+		t_entry *entry = current->content; 
+		printf("id: %c | path: %s\n", entry->id, entry->value);
+		current = current->next;
+	}
+	int i = 0;
+	while (mapscan->map[i])
+	{
+		printf("%s", mapscan->map[i++]);
+	}
+	printf("\n");
+	
+	system("leaks -q cub3D");
+	exit(0);
 	
 }
 
