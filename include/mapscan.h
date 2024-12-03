@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/02 15:39:35 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:28:49 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef enum e_mperror {
     ERR_EMPTY,          // Map is empty
     ERR_INVALID_CHAR,   // Map contains invalid characters
     ERR_MISSING_TEXTURE, // Missing texture path (NO, SO, WE, EA)
-    ERR_INVALID_TEXTURE, // Invalid texture path format
+    ERR_INVALID_DATA, // Invalid texture path format
     ERR_MISSING_COLOR,  // Missing floor or ceiling color definition
     ERR_INVALID_COLOR,  // Invalid color format (e.g., incorrect RGB values)
     ERR_MAP_NOT_CLOSED, // Map is not surrounded by walls
@@ -51,7 +51,7 @@ typedef struct s_mapscan {
 } t_mapscan;
 
 t_mapscan	*init_mapscan(char *mapfile);
-
+void	    mp_clearmap(t_mapscan *mapscan);
 // map reader.
 void	mp_loadmap(t_mapscan *mapscan);
 bool	rdr_readtex(t_mapscan *mapscan, char *line);
@@ -62,5 +62,5 @@ char	**rdr_readmap(t_mapscan *mapscan);
 char	**ump_create_map(t_list *maplst, int mapsize);
 void	ump_clear(void *content);
 bool	ump_is_empty_line(char *line);
-
+void	mp_post_error(t_mperror error);
 #endif

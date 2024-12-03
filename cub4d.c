@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/11/28 12:12:22 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:57:26 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@ t_mapscan	*readmap(char *mapfile)
 	return (mapscan);
 }
 
+void	foo() {
+	system("leaks -q cub3D");
+}
+
 int	main(int ac, char **av) {
 	t_mapscan *mapscan;
 
+	atexit(foo);
 	mapscan = readmap(av[1]);
+	mp_clearmap(mapscan);
 	// mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
 	// if (!mlx)
 	// 	return (EXIT_FAILURE);
