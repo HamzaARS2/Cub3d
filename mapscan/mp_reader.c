@@ -6,29 +6,58 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/04 12:08:15 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:11:29 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/mapscan.h"
 
+// bool	rdr_readtex(t_mapscan *mapscan, char *line)
+// {
+// 	t_entry	*entry;
+// 	char	*tline;
+
+// 	tline = ft_strtrim(line, " \n");
+// 	if (!tline  || (ft_strncmp(tline, "NO ", 3) && ft_strncmp(tline, "SO ", 3)
+// 		&& ft_strncmp(tline, "WE ", 3) && ft_strncmp(tline, "EA ", 3)))
+// 		return (false);
+// 	entry = malloc(sizeof(t_entry));
+// 	if (!entry)
+// 		return (false);
+// 	entry->id = tline[0];
+// 	entry->value = ft_strdup(tline + 3);
+// 	if (!entry->value || !entry->value[0])
+// 	{
+// 		ump_clear(entry);
+// 		return (false);
+// 	}
+// 	free(tline);
+// 	ft_lstadd_back(&mapscan->textures, ft_lstnew(entry));
+// 	return (true);
+// }
+
 bool	rdr_readtex(t_mapscan *mapscan, char *line)
 {
 	t_entry	*entry;
+	char	**strs;
 
-	if (!line  || (ft_strncmp(line, "NO ", 3) && ft_strncmp(line, "SO ", 3)
-		&& ft_strncmp(line, "WE ", 3) && ft_strncmp(line, "EA ", 3)))
+	strs = ft_split(line, 32);
+	if (!strs)
+		return (false);
+	if (!strs[0]  || (ft_strncmp(strs[0], "NO", 2) && ft_strncmp(strs[0], "SO", 2)
+		&& ft_strncmp(strs[0], "WE", 2) && ft_strncmp(strs[0], "EA", 2)))
 		return (false);
 	entry = malloc(sizeof(t_entry));
 	if (!entry)
 		return (false);
-	entry->id = line[0];
-	entry->value = ft_strtrim(line + 2, " \n");
+	entry->id = strs[0][0];
+	entry->value = ft_strtrim(strs[1], "\n");
 	if (!entry->value || !entry->value[0])
 	{
 		ump_clear(entry);
 		return (false);
 	}
+	clear_array((void **)strs);
 	ft_lstadd_back(&mapscan->textures, ft_lstnew(entry));
 	return (true);
 }

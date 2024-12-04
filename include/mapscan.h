@@ -6,17 +6,14 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/04 12:13:54 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:03:39 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAPSCAN_H
 # define MAPSCAN_H
 
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include "../libft/libft.h"
+# include "../include/utils.h"
 # include "get_next_line.h"
 
 typedef enum e_mperror {
