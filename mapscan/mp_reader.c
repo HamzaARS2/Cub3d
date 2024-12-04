@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/03 12:28:11 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:08:15 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,3 +95,4 @@ char	**rdr_readmap(t_mapscan *mapscan)
 	}
 	return (ump_create_map(maplst, mapsize));
 }
+

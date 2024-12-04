@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/03 12:35:12 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:14:24 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,7 @@ t_mapscan	*init_mapscan(char *mapfile)
 	return (mapscan);
 }
 
-void	print_map(t_mapscan *mapscan)
-{
-	printf("floor: %s | ceilling: %s\n", mapscan->floor, mapscan->ceilling);
-	t_list *current = mapscan->textures;
-	while (current) {
-		t_entry *entry = current->content; 
-		printf("id: %c | path: %s\n", entry->id, entry->value);
-		current = current->next;
-	}
-	int i = 0;
-	while (mapscan->map[i])
-	{
-		printf("%s", mapscan->map[i++]);
-	}
-	printf("\n");
-}
+
 
 void	mp_loadmap(t_mapscan *mapscan)
 {
@@ -58,18 +43,26 @@ void	mp_loadmap(t_mapscan *mapscan)
 	if (rdr_read_data(mapscan))
 	{
 		mp_post_error(ERR_INVALID_DATA);
-		return; // TODO: Handle data missing or unexpected error occured.
+		exit(EXIT_FAILURE);
 	}
 	mapscan->map = rdr_readmap(mapscan);
-	print_map(mapscan);
-	
-	
-	
+	if (!mapscan->map)
+	{
+		mp_post_error(ERR_MAP_NOT_FOUND);
+		exit(EXIT_FAILURE);
+	}
 }
 
-void	mp_verifymap(t_mapscan *mapscan)
+bool	mp_verifymap(t_mapscan *mapscan)
 {
-	
+	int			i;
+	t_mperror	error[15];
+
+	i = 0;
+	error[i++] = chk_textures(mapscan->textures);
+	if (error[0])
+		mp_post_error(error[0]);
+	return (!error[0]);
 }
 
 void	mp_clearmap(t_mapscan *mapscan)
@@ -93,5 +86,11 @@ void	mp_post_error(t_mperror error)
 {
 	if (error == ERR_INVALID_DATA)
 		ft_putstr_fd("Error\nInvalid data!.\n", 2);
+	else if (error == ERR_MISSING_TEXTURE)
+		ft_putstr_fd("Error\nMissing texture!.\n", 2);
+	else if (error == ERR_DUPLICATED_TEXTURE)
+		ft_putstr_fd("Error\nduplicated texture\n", 2);
+	else if (error == ERR_MAP_NOT_FOUND)
+		ft_putstr_fd("Error\nMap not found!.\n", 2);
 
 }

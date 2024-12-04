@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/02 15:35:06 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:58:46 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**ump_create_map(t_list *maplst, int mapsize)
 	char	**map;
 	t_list	*current;
 	
+	if (!maplst)
+		return (NULL);
 	i = 0;
 	current = maplst;
 	map = malloc((mapsize + 1) * sizeof(char *));

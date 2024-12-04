@@ -11,7 +11,8 @@ LIBFT := $(LIBFT_DIR)/libft.a
 HEADERS := $(MLX)/include
 
 GNL_FILES := gnl/get_next_line.c gnl/get_next_line_utils.c
-MAIN_FILES = cub4d.c mapscan/mapscan.c mapscan/mp_reader.c mapscan/mp_utils.c $(GNL_FILES)
+MAIN_FILES = $(GNL_FILES) cub4d.c mapscan/mapscan.c mapscan/mp_reader.c mapscan/mp_utils.c \
+mapscan/mp_checker.c
 
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)
