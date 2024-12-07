@@ -6,70 +6,66 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/04 16:11:29 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:50:23 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/mapscan.h"
 
-// bool	rdr_readtex(t_mapscan *mapscan, char *line)
-// {
-// 	t_entry	*entry;
-// 	char	*tline;
+int	rdr_checkid(char *line)
+{
+	int i;
 
-// 	tline = ft_strtrim(line, " \n");
-// 	if (!tline  || (ft_strncmp(tline, "NO ", 3) && ft_strncmp(tline, "SO ", 3)
-// 		&& ft_strncmp(tline, "WE ", 3) && ft_strncmp(tline, "EA ", 3)))
-// 		return (false);
-// 	entry = malloc(sizeof(t_entry));
-// 	if (!entry)
-// 		return (false);
-// 	entry->id = tline[0];
-// 	entry->value = ft_strdup(tline + 3);
-// 	if (!entry->value || !entry->value[0])
-// 	{
-// 		ump_clear(entry);
-// 		return (false);
-// 	}
-// 	free(tline);
-// 	ft_lstadd_back(&mapscan->textures, ft_lstnew(entry));
-// 	return (true);
-// }
+	i = 0;
+	if (!line)
+		return (-1);
+	while (line[i] && line[i + 1])
+	{
+		if (!ft_strncmp(line + i, "NO", 2) || !ft_strncmp(line + i, "SO", 2)
+			|| !ft_strncmp(line + i, "EA", 2) || !ft_strncmp(line + i, "WE", 2)
+			|| line[i] == 'F' || line[i] == 'C')
+			return (i);
+		if (ft_isprint(line[i]) && line[i] != 32)
+			break;
+		i++;
+	}
+	return (-1);
+}
 
 bool	rdr_readtex(t_mapscan *mapscan, char *line)
 {
-	t_entry	*entry;
-	char	**strs;
+	int id;
 
-	strs = ft_split(line, 32);
-	if (!strs)
+	id = rdr_checkid(line);
+	if (id < 0 || (line[id] != 'N' && line[id] != 'S'
+		&& line[id] != 'E' && line[id] != 'W'))
 		return (false);
-	if (!strs[0]  || (ft_strncmp(strs[0], "NO", 2) && ft_strncmp(strs[0], "SO", 2)
-		&& ft_strncmp(strs[0], "WE", 2) && ft_strncmp(strs[0], "EA", 2)))
+	if ((line[id + 2] < 9 || line[id + 2] > 13) && line[id + 2] != 32)
 		return (false);
-	entry = malloc(sizeof(t_entry));
-	if (!entry)
-		return (false);
-	entry->id = strs[0][0];
-	entry->value = ft_strtrim(strs[1], "\n");
-	if (!entry->value || !entry->value[0])
-	{
-		ump_clear(entry);
-		return (false);
-	}
-	clear_array((void **)strs);
-	ft_lstadd_back(&mapscan->textures, ft_lstnew(entry));
+	if (line[id] == 'N')
+		mapscan->textures.north_tex = ft_strtrim(line + id + 2, " \n\t");
+	else if (line[id] == 'S')
+		mapscan->textures.south_tex = ft_strtrim(line + id + 2, " \n\t");
+	else if (line[id] == 'E')
+		mapscan->textures.east_tex = ft_strtrim(line + id + 2, " \n\t");
+	else if (line[id] == 'W')
+		mapscan->textures.west_tex = ft_strtrim(line + id + 2, " \n\t");
 	return (true);
 }
 
 bool	rdr_readsurfs(t_mapscan *mapscan, char *line)
-{		
-	if (!line || (ft_strncmp(line, "F ", 2) && ft_strncmp(line, "C ", 2)))
+{
+	int id;
+
+	id = rdr_checkid(line);
+	if (id < 0 || (line[id] != 'F' && line[id] != 'C'))
 		return (false);
-	if (line[0] == 'F')
-		mapscan->floor = ft_strtrim(line + 1, " \n");
+	if ((line[id + 1] < 9 && line[id + 1] > 13) && line[id + 1] != 32)
+		return (false);
+	if (line[id] == 'F')
+		mapscan->floor = ft_strtrim(line + id + 1, "  \n\t");
 	else
-		mapscan->ceilling = ft_strtrim(line + 1, " \n");
+		mapscan->ceilling = ft_strtrim(line + id + 1, " \n\t");
 	return (true);
 }
 

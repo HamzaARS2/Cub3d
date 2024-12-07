@@ -6,14 +6,17 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/04 16:03:39 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/07 08:06:41 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAPSCAN_H
 # define MAPSCAN_H
 
-# include "../include/utils.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include "../libft/libft.h"
 # include "get_next_line.h"
 
 typedef enum e_mperror {
@@ -40,8 +43,15 @@ typedef struct s_entry {
     char    *value;
 } t_entry;
 
+typedef struct s_textures {
+    char *north_tex;
+    char *south_tex;
+    char *east_tex;
+    char *west_tex;
+} t_textures;
+
 typedef struct s_mapscan {
-	t_list      *textures;
+	t_textures  textures;
     char        *floor;
     char        *ceilling;
     char		**map;

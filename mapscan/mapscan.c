@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/04 12:14:24 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:42:15 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_mapscan	*init_mapscan(char *mapfile)
 	if (mapscan->mapfd < 0)
 		mp_post_error(ERR_FILE_READ);
 	mapscan->map = NULL;
-	mapscan->textures = NULL;
+	// mapscan->textures = NULL;
 	mapscan->floor = 0;
 	mapscan->ceilling = 0;
 	return (mapscan);
@@ -55,22 +55,28 @@ void	mp_loadmap(t_mapscan *mapscan)
 
 bool	mp_verifymap(t_mapscan *mapscan)
 {
-	int			i;
-	t_mperror	error[15];
+	// int			i;
+	// t_mperror	error[15];
 
-	i = 0;
-	error[i++] = chk_textures(mapscan->textures);
-	if (error[0])
-		mp_post_error(error[0]);
-	return (!error[0]);
+	// i = 0;
+	// error[i++] = chk_textures(mapscan->textures);
+	// if (error[0])
+	// 	mp_post_error(error[0]);
+	// return (!error[0]);
+	return (1);
 }
 
 void	mp_clearmap(t_mapscan *mapscan)
 {
 	int i;
-
+	t_textures textures;
+	
+		
 	i = 0;
-	ft_lstclear(&mapscan->textures, ump_clear);
+	free(mapscan->textures.north_tex);
+	free(mapscan->textures.south_tex);
+	free(mapscan->textures.east_tex);
+	free(mapscan->textures.west_tex);
 	free(mapscan->floor);
 	free(mapscan->ceilling);
 	while (mapscan->map && mapscan->map[i])
@@ -80,6 +86,7 @@ void	mp_clearmap(t_mapscan *mapscan)
 	}
 	free(mapscan->map);
 	ft_memset(mapscan, 0, sizeof(t_mapscan));
+	free(mapscan);
 }
 
 void	mp_post_error(t_mperror error)
