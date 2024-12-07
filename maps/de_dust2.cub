@@ -1,7 +1,7 @@
-NO ./path_to_  the_north_texture
+SO ./path_to_  the_north_texture
 SO ./path_to_the_south_texture
 EA asdasd
-WE ./path_to_the_west_texture   
+SO ./path_to_the_west_texture   
 
 F 255,255,255
 C 0,0,0

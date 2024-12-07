@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/07 09:42:15 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:11:29 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_mapscan	*init_mapscan(char *mapfile)
 	if (mapscan->mapfd < 0)
 		mp_post_error(ERR_FILE_READ);
 	mapscan->map = NULL;
-	// mapscan->textures = NULL;
+	mapscan->textures = (t_textures) {NULL};
 	mapscan->floor = 0;
 	mapscan->ceilling = 0;
 	return (mapscan);

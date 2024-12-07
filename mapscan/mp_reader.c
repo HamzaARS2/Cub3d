@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/07 10:50:23 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:58:27 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ bool	rdr_readtex(t_mapscan *mapscan, char *line)
 		return (false);
 	if ((line[id + 2] < 9 || line[id + 2] > 13) && line[id + 2] != 32)
 		return (false);
-	if (line[id] == 'N')
+	if (line[id] == 'N' && !mapscan->textures.north_tex)
 		mapscan->textures.north_tex = ft_strtrim(line + id + 2, " \n\t");
-	else if (line[id] == 'S')
+	else if (line[id] == 'S' && !mapscan->textures.south_tex)
 		mapscan->textures.south_tex = ft_strtrim(line + id + 2, " \n\t");
-	else if (line[id] == 'E')
+	else if (line[id] == 'E' && !mapscan->textures.east_tex)
 		mapscan->textures.east_tex = ft_strtrim(line + id + 2, " \n\t");
-	else if (line[id] == 'W')
+	else if (line[id] == 'W' && !mapscan->textures.west_tex)
 		mapscan->textures.west_tex = ft_strtrim(line + id + 2, " \n\t");
 	return (true);
 }
