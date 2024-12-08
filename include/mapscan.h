@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/07 08:06:41 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:22:32 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef enum e_mperror {
 	NO_ERROR,			// Map is valid
     ERR_EMPTY,          // Map is empty
     ERR_INVALID_CHAR,   // Map contains invalid characters
-    ERR_MISSING_TEXTURE, // Missing texture path (NO, SO, WE, EA)
-    ERR_DUPLICATED_TEXTURE, // duplicated texture.
+    ERR_DUPLICATED_DATA, // duplicated data.
     ERR_INVALID_DATA, // Invalid texture path format
+    ERR_MISSING_DATA, // Missing data (Texture, Color)
     ERR_MISSING_COLOR,  // Missing floor or ceiling color definition
     ERR_INVALID_COLOR,  // Invalid color format (e.g., incorrect RGB values)
     ERR_MAP_NOT_CLOSED, // Map is not surrounded by walls
@@ -52,6 +52,7 @@ typedef struct s_textures {
 
 typedef struct s_mapscan {
 	t_textures  textures;
+    t_mperror    error;
     char        *floor;
     char        *ceilling;
     char		**map;
@@ -70,6 +71,7 @@ bool	rdr_read_data(t_mapscan *mapscan);
 char	**rdr_readmap(t_mapscan *mapscan);
 
 // checker.
+bool        chk_format(char *mapfile);
 t_mperror	chk_textures(t_list *textures);
 
 // utils
