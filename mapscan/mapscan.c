@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/08 13:53:03 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:01:15 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,9 @@ void	mp_loadmap(t_mapscan *mapscan)
 
 bool	mp_verifymap(t_mapscan *mapscan)
 {
-	// int			i;
-	// t_mperror	error[15];
-
-	// i = 0;
-	// error[i++] = chk_textures(mapscan->textures);
-	// if (error[0])
-	// 	mp_post_error(error[0]);
-	// return (!error[0]);
-	return (1);
+	if (!chk_color(mapscan->floor))
+		return (false);
+	return (true);
 }
 
 void	mp_clearmap(t_mapscan *mapscan)
@@ -104,5 +98,7 @@ void	mp_post_error(t_mperror error)
 		ft_putstr_fd("Error\nWrong file format!.\n", 2);
 	else if (error == ERR_FILE_READ)
 		ft_putstr_fd("Error\nCan't read file!.\n", 2);
+	else if (error == ERR_INVALID_COLOR)
+		ft_putstr_fd("Error\nInvalid color!.\n", 2);
 
 }

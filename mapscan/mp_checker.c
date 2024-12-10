@@ -6,12 +6,11 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/08 13:32:14 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:01:26 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/mapscan.h"
-// N(78) + S(83) + W(87) + E(69)  = 317
 
 bool	chk_format(char *mapfile)
 {
@@ -25,25 +24,46 @@ bool	chk_format(char *mapfile)
 	return (true);
 }
 
-// t_mperror	chk_textures(t_list *textures)
-// {
-// 	t_list		*current;
-// 	t_entry		*entry;
-// 	int			ids_sum;
+bool	chk_color(char *color)
+{
+	int i;
+	t_mperror error;
 	
-// 	if (!textures)
-// 		return (ERR_MISSING_TEXTURE);
-// 	ids_sum = 0;
-// 	current = textures;
-// 	while (current)
+	i = 0;
+	error = NO_ERROR;
+	while (color[i] && !error)
+	{
+		if (!ft_isdigit(color[i]))
+		{
+			if (i == 0  || color[i] != ',' || color[i - 1] == ',')
+				error = ERR_INVALID_COLOR;
+		}
+		i++;
+	}
+	mp_post_error(error);
+	return (!error);
+}
+
+// bool	chk_color(char *fcolor)
+// {
+// 	int i;
+// 	int byte;
+// 	int rgba[4];
+
+// 	i = 0;
+// 	byte = 0;
+// 	while (fcolor[i])
 // 	{
-// 		entry = (t_entry *) current->content;
-// 		ids_sum += entry->id;
-// 		if (!entry->value)
-// 			return (ERR_MISSING_TEXTURE);
-// 		current = current->next;
+// 		if (ft_isdigit(fcolor[i]))
+// 		{
+// 			rgba[byte] = (rgba[byte] * 10) + fcolor[i] - 48;
+// 		}
+// 		else if (i > 0 && fcolor[i] == ',' && fcolor[i - 1] != ',')
+// 		{
+// 			rgba[byte] = rgba[byte] << 24 / byte;
+// 			byte++;
+// 		}
+		
+// 		i++;
 // 	}
-// 	if (ids_sum != 317)
-// 		return (ERR_DUPLICATED_TEXTURE);
-// 	return (NO_ERROR);
 // }

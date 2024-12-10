@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/08 13:57:57 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:01:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,14 @@ int	main(int ac, char **av) {
 	mapscan = readmap(av[1]);
 	if (!mapscan)
 		return (EXIT_FAILURE);
-	// if (mp_verifymap(mapscan))
-		print_map(mapscan);
-
-	mp_clearmap(mapscan);
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
-	if (!mlx)
+	if (!mp_verifymap(mapscan))
 		return (EXIT_FAILURE);
+	
+	print_map(mapscan);
+	mp_clearmap(mapscan);
+	// mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);
+	// if (!mlx)
+	// 	return (EXIT_FAILURE);
 
 	
 	// // mlx loop.

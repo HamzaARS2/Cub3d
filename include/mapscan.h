@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/08 13:22:32 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:34:22 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,14 @@ typedef struct s_mapscan {
     char        *ceilling;
     char		**map;
 	char        mapfd;
-    
 } t_mapscan;
+
+typedef struct s_environ {
+    t_textures  textures;
+    char        **map;
+    int         fcolor;
+    int         ccolor;
+} t_environ;
 
 t_mapscan	*init_mapscan(char *mapfile);
 bool        mp_verifymap(t_mapscan *mapscan);
@@ -72,7 +78,7 @@ char	**rdr_readmap(t_mapscan *mapscan);
 
 // checker.
 bool        chk_format(char *mapfile);
-t_mperror	chk_textures(t_list *textures);
+bool	    chk_color(char *fcolor);
 
 // utils
 char	**ump_create_map(t_list *maplst, int mapsize);
