@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/09 12:01:26 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:59:34 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,52 @@ bool	chk_format(char *mapfile)
 
 bool	chk_color(char *color)
 {
+	char	**rgb;
 	int i;
-	t_mperror error;
+	int k;
+	int d;
 	
 	i = 0;
-	error = NO_ERROR;
-	while (color[i] && !error)
+	rgb = ft_split(color, ',');
+	while (rgb && rgb[i])
 	{
-		if (!ft_isdigit(color[i]))
-		{
-			if (i == 0  || color[i] != ',' || color[i - 1] == ',')
-				error = ERR_INVALID_COLOR;
-		}
-		i++;
+		k = 0;
+		d = 0;
+		while (rgb[i][k] == 32)
+			k++;
+		while (ft_isdigit(rgb[i][k]) && ++d)
+			k++;
+		while (rgb[i][k] == 32)
+			k++;
+		if (rgb[i++][k] || d == 0)
+			return (false);
 	}
-	mp_post_error(error);
-	return (!error);
+	free_array(rgb);
+	k = utl_charcount(color, ',');
+	return (i == 3 && k == 2);
 }
+
+
+// bool	chk_map(char **map)
+// {
+// 	int y;
+// 	int x;
+
+// 	y = 0;
+// 	while (map[y])
+// 	{
+// 		x = 0;
+// 		if (map[y][0] == '\n')
+// 			return (false);
+// 		while (map[y][x])
+// 		{
+			
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (true);
+// }
 
 // bool	chk_color(char *fcolor)
 // {

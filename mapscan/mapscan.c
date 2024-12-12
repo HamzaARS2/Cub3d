@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/09 12:01:15 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:59:46 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,15 @@ void	mp_loadmap(t_mapscan *mapscan)
 bool	mp_verifymap(t_mapscan *mapscan)
 {
 	if (!chk_color(mapscan->floor))
+	{
+		mp_post_error(ERR_INVALID_COLOR);
 		return (false);
+	}
+	// if (!chk_map(mapscan->map))
+	// {
+	// 	mp_post_error(ERR_INVALID_MAP);
+	// 	return (false);
+	// }
 	return (true);
 }
 
@@ -100,5 +108,7 @@ void	mp_post_error(t_mperror error)
 		ft_putstr_fd("Error\nCan't read file!.\n", 2);
 	else if (error == ERR_INVALID_COLOR)
 		ft_putstr_fd("Error\nInvalid color!.\n", 2);
+	else if (error == ERR_INVALID_MAP)
+		ft_putstr_fd("Error\nInvalid map!.\n", 2);
 
 }

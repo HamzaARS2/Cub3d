@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/08 08:43:34 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:24:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,27 @@ char	**ump_create_map(t_list *maplst, int mapsize)
 	return (map);
 }
 
+void	free_array(char **arr)
+{
+	int i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+int	utl_charcount(char *str, int c)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (str && str[i])
+		if (str[i++] == c)
+			count++;
+	return (count);
+}

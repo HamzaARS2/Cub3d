@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/09 11:34:22 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:53:54 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_environ {
 t_mapscan	*init_mapscan(char *mapfile);
 bool        mp_verifymap(t_mapscan *mapscan);
 void	    mp_clearmap(t_mapscan *mapscan);
+
 // map reader.
 void	mp_loadmap(t_mapscan *mapscan);
 bool	rdr_readtex(t_mapscan *mapscan, char *line);
@@ -79,10 +80,12 @@ char	**rdr_readmap(t_mapscan *mapscan);
 // checker.
 bool        chk_format(char *mapfile);
 bool	    chk_color(char *fcolor);
-
+bool	    chk_map(char **map);
 // utils
 char	**ump_create_map(t_list *maplst, int mapsize);
 void	ump_clear(void *content);
 bool	ump_is_empty_line(char *line);
 void	mp_post_error(t_mperror error);
+void	free_array(char **arr);
+int     utl_charcount(char *str, int c);
 #endif
