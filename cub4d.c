@@ -6,22 +6,11 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/09 12:01:52 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:23:26 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub4d.h"
-
-t_mapscan	*readmap(char *mapfile)
-{
-	t_mapscan *mapscan;
-
-	mapscan = init_mapscan(mapfile);
-	if (!mapscan)
-		return (NULL);
-	mp_loadmap(mapscan);
-	return (mapscan);
-}
 
 void	foo() {
 	system("leaks -q cub3D");
@@ -39,20 +28,42 @@ void	print_map(t_mapscan *mapscan)
 	int i = 0;
 	while (mapscan->map[i])
 	{
-		printf("%s", mapscan->map[i++]);
+		printf("%s\n", mapscan->map[i++]);
 	}
 	printf("\n");
 }
 
+
+
+
+
+
+
+
+
+
+t_mapscan	*readmap(char *mapfile)
+{
+	t_mapscan *mapscan;
+
+	mapscan = init_mapscan(mapfile);
+	if (!mapscan)
+		return (NULL);
+	mp_loadmap(mapscan);
+	if (!mp_verifymap(mapscan))
+		exit(EXIT_FAILURE);
+	return (mapscan);
+}
+
+
 int	main(int ac, char **av) {
 	t_mapscan *mapscan;
 
-	// atexit(foo);
+	atexit(foo);
 	mapscan = readmap(av[1]);
 	if (!mapscan)
 		return (EXIT_FAILURE);
-	if (!mp_verifymap(mapscan))
-		return (EXIT_FAILURE);
+	
 	
 	print_map(mapscan);
 	mp_clearmap(mapscan);

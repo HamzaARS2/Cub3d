@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_clear_array.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 21:38:01 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 18:20:20 by helarras         ###   ########.fr       */
+/*   Created: 2024/12/12 16:55:55 by helarras          #+#    #+#             */
+/*   Updated: 2024/12/12 17:04:22 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_clear_array(char **arr)
 {
-	size_t	i;
+	int i;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!arr)
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

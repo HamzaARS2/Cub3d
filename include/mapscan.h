@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/12 14:53:54 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:13:32 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ bool	    chk_map(char **map);
 char	**ump_create_map(t_list *maplst, int mapsize);
 void	ump_clear(void *content);
 bool	ump_is_empty_line(char *line);
-void	mp_post_error(t_mperror error);
-void	free_array(char **arr);
-int     utl_charcount(char *str, int c);
+void	ump_post_error(t_mperror error);
+bool	ump_is_mpcomponent(char c);
 #endif

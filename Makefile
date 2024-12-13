@@ -20,7 +20,7 @@ OBJS_FILES = $(MAIN_FILES:.c=.o)
 
 NAME = cub3D
 
-ADS := -fsanitize=address -g
+# ADS := -fsanitize=address -g
 
 all: libmlx $(NAME)
 

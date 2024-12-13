@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/12 13:24:52 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:27:00 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	ump_is_empty_line(char *line)
 	
 	i = 0;
 	flag = true;
-	while (line[i] && flag)
+	while (line && line[i] && flag)
 	{
 		if (ft_isprint(line[i]) && line[i] != 32)
 			flag = false;
@@ -64,27 +64,29 @@ char	**ump_create_map(t_list *maplst, int mapsize)
 	return (map);
 }
 
-void	free_array(char **arr)
+bool	ump_is_mpcomponent(char c)
 {
-	int i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	return (c == '1' || c == '0' || c == 'N'
+		|| c == 'S' || c == 'E' || c == 'W');
 }
 
-int	utl_charcount(char *str, int c)
+void	ump_post_error(t_mperror error)
 {
-	int i;
-	int count;
+	if (error == ERR_INVALID_DATA)
+		ft_putstr_fd("Error\nInvalid data!.\n", 2);
+	else if (error == ERR_MISSING_DATA)
+		ft_putstr_fd("Error\nMissing data!.\n", 2);
+	else if (error == ERR_DUPLICATED_DATA)
+		ft_putstr_fd("Error\nDuplicated data!.\n", 2);
+	else if (error == ERR_MAP_NOT_FOUND)
+		ft_putstr_fd("Error\nMap not found!.\n", 2);
+	else if (error == ERR_FILE_FORMAT)
+		ft_putstr_fd("Error\nWrong file format!.\n", 2);
+	else if (error == ERR_FILE_READ)
+		ft_putstr_fd("Error\nCan't read file!.\n", 2);
+	else if (error == ERR_INVALID_COLOR)
+		ft_putstr_fd("Error\nInvalid color!.\n", 2);
+	else if (error == ERR_INVALID_MAP)
+		ft_putstr_fd("Error\nInvalid map!.\n", 2);
 
-	count = 0;
-	i = 0;
-	while (str && str[i])
-		if (str[i++] == c)
-			count++;
-	return (count);
 }

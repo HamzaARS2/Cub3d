@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_charcount.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 21:38:01 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 18:20:20 by helarras         ###   ########.fr       */
+/*   Created: 2024/12/12 17:07:38 by helarras          #+#    #+#             */
+/*   Updated: 2024/12/12 17:08:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_charcount(char *str, int c)
 {
-	size_t	i;
+	int i;
+	int count;
 
+	count = 0;
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	while (str && str[i])
+		if (str[i++] == c)
+			count++;
+	return (count);
 }

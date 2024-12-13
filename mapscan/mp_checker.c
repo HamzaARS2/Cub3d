@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/12 14:59:34 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:26:37 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,82 @@ bool	chk_color(char *color)
 		while (rgb[i][k] == 32)
 			k++;
 		if (rgb[i++][k] || d == 0)
-			return (false);
+			break;
 	}
-	free_array(rgb);
-	k = utl_charcount(color, ',');
+	ft_clear_array(rgb);
+	k = ft_charcount(color, ',');
 	return (i == 3 && k == 2);
 }
 
+// Checks for invalid component.
+// Checks for duplicate/not exist player position.
+static bool	chk_map_comp(char **map)
+{
+	int y;
+	int x;
+	int count;
 
-// bool	chk_map(char **map)
-// {
-// 	int y;
-// 	int x;
+	y = 0;
+	count = 0;
+	while (map[y] && count <= 1)
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (!ft_iswhitespace(map[y][x]) && !ump_is_mpcomponent(map[y][x]))
+				return (false);
+			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+				|| map[y][x] == 'W')
+					count++;
+		}
+		y++;
+	}
+	if (count == 0 || count > 1)
+		return (false);
+	return (true);
+}
 
-// 	y = 0;
-// 	while (map[y])
-// 	{
-// 		x = 0;
-// 		if (map[y][0] == '\n')
-// 			return (false);
-// 		while (map[y][x])
-// 		{
-			
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (true);
-// }
+
+bool	chk_position(char **map, int x, int y)
+{
+	if (y == 0 || x == 0 || !map[y] || !map[y + 1] || !map[y - 1]
+		|| !map[y][x + 1])
+		return (false);
+	if (ft_strlen(map[y - 1]) <= x || !ump_is_mpcomponent(map[y - 1][x]))
+		return (false);
+	if (ft_strlen(map[y + 1]) <= x || !ump_is_mpcomponent(map[y + 1][x]))
+		return (false);
+	if (!ump_is_mpcomponent(map[y][x - 1]))
+		return (false);
+	if (!ump_is_mpcomponent(map[y][x + 1]))
+		return (false);
+	return (true);
+}
+
+bool	chk_map(char **map)
+{
+	int y;
+	int x;
+
+	if (!chk_map_comp(map))
+		return (false);
+	y = 0;
+	while (map[y])
+	{
+		x = -1;
+		if (!map[y][0])
+			return (false);
+		while (map[y][++x])
+		{
+			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+				|| map[y][x] == 'W')
+				if (!chk_position(map, x, y))
+					return (false);
+		}
+		y++;
+	}
+	return (true);
+}
 
 // bool	chk_color(char *fcolor)
 // {
