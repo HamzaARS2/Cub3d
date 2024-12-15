@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 11:27:00 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:59:28 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,21 @@ bool	ump_is_mpcomponent(char c)
 		|| c == 'S' || c == 'E' || c == 'W');
 }
 
-void	ump_post_error(t_mperror error)
+bool	ump_color_toint(char **rgb, int *color)
 {
-	if (error == ERR_INVALID_DATA)
-		ft_putstr_fd("Error\nInvalid data!.\n", 2);
-	else if (error == ERR_MISSING_DATA)
-		ft_putstr_fd("Error\nMissing data!.\n", 2);
-	else if (error == ERR_DUPLICATED_DATA)
-		ft_putstr_fd("Error\nDuplicated data!.\n", 2);
-	else if (error == ERR_MAP_NOT_FOUND)
-		ft_putstr_fd("Error\nMap not found!.\n", 2);
-	else if (error == ERR_FILE_FORMAT)
-		ft_putstr_fd("Error\nWrong file format!.\n", 2);
-	else if (error == ERR_FILE_READ)
-		ft_putstr_fd("Error\nCan't read file!.\n", 2);
-	else if (error == ERR_INVALID_COLOR)
-		ft_putstr_fd("Error\nInvalid color!.\n", 2);
-	else if (error == ERR_INVALID_MAP)
-		ft_putstr_fd("Error\nInvalid map!.\n", 2);
+	int r;
+	int g;
+	int b;
 
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
+		return (0);
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	ft_clear_array(rgb);
+	if (r > 255 || r < 0 || g > 255 || g < 0 
+		|| b > 255 || b < 0)
+		return (false);
+	*color = r << 24 | g << 16 | b << 8 | 255;
+	return (true);
 }

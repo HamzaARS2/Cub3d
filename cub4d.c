@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 18:23:26 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:01:01 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	foo() {
 
 void	print_map(t_mapscan *mapscan)
 {
-	printf("floor: %s | ceilling: %s\n", mapscan->floor, mapscan->ceilling);
+	printf("floor: %s | ceilling: %s\n", mapscan->colors.fcolor_str, mapscan->colors.ccolor_str);
 	
 	printf("id: %c | path: %s\n", 'N', mapscan->textures.north_tex);
 	printf("id: %c | path: %s\n", 'S', mapscan->textures.south_tex);
@@ -63,8 +63,6 @@ int	main(int ac, char **av) {
 	mapscan = readmap(av[1]);
 	if (!mapscan)
 		return (EXIT_FAILURE);
-	
-	
 	print_map(mapscan);
 	mp_clearmap(mapscan);
 	// mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "Cub4D", true);

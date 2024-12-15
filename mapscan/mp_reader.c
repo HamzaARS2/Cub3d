@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 11:27:27 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/15 11:44:14 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ bool	rdr_readsurfs(t_mapscan *mapscan, char *line)
 		return (false);
 	if ((line[id + 1] < 9 && line[id + 1] > 13) && line[id + 1] != 32)
 		return (false);
-	if (line[id] == 'F' && !mapscan->floor)
-		mapscan->floor = ft_strtrim(line + id + 1, "  \n\t");
-	else if (line[id] == 'C' && !mapscan->ceilling)
-		mapscan->ceilling = ft_strtrim(line + id + 1, " \n\t");
+	if (line[id] == 'F' && !mapscan->colors.fcolor_str)
+		mapscan->colors.fcolor_str = ft_strtrim(line + id + 1, "  \n\t");
+	else if (line[id] == 'C' && !mapscan->colors.ccolor_str)
+		mapscan->colors.ccolor_str = ft_strtrim(line + id + 1, " \n\t");
 	else
 		mapscan->error = ERR_DUPLICATED_DATA;
 	return (true);

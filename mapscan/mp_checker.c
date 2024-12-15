@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 18:26:37 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:56:21 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ bool	chk_format(char *mapfile)
 	return (true);
 }
 
-bool	chk_color(char *color)
+int	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+bool	chk_color(char *color_str, int *color)
 {
 	char	**rgb;
 	int i;
@@ -32,7 +37,7 @@ bool	chk_color(char *color)
 	int d;
 	
 	i = 0;
-	rgb = ft_split(color, ',');
+	rgb = ft_split(color_str, ',');
 	while (rgb && rgb[i])
 	{
 		k = 0;
@@ -46,8 +51,9 @@ bool	chk_color(char *color)
 		if (rgb[i++][k] || d == 0)
 			break;
 	}
-	ft_clear_array(rgb);
-	k = ft_charcount(color, ',');
+	if (!ump_color_toint(rgb, color))
+		return (false);
+	k = ft_charcount(color_str, ',');
 	return (i == 3 && k == 2);
 }
 

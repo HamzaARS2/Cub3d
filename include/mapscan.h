@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 11:13:32 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:58:27 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,20 @@ typedef struct s_textures {
     char *west_tex;
 } t_textures;
 
+typedef struct s_colors {
+    char    *fcolor_str;
+    char    *ccolor_str;
+    int     fcolor;
+    int     ccolor;
+} t_colors;
+
 typedef struct s_mapscan {
 	t_textures  textures;
     t_mperror    error;
-    char        *floor;
-    char        *ceilling;
+    t_colors    colors;
     char		**map;
 	char        mapfd;
 } t_mapscan;
-
-typedef struct s_environ {
-    t_textures  textures;
-    char        **map;
-    int         fcolor;
-    int         ccolor;
-} t_environ;
 
 t_mapscan	*init_mapscan(char *mapfile);
 bool        mp_verifymap(t_mapscan *mapscan);
@@ -76,15 +75,16 @@ bool	rdr_readtex(t_mapscan *mapscan, char *line);
 bool	rdr_readsurfs(t_mapscan *mapscan, char *line);
 bool	rdr_read_data(t_mapscan *mapscan);
 char	**rdr_readmap(t_mapscan *mapscan);
+void	ump_post_error(t_mperror error);
 
 // checker.
 bool        chk_format(char *mapfile);
-bool	    chk_color(char *fcolor);
+bool	    chk_color(char *fcolor, int *color);
 bool	    chk_map(char **map);
 // utils
 char	**ump_create_map(t_list *maplst, int mapsize);
 void	ump_clear(void *content);
 bool	ump_is_empty_line(char *line);
-void	ump_post_error(t_mperror error);
+bool	ump_color_toint(char **rgb, int *color);
 bool	ump_is_mpcomponent(char c);
 #endif

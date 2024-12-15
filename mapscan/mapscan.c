@@ -6,13 +6,13 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 19:18:12 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:56:51 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/mapscan.h"
 
-t_mapscan	*init_mapscan(char *mapfile)
+t_mapscan	*init_mapscan(char *mapfile)	
 {
 	t_mapscan *mapscan;
 
@@ -30,11 +30,9 @@ t_mapscan	*init_mapscan(char *mapfile)
 	mapscan->map = NULL;
 	mapscan->textures = (t_textures) {NULL};
 	mapscan->error = NO_ERROR;
-	mapscan->floor = 0;
-	mapscan->ceilling = 0;
+	mapscan->colors = (t_colors) {0};
 	return (mapscan);
 }
-
 
 void	mp_loadmap(t_mapscan *mapscan)
 {
@@ -53,9 +51,12 @@ void	mp_loadmap(t_mapscan *mapscan)
 	}
 }
 
+
+
 bool	mp_verifymap(t_mapscan *mapscan)
 {
-	if (!chk_color(mapscan->floor) || !chk_color(mapscan->ceilling))
+	if (!chk_color(mapscan->colors.fcolor_str, &mapscan->colors.fcolor)
+		|| !chk_color(mapscan->colors.ccolor_str, &mapscan->colors.ccolor))
 	{
 		ump_post_error(ERR_INVALID_COLOR);
 		return (false);
@@ -65,9 +66,30 @@ bool	mp_verifymap(t_mapscan *mapscan)
 		ump_post_error(ERR_INVALID_MAP);
 		return (false);
 	}
+	
 	return (true);
 }
 
+void	ump_post_error(t_mperror error)
+{
+	if (error == ERR_INVALID_DATA)
+		ft_putstr_fd("Error\nInvalid data!.\n", 2);
+	else if (error == ERR_MISSING_DATA)
+		ft_putstr_fd("Error\nMissing data!.\n", 2);
+	else if (error == ERR_DUPLICATED_DATA)
+		ft_putstr_fd("Error\nDuplicated data!.\n", 2);
+	else if (error == ERR_MAP_NOT_FOUND)
+		ft_putstr_fd("Error\nMap not found!.\n", 2);
+	else if (error == ERR_FILE_FORMAT)
+		ft_putstr_fd("Error\nWrong file format!.\n", 2);
+	else if (error == ERR_FILE_READ)
+		ft_putstr_fd("Error\nCan't read file!.\n", 2);
+	else if (error == ERR_INVALID_COLOR)
+		ft_putstr_fd("Error\nInvalid color!.\n", 2);
+	else if (error == ERR_INVALID_MAP)
+		ft_putstr_fd("Error\nInvalid map!.\n", 2);
+
+}
 
 void	mp_clearmap(t_mapscan *mapscan)
 {
@@ -79,8 +101,8 @@ void	mp_clearmap(t_mapscan *mapscan)
 	free(mapscan->textures.south_tex);
 	free(mapscan->textures.east_tex);
 	free(mapscan->textures.west_tex);
-	free(mapscan->floor);
-	free(mapscan->ceilling);
+	free(mapscan->colors.fcolor_str);
+	free(mapscan->colors.ccolor_str);
 	while (mapscan->map && mapscan->map[i])
 	{
 		free(mapscan->map[i]);
