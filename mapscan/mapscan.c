@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/15 12:56:51 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:07:42 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_mapscan	*init_mapscan(char *mapfile)
 		return (NULL);
 	if (!chk_format(mapfile))
 	{
-		ump_post_error(ERR_FILE_FORMAT);
+		free(mapscan);
 		return (NULL);
 	}
 	mapscan->mapfd = open(mapfile, O_RDONLY, 0777);
 	if (mapscan->mapfd < 0)
-		ump_post_error(ERR_FILE_READ);
+		mp_post_error(ERR_FILE_READ);
 	mapscan->map = NULL;
 	mapscan->textures = (t_textures) {NULL};
 	mapscan->error = NO_ERROR;
@@ -40,37 +40,31 @@ void	mp_loadmap(t_mapscan *mapscan)
 	
 	if (!rdr_read_data(mapscan))
 	{
-		ump_post_error(mapscan->error);
+		mp_post_error(mapscan->error);
 		exit(EXIT_FAILURE);
 	}
 	mapscan->map = rdr_readmap(mapscan);
 	if (!mapscan->map)
 	{
-		ump_post_error(ERR_MAP_NOT_FOUND);
+		mp_post_error(ERR_MAP_NOT_FOUND);
 		exit(EXIT_FAILURE);
 	}
 }
-
-
 
 bool	mp_verifymap(t_mapscan *mapscan)
 {
 	if (!chk_color(mapscan->colors.fcolor_str, &mapscan->colors.fcolor)
 		|| !chk_color(mapscan->colors.ccolor_str, &mapscan->colors.ccolor))
-	{
-		ump_post_error(ERR_INVALID_COLOR);
-		return (false);
-	}
+		{
+			mp_post_error(ERR_INVALID_COLOR);
+			return (false);
+		}
 	if (!chk_map(mapscan->map))
-	{
-		ump_post_error(ERR_INVALID_MAP);
 		return (false);
-	}
-	
 	return (true);
 }
 
-void	ump_post_error(t_mperror error)
+bool	mp_post_error(t_mperror error)
 {
 	if (error == ERR_INVALID_DATA)
 		ft_putstr_fd("Error\nInvalid data!.\n", 2);
@@ -88,7 +82,15 @@ void	ump_post_error(t_mperror error)
 		ft_putstr_fd("Error\nInvalid color!.\n", 2);
 	else if (error == ERR_INVALID_MAP)
 		ft_putstr_fd("Error\nInvalid map!.\n", 2);
-
+	else if (error == ERR_MULTIPLE_START)
+		ft_putstr_fd("Error\nMultiple starting positions!.\n", 2);
+	else if (error == ERR_NO_START)
+		ft_putstr_fd("Error\nNo starting position found!.\n", 2);
+	else if (error == ERR_MAP_NOT_CLOSED)
+		ft_putstr_fd("Error\nMap not closed!.\n", 2);
+	else if (error == ERR_INVALID_CHAR)
+		ft_putstr_fd("Error\nInvalid map component!.\n", 2);
+	return (!error);
 }
 
 void	mp_clearmap(t_mapscan *mapscan)

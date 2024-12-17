@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 11:15:30 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:00:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ bool	chk_format(char *mapfile)
 	char *ext;
 	
 	if (!mapfile || mapfile[0] == 0)
-		return (false);
+		return (mp_post_error(ERR_FILE_READ));
 	ext = ft_strnstr(mapfile, ".cub", ft_strlen(mapfile));
 	if (!(ext && ext[4] == 0))
-		return (false);	
+		return (mp_post_error(ERR_FILE_FORMAT));	
 	return (true);
 }
 
@@ -55,7 +55,7 @@ bool	chk_color(char *color_str, int *color)
 
 // Checks for invalid component.
 // Checks for duplicate/not exist player position.
-static bool	chk_map_comp(char **map)
+static t_mperror	chk_map_comp(char **map)
 {
 	int y;
 	int x;
@@ -69,15 +69,17 @@ static bool	chk_map_comp(char **map)
 		while (map[y][++x])
 		{
 			if (!ft_iswhitespace(map[y][x]) && !ump_is_mpcomponent(map[y][x]))
-				return (false);
+				return (mp_post_error(ERR_INVALID_CHAR));
 			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
 				|| map[y][x] == 'W')
 					count++;
 		}
 		y++;
 	}
-	if (count == 0 || count > 1)
-		return (false);
+	if (count > 1)
+		return (mp_post_error(ERR_MULTIPLE_START));
+	else if (count == 0)
+		return (mp_post_error(ERR_NO_START));
 	return (true);
 }
 
@@ -86,15 +88,15 @@ bool	chk_position(char **map, int x, int y)
 {
 	if (y == 0 || x == 0 || !map[y] || !map[y + 1] || !map[y - 1]
 		|| !map[y][x + 1])
-		return (false);
+		return (mp_post_error(ERR_MAP_NOT_CLOSED));
 	if (ft_strlen(map[y - 1]) <= x || !ump_is_mpcomponent(map[y - 1][x]))
-		return (false);
+		return (mp_post_error(ERR_MAP_NOT_CLOSED));
 	if (ft_strlen(map[y + 1]) <= x || !ump_is_mpcomponent(map[y + 1][x]))
-		return (false);
+		return (mp_post_error(ERR_MAP_NOT_CLOSED));
 	if (!ump_is_mpcomponent(map[y][x - 1]))
-		return (false);
+		return (mp_post_error(ERR_INVALID_CHAR));
 	if (!ump_is_mpcomponent(map[y][x + 1]))
-		return (false);
+		return (mp_post_error(ERR_INVALID_CHAR));
 	return (true);
 }
 
@@ -102,7 +104,7 @@ bool	chk_map(char **map)
 {
 	int y;
 	int x;
-
+	
 	if (!chk_map_comp(map))
 		return (false);
 	y = 0;

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 10:40:33 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:37:02 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ bool	rdr_read_data(t_mapscan *mapscan)
 	{
 		line = get_next_line(mapscan->mapfd);
 		if (!line)
+		{
+			mapscan->error = ERR_INVALID_MAP;
 			return (false);
+		}
 		if (rdr_readtex(mapscan, line))
 			count--;
 		else if (rdr_readsurfs(mapscan, line))
