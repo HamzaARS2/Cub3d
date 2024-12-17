@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 22:06:03 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/13 18:20:22 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:38:22 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_iswhitespace(char c);
 void				ft_clear_array(char **arr);
 int					ft_charcount(char *str, int c);
+int					get_rgba(int r, int g, int b, int a);
 #endif

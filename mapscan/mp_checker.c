@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/15 12:56:21 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:36:22 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ bool	chk_format(char *mapfile)
 	return (true);
 }
 
-int	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+
 
 bool	chk_color(char *color_str, int *color)
 {
@@ -38,7 +35,7 @@ bool	chk_color(char *color_str, int *color)
 	
 	i = 0;
 	rgb = ft_split(color_str, ',');
-	while (rgb && rgb[i])
+	while (rgb && rgb[i] && k >= 0)
 	{
 		k = 0;
 		d = 0;
@@ -49,12 +46,11 @@ bool	chk_color(char *color_str, int *color)
 		while (rgb[i][k] == 32)
 			k++;
 		if (rgb[i++][k] || d == 0)
-			break;
+			k = -1;
 	}
-	if (!ump_color_toint(rgb, color))
-		return (false);
-	k = ft_charcount(color_str, ',');
-	return (i == 3 && k == 2);
+	if (!ump_color_toint(color_str, rgb, color))
+		return (false);		
+	return (i == 3 && k >= 0);
 }
 
 // Checks for invalid component.

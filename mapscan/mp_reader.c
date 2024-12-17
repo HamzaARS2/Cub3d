@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/15 11:44:14 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:40:33 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	rdr_checkid(t_mapscan *mapscan, char *line)
 	i = 0;
 	if (!line)
 		return (-1);
-	while (line[i] && line[i + 1] && !mapscan->error)
+	while (line[i] && !mapscan->error)
 	{
 		if (!ft_strncmp(line + i, "NO", 2) || !ft_strncmp(line + i, "SO", 2)
 			|| !ft_strncmp(line + i, "EA", 2) || !ft_strncmp(line + i, "WE", 2)
 			|| line[i] == 'F' || line[i] == 'C')
 			return (i);
 		if (ft_isprint(line[i]) && line[i] != 32)
-			mapscan->error = ERR_MISSING_DATA;
+			mapscan->error = ERR_INVALID_DATA;
 		i++;
 	}
 	return (-1);
@@ -66,10 +66,10 @@ bool	rdr_readsurfs(t_mapscan *mapscan, char *line)
 	id = rdr_checkid(mapscan, line);
 	if (id < 0 || (line[id] != 'F' && line[id] != 'C'))
 		return (false);
-	if ((line[id + 1] < 9 && line[id + 1] > 13) && line[id + 1] != 32)
+	if (!ft_iswhitespace(line[id + 1]))
 		return (false);
 	if (line[id] == 'F' && !mapscan->colors.fcolor_str)
-		mapscan->colors.fcolor_str = ft_strtrim(line + id + 1, "  \n\t");
+		mapscan->colors.fcolor_str = ft_strtrim(line + id + 1, " \n\t");
 	else if (line[id] == 'C' && !mapscan->colors.ccolor_str)
 		mapscan->colors.ccolor_str = ft_strtrim(line + id + 1, " \n\t");
 	else
@@ -93,7 +93,7 @@ bool	rdr_read_data(t_mapscan *mapscan)
 		else if (rdr_readsurfs(mapscan, line))
 			count--;
 		else if (count > 0 && !ump_is_empty_line(line) && !mapscan->error)
-			mapscan->error = ERR_MISSING_DATA;
+			mapscan->error = ERR_INVALID_DATA;
 		free(line);
 		line = NULL;
 	}

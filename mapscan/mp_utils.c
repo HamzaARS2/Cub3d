@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/15 12:59:28 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:37:57 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	ump_is_mpcomponent(char c)
 		|| c == 'S' || c == 'E' || c == 'W');
 }
 
-bool	ump_color_toint(char **rgb, int *color)
+bool	ump_color_toint(char *color_str, char **rgb, int *color)
 {
 	int r;
 	int g;
@@ -85,6 +85,8 @@ bool	ump_color_toint(char **rgb, int *color)
 	if (r > 255 || r < 0 || g > 255 || g < 0 
 		|| b > 255 || b < 0)
 		return (false);
-	*color = r << 24 | g << 16 | b << 8 | 255;
+	if (ft_charcount(color_str, ',') != 2)
+		return (false);
+	*color = get_rgba(r, g, b, 255);
 	return (true);
 }

@@ -11,7 +11,7 @@ SRC_FILES = ft_isalnum.c ft_isdigit.c ft_memmove.c ft_strlcat.c ft_tolower.c \
 BONUS_FILES = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 			  ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-ADDONS = ft_iswhitespace.c ft_clear_array.c ft_charcount.c
+ADDONS = ft_iswhitespace.c ft_clear_array.c ft_charcount.c get_rgba.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 BONUS_OBJ = $(BONUS_FILES:.c=.o)
