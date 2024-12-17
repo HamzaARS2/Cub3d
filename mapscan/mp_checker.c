@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 10:36:22 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:15:30 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,27 +122,3 @@ bool	chk_map(char **map)
 	}
 	return (true);
 }
-
-// bool	chk_color(char *fcolor)
-// {
-// 	int i;
-// 	int byte;
-// 	int rgba[4];
-
-// 	i = 0;
-// 	byte = 0;
-// 	while (fcolor[i])
-// 	{
-// 		if (ft_isdigit(fcolor[i]))
-// 		{
-// 			rgba[byte] = (rgba[byte] * 10) + fcolor[i] - 48;
-// 		}
-// 		else if (i > 0 && fcolor[i] == ',' && fcolor[i - 1] != ',')
-// 		{
-// 			rgba[byte] = rgba[byte] << 24 / byte;
-// 			byte++;
-// 		}
-		
-// 		i++;
-// 	}
-// }

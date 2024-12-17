@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 10:37:57 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:17:43 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ bool	ump_color_toint(char *color_str, char **rgb, int *color)
 	int b;
 
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-		return (0);
+	{
+		ft_clear_array(rgb);
+		return (false);
+	}
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
