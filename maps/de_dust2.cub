@@ -5,7 +5,7 @@ EA ./path_to_the_east_texture
 WE ./path_to_the_west_texture 
 
 C   255,   0, 1
-F 24i4,1,23
+F 244,1,23
 
 
         1111111111111111111111111 

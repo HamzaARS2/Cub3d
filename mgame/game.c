@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/20 08:46:17 by helarras         ###   ########.fr       */
+/*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
+/*   Updated: 2024/12/20 08:47:02 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "../include/game.h"
 
-void	foo() {
-	system("leaks -q cub3D");
+
+
+bool	init_game(t_game *game, char *mapfile)
+{
+	game->mapscan = readmap(mapfile);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
+	if (!game->mlx)
+		return (false);
+	
+	return (true);
 }
 
-int	main(int ac, char **av) {
-	t_game		game;
 
-	atexit(foo);
-	if (!init_game(&game, av[1]))
-	{
-		cleanup_game(game);
-		return (EXIT_FAILURE);
-	}
+void	run_game(t_game *game)
+{
 	
-	run_game(&game);
+	// game loop.
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
+}
 
-	cleanup_game(game);
-	return (EXIT_SUCCESS);
+
+void	cleanup_game(t_game game)
+{
+	mp_clearmap(game.mapscan);
 }
