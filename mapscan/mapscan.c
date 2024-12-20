@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 12:07:42 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:00:53 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ t_mapscan	*init_mapscan(char *mapfile)
 	}
 	mapscan->mapfd = open(mapfile, O_RDONLY, 0777);
 	if (mapscan->mapfd < 0)
+	{
+		free(mapscan);
 		mp_post_error(ERR_FILE_READ);
+		return (NULL);
+	}
 	mapscan->map = NULL;
 	mapscan->textures = (t_textures) {NULL};
 	mapscan->error = NO_ERROR;
