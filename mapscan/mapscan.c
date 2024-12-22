@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/20 08:00:53 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:15:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	mp_verifymap(t_mapscan *mapscan)
 			mp_post_error(ERR_INVALID_COLOR);
 			return (false);
 		}
-	if (!chk_map(mapscan->map))
+	if (!chk_map(mapscan))
 		return (false);
 	return (true);
 }

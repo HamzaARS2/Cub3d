@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 12:00:52 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:26:55 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,43 +84,47 @@ static t_mperror	chk_map_comp(char **map)
 }
 
 
-bool	chk_position(char **map, int x, int y)
+bool	chk_position(char **map, t_vector2 v2)
 {
-	if (y == 0 || x == 0 || !map[y] || !map[y + 1] || !map[y - 1]
-		|| !map[y][x + 1])
+	if (v2.y == 0 || v2.x == 0 || !map[v2.y] || !map[v2.y + 1] || !map[v2.y - 1]
+		|| !map[v2.y][v2.x + 1])
 		return (mp_post_error(ERR_MAP_NOT_CLOSED));
-	if (ft_strlen(map[y - 1]) <= x || !ump_is_mpcomponent(map[y - 1][x]))
+	if (ft_strlen(map[v2.y - 1]) <= v2.x || !ump_is_mpcomponent(map[v2.y - 1][v2.x]))
 		return (mp_post_error(ERR_MAP_NOT_CLOSED));
-	if (ft_strlen(map[y + 1]) <= x || !ump_is_mpcomponent(map[y + 1][x]))
+	if (ft_strlen(map[v2.y + 1]) <= v2.x || !ump_is_mpcomponent(map[v2.y + 1][v2.x]))
 		return (mp_post_error(ERR_MAP_NOT_CLOSED));
-	if (!ump_is_mpcomponent(map[y][x - 1]))
+	if (!ump_is_mpcomponent(map[v2.y][v2.x - 1]))
 		return (mp_post_error(ERR_INVALID_CHAR));
-	if (!ump_is_mpcomponent(map[y][x + 1]))
+	if (!ump_is_mpcomponent(map[v2.y][v2.x + 1]))
 		return (mp_post_error(ERR_INVALID_CHAR));
 	return (true);
 }
 
-bool	chk_map(char **map)
+// TODO: save start position!.
+bool	chk_map(t_mapscan *mapscan)
 {
-	int y;
-	int x;
+	t_vector2 v2;
+	t_vector2 start_pos;
 	
-	if (!chk_map_comp(map))
+	v2.y = 0;
+	if (!chk_map_comp(mapscan->map))
 		return (false);
-	y = 0;
-	while (map[y])
+	while (mapscan->map[v2.y])
 	{
-		x = -1;
-		if (!map[y][0])
+		v2.x = -1;
+		if (!mapscan->map[v2.y][0])
 			return (false);
-		while (map[y][++x])
+		while (mapscan->map[v2.y][++v2.x])
 		{
-			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
-				|| map[y][x] == 'W')
-				if (!chk_position(map, x, y))
+			if (ump_is_mpcomponent(mapscan->map[v2.y][v2.x]) && mapscan->map[v2.y][v2.x] != '1')
+			{
+				if (!chk_position(mapscan->map, v2))
 					return (false);
+				if (mapscan->map[v2.y][v2.x] != '0')
+					mapscan->start_pos = (t_vector2) {v2.x, v2.y};
+			}
 		}
-		y++;
+		v2.y++;
 	}
 	return (true);
 }
