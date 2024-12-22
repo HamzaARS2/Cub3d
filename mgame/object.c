@@ -19,11 +19,33 @@ t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos)
 	object = malloc(sizeof(t_object));
 	if (!object)
 		return (NULL);
-	object->position = pos;
-	object->velocity = 3;
+	object->position.x = pos.x * TILE_SIZE;
+	object->position.y = pos.y * TILE_SIZE;
+	object->speed = 3.0f;
+	object->direction = (t_vector2) {0};
 	if (!img)
 		object->image = gfx_create_image(game, OBJ_SIZE, OBJ_SIZE, get_rgba(33, 216, 184, 255));
 	else
 		object->image = img;
 	return (object);
+}
+
+void	obj_update_mvdirection(t_game *game, t_object *object)
+{
+	float speed;
+	int new_x;
+	int new_y;
+
+	if (object->direction.x != 0 && object->direction.y != 0)
+		speed = object->speed * 0.707;
+	else
+		speed = object->speed;
+	new_x = object->position.x + object->direction.x * speed;
+	new_y = object->position.y + object->direction.y * speed;
+	if (!mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
+		return ;
+	object->position.x = new_x;
+	object->position.y = new_y;
+	object->image->instances[0].x = object->position.x;
+	object->image->instances[0].y = object->position.y;
 }

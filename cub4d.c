@@ -19,7 +19,7 @@ void	foo() {
 int	main(int ac, char **av) {
 	t_game		game;
 
-	atexit(foo);
+	// atexit(foo);
 	if (!init_game(&game, av[1]))
 	{
 		cleanup_game(game);

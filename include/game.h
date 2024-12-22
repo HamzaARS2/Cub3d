@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
+#include "/home/helarras/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048
@@ -33,7 +33,8 @@ typedef struct s_graphic {
 typedef struct s_object {
 	mlx_image_t	*image;
 	t_vector2	position;
-	int			velocity;
+	t_vector2	direction;
+	float		speed;
 } t_object;
 
 typedef struct s_game {
@@ -57,8 +58,10 @@ bool	rnd_draw_map(t_game *game);
 bool	rnd_draw_player(t_game *game);
 // movements
 void	mv_handle_moves(void *param);
+bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object
 t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos);
+void	obj_update_mvdirection(t_game *game, t_object *object);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
