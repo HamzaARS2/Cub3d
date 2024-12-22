@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 15:13:23 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:52:41 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define HEIGHT 1024
 
 #define TILE_SIZE 64
+#define OBJ_SIZE 16
 
 typedef struct s_graphic {
 	mlx_image_t *image;
@@ -30,16 +31,16 @@ typedef struct s_graphic {
 } t_graphic;
 
 typedef struct s_object {
-	mlx_image_t *image;
-	t_vector2 position;
-	t_vector2 velocity;
+	mlx_image_t	*image;
+	t_vector2	position;
+	int			velocity;
 } t_object;
 
 typedef struct s_game {
 	t_mapscan	*mapscan;
 	mlx_t		*mlx;
 	t_list		*graphics;
-	t_object	player;
+	t_object	*player;
 } t_game;
 
 
@@ -53,8 +54,11 @@ mlx_image_t	*gfx_create_image(t_game *game, int width, int height, int color);
 void	gfx_set_color(mlx_image_t *image, int color);
 // renderer
 bool	rnd_draw_map(t_game *game);
-bool	rnd_draw_object(t_game *game, t_vector2 v2);
-
+bool	rnd_draw_player(t_game *game);
+// movements
+void	mv_handle_moves(void *param);
+// object
+t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos);
 
 // utils
 t_mapscan	*readmap(char *mapfile);

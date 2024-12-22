@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 14:04:36 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:25:17 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ bool	rnd_draw_map(t_game *game)
 	return (true);
 }
 
-bool	rnd_draw_object(t_game *game, t_vector2 v2)
+bool	rnd_draw_player(t_game *game)
 {
-	mlx_image_t *object;
+	t_vector2 pos;
 
-	object = gfx_create_image(game, 16, 16, get_rgba(33, 216, 184, 255));
-	if (!object)
-		return (false);
-	mlx_image_to_window(game->mlx, object, v2.x * TILE_SIZE, v2.y * TILE_SIZE);
+	pos = game->player->position;
+	mlx_image_to_window(game->mlx, game->player->image, pos.x * TILE_SIZE, pos.y * TILE_SIZE);
 	return (true);
 }

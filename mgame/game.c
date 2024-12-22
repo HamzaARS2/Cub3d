@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 15:18:00 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:24:37 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 
 bool	init_game(t_game *game, char *mapfile)
 {
+	mlx_image_t *obj_img;
+	
 	game->mapscan = readmap(mapfile);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	if (!game->mlx)
 		return (false);
-	
+	game->player = init_object(game, NULL, game->mapscan->start_pos);
 	return (true);
 }
 
@@ -28,7 +30,8 @@ bool	init_game(t_game *game, char *mapfile)
 void	run_game(t_game *game)
 {
 	rnd_draw_map(game);
-	rnd_draw_object(game, game->mapscan->start_pos);
+	rnd_draw_player(game);
+	mlx_loop_hook(game->mlx, mv_handle_moves, game);
 	// game loop.
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
