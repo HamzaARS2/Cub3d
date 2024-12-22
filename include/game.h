@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 11:56:13 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:57:13 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 #define WIDTH 2048
 #define HEIGHT 960
+
+#define TILE_SIZE 64
 
 typedef struct s_graphic {
 	mlx_image_t *image;
@@ -44,6 +46,8 @@ mlx_image_t	*gfx_create_image(t_game *game, int width, int height, int color);
 void	gfx_set_color(mlx_image_t *image, int color);
 // renderer
 bool	rnd_draw_map(t_game *game);
+bool	rnd_draw_object(t_game *game, int x, int y);
+
 
 // utils
 t_mapscan	*readmap(char *mapfile);
