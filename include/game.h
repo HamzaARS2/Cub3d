@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 16:52:41 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/24 12:03:54 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "/home/helarras/MLX42/include/MLX42/MLX42.h"
+#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048

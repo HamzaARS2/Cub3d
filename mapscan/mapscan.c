@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 15:15:07 by helarras         ###   ########.fr       */
+/*   Updated: 2024/12/24 12:42:31 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	mp_clearmap(t_mapscan *mapscan)
 	t_textures textures;
 	
 	i = 0;
+	if (!mapscan)
+		return ;
 	free(mapscan->textures.north_tex);
 	free(mapscan->textures.south_tex);
 	free(mapscan->textures.east_tex);
