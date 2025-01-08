@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 13:38:45 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:12:11 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ mlx_image_t	*gfx_create_image(t_game *game, int width, int height, int color)
 	if (!image)
 		return (NULL);
 	gfx_set_color(image, color);
+	ft_lstadd_back(&game->graphics, ft_lstnew(image));
 	return (image);
 }
 

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/24 12:38:19 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:01:23 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	init_game(t_game *game, char *mapfile)
 {
 	mlx_image_t *obj_img;
 	
+	game->graphics = NULL;
 	game->mapscan = readmap(mapfile);
 	if (!game->mapscan)
 		return (false);
