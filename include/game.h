@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/24 12:03:54 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:50:41 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
+#include "/Users/nhimad/Desktop/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048
@@ -44,6 +44,8 @@ typedef struct s_game {
 	t_object	*player;
 } t_game;
 
+
+void	bresenham_line(t_game *game);
 
 bool	init_game(t_game *game, char *mapfile);
 void	run_game(t_game *game);
