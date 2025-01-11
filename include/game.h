@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/07 11:50:41 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:44:21 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@
 
 #define TILE_SIZE 64
 #define OBJ_SIZE 16
-
-typedef struct s_graphic {
-	mlx_image_t *image;
-	bool		is_texture;
-} t_graphic;
 
 typedef struct s_object {
 	mlx_image_t	*image;

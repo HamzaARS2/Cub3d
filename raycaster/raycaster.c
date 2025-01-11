@@ -25,10 +25,9 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat)
 {
 	unsigned int	color;
 
-    color = 0xff0000ff;
+    color = 0x6A5ACDFF;
 	while (1)
 	{
-        printf("\n  %p \n", image);
 		mlx_put_pixel(image, data->x1, data->y1, color);
 		if (data->x1 == data->x2 && data->y1 == data->y2)
 			break ;
@@ -56,11 +55,10 @@ void	bresenham_line(t_game *game)
     player = game->player;
     data.x1 = player->position.x;
     data.y1 = player->position.y;
-    data.x2 = data.x1 + 100;
+    data.x2 = data.x1;
     data.y2 = data.y1;
 	mat.dx = fabs((float)data.x2 - data.x1);
 	mat.dy = fabs((float)data.y2 - data.y1);
 	set_direction(&mat, &data);
-    t_graphic *gfx = (t_graphic *)game->graphics->content;
-	drawing_loop(gfx->image, &data, mat);
+	drawing_loop(game->graphics->next->content, &data, mat);
 }

@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/07 13:55:30 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:39:41 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	init_game(t_game *game, char *mapfile)
 void	run_game(t_game *game)
 {
 	rnd_draw_map(game);
-	rnd_draw_player(game);
+	rnd_draw_player(game);	
 	mlx_loop_hook(game->mlx, mv_handle_moves, game);
 	// game loop.
 	mlx_loop(game->mlx);

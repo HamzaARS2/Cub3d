@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/07 14:08:53 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/08 16:20:45 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@ int	main(int ac, char **av) {
 		cleanup_game(game);
 		return (EXIT_FAILURE);
 	}
-	//run_game(&game);
-	t_graphic *images;
-	while (game.graphics)
-	{
-		images = game.graphics->content;
-		printf("%p\n",images);
-		game.graphics = game.graphics->next;
-	}
-
+	
+	run_game(&game);
 	cleanup_game(game);
 	return (EXIT_SUCCESS);
 }
+
+
