@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 15:26:55 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:37:48 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	chk_color(char *color_str, int *color)
 	int d;
 	
 	i = 0;
+	k = 0;
 	rgb = ft_split(color_str, ',');
 	while (rgb && rgb[i] && k >= 0)
 	{
