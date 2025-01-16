@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub4d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/05 10:23:37 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:20:45 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char **av) {
 	}
 	
 	run_game(&game);
-
 	cleanup_game(game);
 	return (EXIT_SUCCESS);
 }
+
+
