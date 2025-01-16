@@ -55,8 +55,8 @@ void	bresenham_line(t_game *game)
     player = game->player;
     data.x1 = player->position.x + OBJ_SIZE / 2;
     data.y1 = player->position.y + OBJ_SIZE / 2;
-    data.x2 = data.x1 + 100;
-    data.y2 = data.y1;
+    data.x2 = data.x1 + game->mouse_pos.x;
+    data.y2 = data.y1 + game->mouse_pos.y;
 	mat.dx = fabs((float)data.x2 - data.x1);
 	mat.dy = fabs((float)data.y2 - data.y1);
 	set_direction(&mat, &data);

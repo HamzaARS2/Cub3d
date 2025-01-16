@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 17:07:34 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:40:48 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_list		*graphics;
 	t_object	*player;
+	t_vector2	mouse_pos;
 } t_game;
 
 
@@ -44,6 +45,7 @@ void	bresenham_line(t_game *game);
 
 bool	init_game(t_game *game, char *mapfile);
 void	run_game(t_game *game);
+void	update(void *param);
 void	cleanup_game(t_game game);
 
 // graphics manager
@@ -55,7 +57,7 @@ bool	rnd_draw_map(t_game *game);
 bool	rnd_draw_player(t_game *game);
 // movements
 void	mv_move_object(t_object *object, int new_x, int new_y);
-void	mv_handle_moves(void *param);
+void	mv_handle_moves(t_game *game);
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object
 t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos);

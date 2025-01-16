@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 17:08:20 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:22:51 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,12 @@ bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
 	return (true);
 }
 
-void	mv_handle_moves(void *param)
+void	mv_handle_moves(t_game *game)
 {
-	t_game *game;
 	t_object *player;
 
-	game = param;
 	player = game->player;
 	player->direction = (t_vector2) {0};
-	bresenham_line(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 
