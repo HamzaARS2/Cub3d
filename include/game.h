@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 16:55:30 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:07:34 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "/Users/helarras/Desktop/MLX42/include/MLX42/MLX42.h"
+#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048
@@ -54,6 +54,7 @@ void	gfx_set_color(mlx_image_t *image, t_vector2 coords, int color);
 bool	rnd_draw_map(t_game *game);
 bool	rnd_draw_player(t_game *game);
 // movements
+void	mv_move_object(t_object *object, int new_x, int new_y);
 void	mv_handle_moves(void *param);
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object

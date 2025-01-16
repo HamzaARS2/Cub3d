@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/08 16:28:03 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/16 17:08:20 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-void	mv_move_object(t_object *object, t_vector2 direction)
+void	mv_move_object(t_object *object, int new_x, int new_y)
 {
-	object->position.x += direction.x;
-	object->position.y += direction.y;
-	object->image->instances[0].x += direction.x;
-	object->image->instances[0].y += direction.y;
-	
+	object->position.x = new_x;
+	object->position.y = new_y;
+	object->image->instances[0].x = object->position.x;
+	object->image->instances[0].y = object->position.y;
 }
 
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
@@ -66,5 +65,4 @@ void	mv_handle_moves(void *param)
 		player->direction.x = -1;
 
 	obj_update_mvdirection(game, player);
-	// printf("x %i y %i | \n", player->position.x / TILE_SIZE, player->position.y / TILE_SIZE);
 }

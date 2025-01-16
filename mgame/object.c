@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/12 13:29:25 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:46:58 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,5 @@ void	obj_update_mvdirection(t_game *game, t_object *object)
 	new_y = object->position.y + object->direction.y * speed;
 	if (!mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
 		return ;
-	object->position.x = new_x;
-	object->position.y = new_y;
-	object->image->instances[0].x = object->position.x;
-	object->image->instances[0].y = object->position.y;
+	mv_move_object(object, new_x, new_y);
 }
