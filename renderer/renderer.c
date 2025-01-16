@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/08 15:59:25 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:41:00 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,21 @@ bool	rnd_draw_map(t_game *game)
 	int x;
 	int y;
 	char	**map;
-	mlx_image_t *space_img;
-	mlx_image_t *wall_img;
+	mlx_image_t *image;
 	
 	map = game->mapscan->map;
-	space_img = gfx_create_image(game, TILE_SIZE, TILE_SIZE, get_rgba(225, 221, 221, 255));
-	printf("space_img %p\n", space_img);
-	wall_img = gfx_create_image(game, TILE_SIZE, TILE_SIZE, get_rgba(51,175,255,255));
-	if (!space_img || !wall_img)
-		return (false);
+	image = gfx_create_image(game, WIDTH, HEIGHT);
+	mlx_image_to_window(game->mlx, image, 0, 0);
+	
 	y = -1;
 	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
 			if (map[y][x] == '1')
-				mlx_image_to_window(game->mlx, wall_img, x * TILE_SIZE, y * TILE_SIZE);
+				gfx_set_color(image,(t_vector2) {x, y}, get_rgba(51,175,255,255));
 			else if (ump_is_mpcomponent(map[y][x]))
-				mlx_image_to_window(game->mlx, space_img, x * TILE_SIZE, y * TILE_SIZE);
+				gfx_set_color(image,(t_vector2) {x, y} , get_rgba(225, 221, 221, 255));
 	}
 	return (true);
 }

@@ -6,23 +6,25 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/08 15:46:01 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:39:23 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/game.h"
 
-void	gfx_set_color(mlx_image_t *image, int color)
+void	gfx_set_color(mlx_image_t *image, t_vector2 coords, int color)
 {
 	int y;
 	int x;
 	
-	y = 0;
-	while (y < image->height - 1)
+	coords.x *= TILE_SIZE;
+	coords.y *= TILE_SIZE;
+	y = coords.y;
+	while (y < coords.y + TILE_SIZE - 1)
 	{
-		x = 0;
-		while (x < image->width - 1)
+		x = coords.x;
+		while (x < coords.x + TILE_SIZE - 1)
 			mlx_put_pixel(image, x++, y, color);
 		y++;
 	}
@@ -42,14 +44,13 @@ mlx_image_t	*gfx_create_teximage(t_game *game, char *tex_path)
 	return (image);
 }
 
-mlx_image_t	*gfx_create_image(t_game *game, int width, int height, int color)
+mlx_image_t	*gfx_create_image(t_game *game, int width, int height)
 {
 	mlx_image_t	*image;
 
 	image = mlx_new_image(game->mlx, width, height);
 	if (!image)
 		return (NULL);
-	gfx_set_color(image, color);
 	ft_lstadd_back(&game->graphics, ft_lstnew(image));
 	return (image);
 }

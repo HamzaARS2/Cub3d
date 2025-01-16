@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/08 15:44:21 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:38:53 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	cleanup_game(t_game game);
 
 // graphics manager
 mlx_image_t	*gfx_create_teximage(t_game *game, char *tex_path);
-mlx_image_t	*gfx_create_image(t_game *game, int width, int height, int color);
-void	gfx_set_color(mlx_image_t *image, int color);
+mlx_image_t	*gfx_create_image(t_game *game, int width, int height);
+void	gfx_set_color(mlx_image_t *image, t_vector2 coords, int color);
 // renderer
 bool	rnd_draw_map(t_game *game);
 bool	rnd_draw_player(t_game *game);

@@ -6,13 +6,11 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/08 16:39:41 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:39:16 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
-
-
 
 bool	init_game(t_game *game, char *mapfile)
 {
@@ -26,6 +24,7 @@ bool	init_game(t_game *game, char *mapfile)
 	if (!game->mlx)
 		return (false);
 	game->player = init_object(game, NULL, game->mapscan->start_pos);
+	gfx_set_color(game->player->image, (t_vector2){0} , get_rgba(33, 216, 184, 255));
 	return (true);
 }
 
