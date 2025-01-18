@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/14 16:41:00 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/18 13:08:35 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ bool	rnd_draw_player(t_game *game)
 
 	pos = game->player->position;
 	mlx_image_to_window(game->mlx, game->player->image, pos.x, pos.y);
+	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
+	board_clean(game->drawing_board);
 	return (true);
 }

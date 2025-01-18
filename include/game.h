@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/14 16:38:53 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/18 13:00:32 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_list		*graphics;
 	t_object	*player;
+	mlx_image_t *drawing_board;
 } t_game;
 
 
@@ -62,6 +63,7 @@ void	obj_update_mvdirection(t_game *game, t_object *object);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
+void	board_clean(mlx_image_t *drawing_board);
 
 
 #endif
