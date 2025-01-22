@@ -29,5 +29,5 @@ typedef struct s_draw
 
 int 	check_if_wall(char **map, int x, int y);
 void	set_direction(t_draw *mat, t_data *data);
-void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat);
+void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 15:46:58 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:06:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos)
 		return (NULL);
 	object->position.x = pos.x * TILE_SIZE;
 	object->position.y = pos.y * TILE_SIZE;
-	object->speed = 3.0f;
+	object->speed = 8.0f;
 	object->direction = (t_vector2) {0};
 	if (!img)
 		object->image = gfx_create_image(game, OBJ_SIZE, OBJ_SIZE);

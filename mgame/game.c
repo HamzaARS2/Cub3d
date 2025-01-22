@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/22 09:42:36 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:00:22 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	run_game(t_game *game)
 {
 	rnd_draw_map(game);
 	rnd_draw_player(game);
-	// mlx_set_mouse_pos(game->mlx, game->player->position.x, game->player->position.y);
 	mlx_loop_hook(game->mlx, update, game);
 	// game loop.
 	mlx_loop(game->mlx);
@@ -54,6 +53,7 @@ void	update(void *param) {
 	mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	game->mouse_pos.x -= game->player->position.x;
 	game->mouse_pos.y -= game->player->position.y;
+	bresenham_line(game);
 	bresenham_line(game);
 }
 

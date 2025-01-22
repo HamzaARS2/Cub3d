@@ -2,7 +2,7 @@
 
 int check_if_wall(char **map, int x, int y)
 {
-    return (map[y / TILE_SIZE][x / TILE_SIZE]);
+    return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
 }
 
 void	set_direction(t_draw *mat, t_data *data)
@@ -38,7 +38,7 @@ void	board_clean(mlx_image_t *drawing_board)
 	}
 }
 
-void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat)
+void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 {
 	unsigned int	color;
 
@@ -47,7 +47,9 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat)
 	while (1)
 	{
 		mlx_put_pixel(image, data->x1, data->y1, color);
-		if (data->x1 == data->x2 && data->y1 == data->y2)
+		if (check_if_wall(map, data->x1, data->y1))
+			break;
+		if ((data->x1 == data->x2 && data->y1 == data->y2))
 			break ;
 		mat.temp = mat.err;
 		if (mat.temp > -mat.dx)
@@ -78,5 +80,5 @@ void	bresenham_line(t_game *game)
 	mat.dx = fabs((float)data.x2 - data.x1);
 	mat.dy = fabs((float)data.y2 - data.y1);
 	set_direction(&mat, &data);
-	drawing_loop(game->drawing_board, &data, mat);
+	drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
 }
