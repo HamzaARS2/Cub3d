@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 19:40:48 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/22 09:44:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_game {
 	t_list		*graphics;
 	t_object	*player;
 	t_vector2	mouse_pos;
+	mlx_image_t *drawing_board;
 } t_game;
 
 
@@ -65,6 +66,7 @@ void	obj_update_mvdirection(t_game *game, t_object *object);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
+void	board_clean(mlx_image_t *drawing_board);
 
 
 #endif
