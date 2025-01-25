@@ -19,6 +19,7 @@ renderer/renderer_utils.c movement/movement.c raycaster/raycaster.c
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)
 
+H = ./include/game.h
 NAME = cub3D
 
 ADS := -fsanitize=address -g
@@ -32,10 +33,10 @@ libmlx:
 $(LIBFT):
 	@make -C $(LIBFT_DIR) all bonus
 
-%.o: %.c
+%.o: %.c $(H)
 	$(CC) $(ADS) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS_FILES) $(LIBFT)
+$(NAME): $(OBJS_FILES) $(LIBFT) $(H)
 	$(CC) $(ADS) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB) -o $@
 
 clean:

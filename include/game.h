@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/18 13:00:32 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/25 12:44:35 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <math.h>
 #include "/Users/nhimad/Desktop/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
@@ -23,12 +24,27 @@
 #define HEIGHT 1024
 
 #define TILE_SIZE 64
-#define OBJ_SIZE 16
+#define OBJ_SIZE 8
+#define ROTATION_SPEED (2.5 * (M_PI / 180))
+
+typedef struct s_Dvector  {
+	double 		x;
+	double 		y;
+	char 		turnDirection;
+	char 		walkDirection;
+	double		rotatin_angle;		
+} t_Dvector;
+
+typedef struct s_vector3 {
+	double x;
+	double y;
+	double z;
+} t_vector3;
 
 typedef struct s_object {
 	mlx_image_t	*image;
-	t_vector2	position;
-	t_vector2	direction;
+	t_vector3	position;
+	t_Dvector	direction;
 	float		speed;
 } t_object;
 
@@ -64,6 +80,5 @@ void	obj_update_mvdirection(t_game *game, t_object *object);
 // utils
 t_mapscan	*readmap(char *mapfile);
 void	board_clean(mlx_image_t *drawing_board);
-
 
 #endif
