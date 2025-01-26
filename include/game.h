@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/26 16:06:04 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/26 18:15:33 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 
 #define TILE_SIZE 64
 #define OBJ_SIZE 8
-#define ROTATION_SPEED (2.5 * (M_PI / 180))
+#define ROTATION_SPEED (3 * (M_PI / 180))
+# define RADIANS(d) (d * (M_PI / 180))
 
 typedef struct s_Dvector  {
 	double 		x;
@@ -80,5 +81,7 @@ void	obj_update_mvdirection(t_game *game, int rotation);
 // utils
 t_mapscan	*readmap(char *mapfile);
 void	board_clean(mlx_image_t *drawing_board);
+
+void	cast_rays(t_game *game);
 
 #endif

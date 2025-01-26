@@ -44,7 +44,6 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat)
 
     color = 0x6A5ACDFF;
 	
-	board_clean(image);
 	while (1)
 	{
 		mlx_put_pixel(image, data->x1, data->y1, color);
