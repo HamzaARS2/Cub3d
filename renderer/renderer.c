@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/25 12:32:58 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/01/26 16:16:52 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ bool	rnd_draw_player(t_game *game)
 	mlx_image_to_window(game->mlx, game->player->image, pos.x, pos.y);
 	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
 	board_clean(game->drawing_board);
+	bresenham_line(game);
 	return (true);
 }
