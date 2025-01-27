@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 16:49:37 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:04:40 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	update(void *param) {
 	mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	game->mouse_pos.x -= game->player->position.x;
 	game->mouse_pos.y -= game->player->position.y;
-	bresenham_line(game);
 	bresenham_line(game);
 }
 

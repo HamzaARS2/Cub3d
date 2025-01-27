@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 16:49:04 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:16:49 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include "/Users/helarras/Desktop/MLX42/include/MLX42/MLX42.h"
+#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048
@@ -25,7 +25,7 @@
 
 #define TILE_SIZE 64
 #define OBJ_SIZE 8
-#define ROTATION_SPEED (3 * (M_PI / 180))
+#define ROTATION_SPEED (7 * (M_PI / 180))
 # define RADIANS(d) (d * (M_PI / 180))
 
 typedef struct s_Dvector  {

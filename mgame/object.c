@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 16:50:35 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:59:39 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos)
 	object->position.x = pos.x * TILE_SIZE;
 	object->position.y = pos.y * TILE_SIZE;
 	object->direction.rotatin_angle = 0;
-	object->speed = 120.0f;
+	object->speed = 5.0f;
 	object->direction = (t_Dvector) {0};
 	if (!img)
 		object->image = gfx_create_image(game, OBJ_SIZE, OBJ_SIZE);
@@ -57,17 +57,19 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	double speed;
 	double new_x;
 	double new_y;
-	double dt = game->mlx->delta_time;
 	direction = &(game->player->direction);
 	
-	speed = game->player->speed * dt;
+	speed = game->player->speed;
 	direction->rotatin_angle += direction->turnDirection * (ROTATION_SPEED);
 	double distance_x = cos(direction->rotatin_angle  + (rotation * (M_PI / 180))) * (direction->walkDirection * speed);
 	double distance_y = sin(direction->rotatin_angle  + (rotation * (M_PI / 180))) * (direction->walkDirection * speed);
 		
 	new_x = round(game->player->position.x + distance_x);
 	new_y = round(game->player->position.y + distance_y);
-	if (!mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
+	if (!mv_check_collusion(new_x, new_y, game->mapscan->map, '1')) {
+		cast_rays(game);	
 		return ;
-	mv_move_object(object, new_x, new_y);
+	}
+	mv_move_object(game->player, new_x, new_y);
+	cast_rays(game);
 }
