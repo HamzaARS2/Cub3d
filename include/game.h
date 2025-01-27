@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/22 09:44:47 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:49:04 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,36 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
+#include <math.h>
+#include "/Users/helarras/Desktop/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048
 #define HEIGHT 1024
 
 #define TILE_SIZE 64
-#define OBJ_SIZE 16
+#define OBJ_SIZE 8
+#define ROTATION_SPEED (3 * (M_PI / 180))
+# define RADIANS(d) (d * (M_PI / 180))
+
+typedef struct s_Dvector  {
+	double 		x;
+	double 		y;
+	char 		turnDirection;
+	char 		walkDirection;
+	double		rotatin_angle;		
+} t_Dvector;
+
+typedef struct s_vector3 {
+	double x;
+	double y;
+	double z;
+} t_vector3;
 
 typedef struct s_object {
 	mlx_image_t	*image;
-	t_vector2	position;
-	t_vector2	direction;
+	t_vector3	position;
+	t_Dvector	direction;
 	float		speed;
 } t_object;
 
@@ -62,11 +79,12 @@ void	mv_handle_moves(t_game *game);
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object
 t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos);
-void	obj_update_mvdirection(t_game *game, t_object *object);
+void	obj_update_mvdirection(t_game *game, int rotation);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
 void	board_clean(mlx_image_t *drawing_board);
 
+void	cast_rays(t_game *game);
 
 #endif

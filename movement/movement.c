@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 19:22:51 by helarras         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:52:02 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,40 @@ void	mv_handle_moves(t_game *game)
 	t_object *player;
 
 	player = game->player;
-	player->direction = (t_vector2) {0};
+	player->direction.turnDirection = 0;
+	player->direction.walkDirection = 0;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-		player->direction.y = -1;
+	{	
+		player->direction.walkDirection = 1;
+		obj_update_mvdirection(game, 0);
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-		player->direction.y = 1;
+	{	
+		player->direction.walkDirection = -1;
+		obj_update_mvdirection(game, 0);
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		player->direction.x = 1; 
+	{	
+		player->direction.walkDirection = -1;
+		obj_update_mvdirection(game, -90);
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		player->direction.x = -1;
-
-	obj_update_mvdirection(game, player);
+	{	
+		player->direction.walkDirection = -1;
+		obj_update_mvdirection(game, 90);
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	{
+		player->direction.turnDirection = -1;
+		obj_update_mvdirection(game, 0);
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	{
+		player->direction.turnDirection = 1;
+		obj_update_mvdirection(game, 0);	
+	}
+	// printf("x %i y %i | \n", player->position.x / TILE_SIZE, player->position.y / TILE_SIZE);
 }
