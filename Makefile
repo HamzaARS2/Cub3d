@@ -1,9 +1,9 @@
 CFLAGS = 
 MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
-MLX := ~/MLX42
+MLX := ~/Desktop/MLX42
 MLX_BUILD := $(MLX)/build
-MLX_LIB = $(MLX)/build/libmlx42.a -Iinclude -lglfw
+MLX_LIB = $(MLX)/build/libmlx42.a -L'/Users/nhimad/.brew/opt/glfw/lib/' -Iinclude -lglfw
 
 LIBFT_DIR := ./libft
 LIBFT := $(LIBFT_DIR)/libft.a
