@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 18:16:49 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:08:12 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include "/Users/helarras/MLX42/include/MLX42/MLX42.h"
+#include "/Users/nhimad/Desktop/Cub3d/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 2048
@@ -25,7 +25,7 @@
 
 #define TILE_SIZE 64
 #define OBJ_SIZE 8
-#define ROTATION_SPEED (7 * (M_PI / 180))
+#define ROTATION_SPEED (3 * (M_PI / 180))
 # define RADIANS(d) (d * (M_PI / 180))
 
 typedef struct s_Dvector  {
@@ -86,5 +86,7 @@ t_mapscan	*readmap(char *mapfile);
 void	board_clean(mlx_image_t *drawing_board);
 
 void	cast_rays(t_game *game);
+
+double normalizeAngle(double angle);
 
 #endif

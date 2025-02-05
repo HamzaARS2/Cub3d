@@ -65,6 +65,17 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 	}
 }
 
+
+double normalizeAngle(double angle) 
+{
+	double n_angle;
+
+    n_angle = fmod(angle, 2 * M_PI);
+    if (n_angle < 0)
+        n_angle += 2 * M_PI;
+	return (n_angle);
+}
+
 void	bresenham_line(t_game *game)
 {
 	t_draw		mat;
@@ -75,7 +86,7 @@ void	bresenham_line(t_game *game)
     player = game->player;
     data.x1 = player->position.x + OBJ_SIZE / 2;
     data.y1 = player->position.y + OBJ_SIZE / 2;
-    data.x2 = data.x1 + cos(player->direction.rotatin_angle) * 50;
+    data.x2 = data.x1 + cos((player->direction.rotatin_angle)) * 50;
     data.y2 = data.y1 + sin(player->direction.rotatin_angle) * 50;
 	mat.dx = fabs((float)data.x2 - data.x1);
 	mat.dy = fabs((float)data.y2 - data.y1); 

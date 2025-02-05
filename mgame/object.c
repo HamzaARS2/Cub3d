@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 17:59:39 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:49:21 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos)
 	object->position.x = pos.x * TILE_SIZE;
 	object->position.y = pos.y * TILE_SIZE;
 	object->direction.rotatin_angle = 0;
-	object->speed = 5.0f;
+	object->speed = 3.0f;
 	object->direction = (t_Dvector) {0};
 	if (!img)
 		object->image = gfx_create_image(game, OBJ_SIZE, OBJ_SIZE);
@@ -37,7 +37,7 @@ void	cast_rays(t_game *game)
 	double	rotate_spead;
 	float 	degree;
 
-	degree = 0.25;
+	degree = 0.234375;
 	rotate_spead = RADIANS(degree);
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
@@ -60,9 +60,10 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	direction = &(game->player->direction);
 	
 	speed = game->player->speed;
-	direction->rotatin_angle += direction->turnDirection * (ROTATION_SPEED);
-	double distance_x = cos(direction->rotatin_angle  + (rotation * (M_PI / 180))) * (direction->walkDirection * speed);
-	double distance_y = sin(direction->rotatin_angle  + (rotation * (M_PI / 180))) * (direction->walkDirection * speed);
+	direction->rotatin_angle += direction->turnDirection * ROTATION_SPEED;
+	direction->rotatin_angle = normalizeAngle(direction->rotatin_angle);
+	double distance_x = cos(direction->rotatin_angle) * (direction->walkDirection * speed);
+	double distance_y = sin(direction->rotatin_angle) * (direction->walkDirection * speed);
 		
 	new_x = round(game->player->position.x + distance_x);
 	new_y = round(game->player->position.y + distance_y);
