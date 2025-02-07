@@ -2,7 +2,8 @@
 
 int check_if_wall(char **map, int x, int y)
 {
-    return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
+	printf("??y= %d ==>y_p %d||x= %d===> x_p %d\n\n", y,  y / TILE_SIZE, x,  x / TILE_SIZE);
+	return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
 }
 
 void	set_direction(t_draw *mat, t_data *data)
@@ -47,8 +48,8 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 	while (1)
 	{
 		mlx_put_pixel(image, data->x1, data->y1, color);
-		if (check_if_wall(map, data->x1, data->y1))
-			break;
+		// if (check_if_wall(map, data->x1, data->y1))
+		// 	break;
 		if ((data->x1 == data->x2 && data->y1 == data->y2))
 			break ;
 		mat.temp = mat.err;
@@ -71,7 +72,7 @@ double normalizeAngle(double angle)
 	double n_angle;
 
     n_angle = fmod(angle, 2 * M_PI);
-    if (n_angle < 0)
+    if (n_angle <= 0)
         n_angle += 2 * M_PI;
 	return (n_angle);
 }
@@ -81,13 +82,16 @@ void	bresenham_line(t_game *game)
 	t_draw		mat;
     t_object    *player;
     t_data      data;
+	t_vector3 	hit;
 
     mat = (t_draw) {0};
     player = game->player;
     data.x1 = player->position.x + OBJ_SIZE / 2;
     data.y1 = player->position.y + OBJ_SIZE / 2;
-    data.x2 = data.x1 + cos((player->direction.rotatin_angle)) * 50;
-    data.y2 = data.y1 + sin(player->direction.rotatin_angle) * 50;
+	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
+    data.x2 = hit.x;
+    data.y2 = hit.y;
+	printf("x: %d ==> %f ## y: %d ==> %f\n", data.x2, hit.x, data.y2, hit.y);
 	mat.dx = fabs((float)data.x2 - data.x1);
 	mat.dy = fabs((float)data.y2 - data.y1); 
 	set_direction(&mat, &data);

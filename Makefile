@@ -14,7 +14,7 @@ GNL_FILES := gnl/get_next_line.c gnl/get_next_line_utils.c
 
 MAIN_FILES = $(GNL_FILES) cub4d.c mapscan/mapscan.c mapscan/mp_reader.c mapscan/mp_utils.c \
 mapscan/mp_checker.c mgame/game.c mgame/game_utils.c mgame/gfx_manager.c mgame/object.c renderer/renderer.c \
-renderer/renderer_utils.c movement/movement.c raycaster/raycaster.c
+renderer/renderer_utils.c movement/movement.c raycaster/raycaster.c raycaster/raycaster_I.c
 
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)

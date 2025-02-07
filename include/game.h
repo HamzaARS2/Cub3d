@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/05 12:08:12 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/07 17:58:37 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 #define TILE_SIZE 64
 #define OBJ_SIZE 8
-#define ROTATION_SPEED (3 * (M_PI / 180))
+#define ROTATION_SPEED (6 * (M_PI / 180))
 # define RADIANS(d) (d * (M_PI / 180))
 
 typedef struct s_Dvector  {
