@@ -2,7 +2,9 @@
 
 int check_if_wall(char **map, int x, int y)
 {
-	printf("??y= %d ==>y_p %d||x= %d===> x_p %d\n\n", y,  y / TILE_SIZE, x,  x / TILE_SIZE);
+	if (y / TILE_SIZE > 30 || x / TILE_SIZE > 15)
+		return (printf("??y= %d ==>y_p %d||x= %d===> x_p %d\n\n", y,  y / TILE_SIZE, x,  x / TILE_SIZE), 1);		
+	
 	return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
 }
 
@@ -48,8 +50,6 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 	while (1)
 	{
 		mlx_put_pixel(image, data->x1, data->y1, color);
-		// if (check_if_wall(map, data->x1, data->y1))
-		// 	break;
 		if ((data->x1 == data->x2 && data->y1 == data->y2))
 			break ;
 		mat.temp = mat.err;

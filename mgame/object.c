@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/07 18:36:57 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/10 17:47:47 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cast_rays(t_game *game)
 	double	rotate_spead;
 	float 	degree;
 
-	degree = 1;
+	degree = 10;
 	rotate_spead = RADIANS(degree);
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
@@ -62,8 +62,8 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	speed = game->player->speed;
 	direction->rotatin_angle += direction->turnDirection * ROTATION_SPEED;
 	direction->rotatin_angle = normalizeAngle(direction->rotatin_angle);
-	double distance_x = cos(direction->rotatin_angle) * (direction->walkDirection * speed);
-	double distance_y = sin(direction->rotatin_angle) * (direction->walkDirection * speed);
+	double distance_x = cos(direction->rotatin_angle + RADIANS(rotation)) * (direction->walkDirection * speed);
+	double distance_y = sin(direction->rotatin_angle + RADIANS(rotation)) * (direction->walkDirection * speed);
 		
 	new_x = round(game->player->position.x + distance_x);
 	new_y = round(game->player->position.y + distance_y);

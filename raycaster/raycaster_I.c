@@ -1,4 +1,5 @@
 # include "../include/raycaster.h"
+#define next_tile 0.0001
 
 void    find_wall_hit(t_game *game, t_vector3 *hit, double Xa, double Ya)
 {
@@ -29,7 +30,7 @@ t_vector3 horizontal_intersection(t_game *game, float ray_angle)
     player = game->player;
     if (ray_angle > M_PI)
     {
-        Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE - 1;
+        Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE - next_tile;
         Ya = -TILE_SIZE;
     }
     else
@@ -37,8 +38,10 @@ t_vector3 horizontal_intersection(t_game *game, float ray_angle)
         Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
         Ya = TILE_SIZE;
     }
-    
-    Ax = (Ay - player->position.y) / tan(ray_angle) + player->position.x;
+    if (ray_angle > (3 / 2) * M_PI && ray_angle < (1 / 2) * M_PI)
+        Ax = fabs(Ay - player->position.y) / tan(ray_angle) + player->position.x;
+    else
+        Ax = fabs(Ay - player->position.y) / tan(ray_angle) - player->position.x;
     Xa = Ya / tan(ray_angle);
     
     hit.x = Ax;
@@ -66,13 +69,16 @@ t_vector3 vertical_intersection(t_game *game, float ray_angle)
     }
     else
     {
-        Bx = floor(player->position.x / TILE_SIZE) * TILE_SIZE - 1;
+        Bx = floor(player->position.x / TILE_SIZE) * TILE_SIZE - next_tile;
         Xa = -TILE_SIZE;
     }
     
-    By = player->position.y + (player->position.x - Bx) * tan(ray_angle);
+    if (ray_angle < M_PI)
+        By = player->position.y + fabs(player->position.x - Bx) * tan(ray_angle);
+    else
+        By = player->position.y - fabs(player->position.x - Bx) * tan(ray_angle);
+
     Ya = Xa * tan(ray_angle);
-    
     hit.x = Bx;
     hit.y = By;
     find_wall_hit(game, &hit, Xa, Ya);
@@ -88,20 +94,16 @@ t_vector3 find_nearest_hit(t_game *game, float ray_angle)
     float v_dist;
 
     player = game->player;
-    //h_hit = horizontal_intersection(game, ray_angle);
+    h_hit = horizontal_intersection(game, ray_angle);
     v_hit = vertical_intersection(game, ray_angle);
     
-    // h_dist = sqrtf(powf(h_hit.x - player->position.x, 2) + 
-    //                powf(h_hit.y - player->position.y, 2));
-    // v_dist = sqrtf(powf(v_hit.x - player->position.x, 2) + 
-    //                powf(v_hit.y - player->position.y, 2));
+    h_dist = sqrtf(powf(h_hit.x - player->position.x, 2) + 
+                   powf(h_hit.y - player->position.y, 2));
+    v_dist = sqrtf(powf(v_hit.x - player->position.x, 2) + 
+                   powf(v_hit.y - player->position.y, 2));
     
-    // if (h_dist < v_dist)
-    //      return h_hit;
-    if (v_hit.x > WIDTH || v_hit.x < 0)
-        v_hit.x = 50;
-    if (v_hit.y > HEIGHT || v_hit.y < 0)
-        v_hit.y = 50;
+    if (h_dist < v_dist)
+         return h_hit;
     return v_hit;
 }
 

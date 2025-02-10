@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 17:47:25 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:16:30 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	mv_handle_moves(t_game *game)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{	
-		player->direction.walkDirection = -1;
-		obj_update_mvdirection(game, -90);
+		player->direction.walkDirection = 1;
+		obj_update_mvdirection(game, 90);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{	
