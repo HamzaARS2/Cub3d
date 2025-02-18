@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   ft_lstcontent_max.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/18 13:21:34 by helarras         ###   ########.fr       */
+/*   Created: 2025/02/18 12:19:37 by helarras          #+#    #+#             */
+/*   Updated: 2025/02/18 12:32:31 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "libft.h"
 
-void	foo() {
-	system("leaks -q cub3D");
-}
-
-int	main(int ac, char **av) {
-	t_game		game;
-
-	// atexit(foo);
-	if (!init_game(&game, av[1]))
+int	ft_lstcontent_max(t_list *lst) {
+	int size;
+	int current;
+	
+	size = 0;
+	while (lst)
 	{
-		cleanup_game(game);
-		return (EXIT_FAILURE);
+		current = ft_strlen(lst->content);
+		if (current > size)
+			size = current;
+		lst = lst->next;
 	}
-	run_game(&game);
-	cleanup_game(game);
-	return (EXIT_SUCCESS);
+	return (size);
 }
-
-

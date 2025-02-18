@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 22:06:03 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 10:38:22 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:33:43 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ int					ft_iswhitespace(char c);
 void				ft_clear_array(char **arr);
 int					ft_charcount(char *str, int c);
 int					get_rgba(int r, int g, int b, int a);
+int					ft_lstcontent_max(t_list *lst);
 #endif

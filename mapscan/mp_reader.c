@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 15:23:16 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 11:37:02 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:17:13 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	**rdr_readmap(t_mapscan *mapscan)
 			continue;
 		}
 		mapstarted = true;
-		ft_lstadd_back(&maplst, ft_lstnew(ft_strtrim(line, "\n")));
+		ft_lstadd_back(&maplst, ft_lstnew(ft_strtrim(line, "\n")));	
 		free(line);
 		mapsize++;
 	}

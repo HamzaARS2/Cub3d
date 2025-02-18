@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:15:38 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/17 11:17:43 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:35:38 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,24 @@ char	**ump_create_map(t_list *maplst, int mapsize)
 	int		i;
 	char	**map;
 	t_list	*current;
+	int		content_size;
 	
 	if (!maplst)
 		return (NULL);
 	i = 0;
 	current = maplst;
+	content_size = ft_lstcontent_max(maplst);
 	map = malloc((mapsize + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	while (i < mapsize && current)
 	{
-		map[i++] = (char *)current->content;
+		map[i] = ft_calloc(content_size + 1, sizeof(char));
+		ft_strlcpy(map[i++], (char *)current->content, content_size + 1);
 		current = current->next;
 	}
 	map[i] = NULL;
-	ft_lstclear(&maplst, NULL);
+	ft_lstclear(&maplst, free);
 	return (map);
 }
 
