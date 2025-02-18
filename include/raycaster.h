@@ -17,8 +17,12 @@
 # include "mapscan.h"
 # include <math.h>
 
+# define looking_up 0
+# define looking_down 1
+# define looking_right 2
+# define looking_left 3
 # define RADIANS(d) (d * (M_PI / 180))
-# define FOV RADIANS(60)
+# define FOV 60
 # define RES 4
 # define NUM_RAYS (WIDTH / RES)
 

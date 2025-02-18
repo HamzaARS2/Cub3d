@@ -83,5 +83,4 @@ void	mv_handle_moves(t_game *game)
 		player->direction.turnDirection = 1;
 		obj_update_mvdirection(game, 0);	
 	}
-	// printf("x %i y %i | \n", player->position.x / TILE_SIZE, player->position.y / TILE_SIZE);
 }

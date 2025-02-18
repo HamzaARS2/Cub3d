@@ -69,12 +69,11 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 
 double normalizeAngle(double angle) 
 {
-	double n_angle;
-
-    n_angle = fmod(angle, 2 * M_PI);
-    if (n_angle <= 0)
-        n_angle += 2 * M_PI;
-	return (n_angle);
+	while (angle < 0)
+		angle += 360;
+	while (angle >= 360)
+		angle -= 360;
+	return (angle);
 }
 
 void	bresenham_line(t_game *game)
@@ -89,11 +88,12 @@ void	bresenham_line(t_game *game)
     data.x1 = player->position.x + OBJ_SIZE / 2;
     data.y1 = player->position.y + OBJ_SIZE / 2;
 	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
-    data.x2 = hit.x;
-    data.y2 = hit.y;
-	printf("x: %d ==> %f ## y: %d ==> %f\n", data.x2, hit.x, data.y2, hit.y);
-	mat.dx = fabs((float)data.x2 - data.x1);
-	mat.dy = fabs((float)data.y2 - data.y1); 
+    data.x2 = floor(hit.x);
+    data.y2 = floor(hit.y);
+	printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
+
+	mat.dx = fabs(data.x2 - data.x1);
+	mat.dy = fabs(data.y2 - data.y1); 
 	set_direction(&mat, &data);
 	drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
 }

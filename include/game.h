@@ -17,15 +17,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include "/Users/nhimad/Desktop/Cub3d/MLX42/include/MLX42/MLX42.h"
+#include "/home/naoufal/n3d/MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
-#define WIDTH 2048
-#define HEIGHT 1024
+#define WIDTH 1024
+#define HEIGHT 512
 
-#define TILE_SIZE 64
-#define OBJ_SIZE 8
-#define ROTATION_SPEED (6 * (M_PI / 180))
+#define TILE_SIZE 32
+#define OBJ_SIZE 4
+#define ROTATION_SPEED 2
 # define RADIANS(d) (d * (M_PI / 180))
 
 typedef struct s_Dvector  {
