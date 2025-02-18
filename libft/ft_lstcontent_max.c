@@ -6,13 +6,14 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 12:19:37 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/18 12:32:31 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:35:44 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstcontent_max(t_list *lst) {
+int	ft_lstcontent_max(t_list *lst)
+{
 	int size;
 	int current;
 	

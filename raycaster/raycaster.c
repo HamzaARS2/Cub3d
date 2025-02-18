@@ -2,7 +2,10 @@
 
 int check_if_wall(char **map, int x, int y)
 {
-    return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
+	if (y / TILE_SIZE > 30 || x / TILE_SIZE > 15)
+		return (printf("??y= %d ==>y_p %d||x= %d===> x_p %d\n\n", y,  y / TILE_SIZE, x,  x / TILE_SIZE), 1);		
+	
+	return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
 }
 
 void	set_direction(t_draw *mat, t_data *data)
@@ -47,8 +50,6 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 	while (1)
 	{
 		mlx_put_pixel(image, data->x1, data->y1, color);
-		if (check_if_wall(map, data->x1, data->y1))
-			break;
 		if ((data->x1 == data->x2 && data->y1 == data->y2))
 			break ;
 		mat.temp = mat.err;
@@ -65,20 +66,34 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 	}
 }
 
+
+double normalizeAngle(double angle) 
+{
+	while (angle < 0)
+		angle += 360;
+	while (angle >= 360)
+		angle -= 360;
+	return (angle);
+}
+
 void	bresenham_line(t_game *game)
 {
 	t_draw		mat;
     t_object    *player;
     t_data      data;
+	t_vector3 	hit;
 
     mat = (t_draw) {0};
     player = game->player;
     data.x1 = player->position.x + OBJ_SIZE / 2;
     data.y1 = player->position.y + OBJ_SIZE / 2;
-    data.x2 = data.x1 + cos(player->direction.rotatin_angle) * 50;
-    data.y2 = data.y1 + sin(player->direction.rotatin_angle) * 50;
-	mat.dx = fabs((float)data.x2 - data.x1);
-	mat.dy = fabs((float)data.y2 - data.y1); 
+	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
+    data.x2 = floor(hit.x);
+    data.y2 = floor(hit.y);
+	printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
+
+	mat.dx = fabs(data.x2 - data.x1);
+	mat.dy = fabs(data.y2 - data.y1); 
 	set_direction(&mat, &data);
 	drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
 }

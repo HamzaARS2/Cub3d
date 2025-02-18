@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:51 by nhimad            #+#    #+#             */
-/*   Updated: 2025/01/27 16:49:32 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:09:07 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 # include "mapscan.h"
 # include <math.h>
 
+# define looking_up 0
+# define looking_down 1
+# define looking_right 2
+# define looking_left 3
 # define RADIANS(d) (d * (M_PI / 180))
-# define FOV RADIANS(60)
+# define FOV 60
 # define RES 4
 # define NUM_RAYS (WIDTH / RES)
 
@@ -42,5 +46,7 @@ typedef struct s_draw
 
 int		check_if_wall(char **map, int x, int y);
 void	set_direction(t_draw *mat, t_data *data);
+double	normalizeAngle(double angle);
+t_vector3 find_nearest_hit(t_game *game, float ray_angle);
 void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 17:04:40 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:52:11 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ void	update(void *param) {
 	// handling moving objects
 	
 	mv_handle_moves(game);
-	mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
-	game->mouse_pos.x -= game->player->position.x;
-	game->mouse_pos.y -= game->player->position.y;
-	bresenham_line(game);
+	// mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
+	// game->mouse_pos.x -= game->player->position.x;
+	// game->mouse_pos.y -= game->player->position.y;
 }
 
 void	cleanup_game(t_game game)
