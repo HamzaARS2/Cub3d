@@ -87,20 +87,20 @@ void	bresenham_line(t_game *game, int *x, double angle)
 
     mat = (t_draw) {0};
     player = game->player;
-    data.x1 = player->position.x + OBJ_SIZE / 2;
-    data.y1 = player->position.y + OBJ_SIZE / 2;
+    data.x1 = player->position.x;
+    data.y1 = player->position.y;
 	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
-    // data.x2 = floor(hit.x);
-    // data.y2 = floor(hit.y);
-	// //printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
+    data.x2 = floor(hit.x);
+    data.y2 = floor(hit.y);
+	//printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
 
-	// mat.dx = fabs(data.x2 - data.x1);
-	// mat.dy = fabs(data.y2 - data.y1); 
-	// set_direction(&mat, &data);
-	// drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
-	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
-    powf(player->position.y - hit.y, 2));
-	draw_wall(game, distance, angle, x);
+	mat.dx = abs(data.x2 - data.x1);
+	mat.dy = abs(data.y2 - data.y1); 
+	set_direction(&mat, &data);
+	drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
+	// double distance = sqrt(powf(player->position.x - hit.x, 2) + 
+    // powf(player->position.y - hit.y, 2));
+	// draw_wall(game, distance, angle, x);
 }
 
 void draw_wall(t_game *game, double distance, double angle, int *x)

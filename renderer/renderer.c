@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/27 16:52:40 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:39:58 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ bool	rnd_draw_player(t_game *game)
 	t_vector3 pos;
 
 	pos = game->player->position;
+	game->player->position.x += (OBJ_SIZE / 2);
+	game->player->position.y += (OBJ_SIZE / 2);
 	mlx_image_to_window(game->mlx, game->player->image, pos.x, pos.y);
 	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
 	board_clean(game->drawing_board);

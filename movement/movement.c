@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/10 16:16:30 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/21 18:42:03 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	mv_move_object(t_object *object, int new_x, int new_y)
 {
-	object->position.x = new_x;
-	object->position.y = new_y;
-	object->image->instances[0].x = object->position.x;
-	object->image->instances[0].y = object->position.y;
+	object->position.x = new_x + (OBJ_SIZE / 2);
+	object->position.y = new_y + (OBJ_SIZE / 2);
+	object->image->instances[0].x = new_x;
+	object->image->instances[0].y = new_y;
 }
 
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
@@ -27,14 +27,14 @@ bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
 	t_vector2 bot_left;
 	t_vector2 bot_right;
 
-	top_left.x = (new_x + 0) / TILE_SIZE;
-	top_left.y = (new_y + 0) / TILE_SIZE;
-	top_right.x = (new_x + OBJ_SIZE - 0) / TILE_SIZE;
-	top_right.y = (new_y + 0) / TILE_SIZE;
-	bot_left.x = (new_x + 0) / TILE_SIZE;
-	bot_left.y = (new_y + OBJ_SIZE - 0) / TILE_SIZE;
-	bot_right.x = (new_x + OBJ_SIZE - 0) / TILE_SIZE;
-	bot_right.y = (new_y + OBJ_SIZE - 0) / TILE_SIZE;
+	top_left.x = (new_x - 1) / TILE_SIZE;
+	top_left.y = (new_y - 1) / TILE_SIZE;
+	top_right.x = (new_x + OBJ_SIZE + 1) / TILE_SIZE;
+	top_right.y = (new_y - 1) / TILE_SIZE;
+	bot_left.x = (new_x - 1) / TILE_SIZE;
+	bot_left.y = (new_y + OBJ_SIZE + 1) / TILE_SIZE;
+	bot_right.x = (new_x + OBJ_SIZE + 1) / TILE_SIZE;
+	bot_right.y = (new_y + OBJ_SIZE + 1) / TILE_SIZE;
 	if (map[top_left.y][top_left.x] == comp
 		|| map[top_right.y][top_right.x] == comp
 		|| map[bot_left.y][bot_left.x] == comp

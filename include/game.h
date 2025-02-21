@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/07 17:58:37 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/21 18:00:14 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include "/home/naoufal/n3d/MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
 #define WIDTH 1024

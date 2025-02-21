@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/10 17:47:47 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/21 18:39:09 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,9 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	double distance_x = cos(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 	double distance_y = sin(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 		
-	new_x = round(game->player->position.x + distance_x);
-	new_y = round(game->player->position.y + distance_y);
-	if (!mv_check_collusion(new_x, new_y, game->mapscan->map, '1')) {
-		cast_rays(game);	
-		return ;
-	}
-	mv_move_object(game->player, new_x, new_y);
+	new_x = round(game->player->image->instances[0].x + distance_x);
+	new_y = round(game->player->image->instances[0].y + distance_y);
+	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
+		mv_move_object(game->player, new_x, new_y);
 	cast_rays(game);
 }

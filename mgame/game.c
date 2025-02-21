@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/07 17:52:11 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/21 18:01:00 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	 init_game(t_game *game, char *mapfile)
 
 void	run_game(t_game *game)
 {
-	//rnd_draw_map(game);
+	rnd_draw_map(game);
 	rnd_draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
 	// game loop.
