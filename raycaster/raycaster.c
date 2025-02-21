@@ -127,6 +127,6 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 		index++;
 		start++;
 	}
-	//printf("after ==> start: %f, wall_h: %f, x: %d\n", start, wall_h, *x);
+	printf("after ==> start: %f, wall_h: %f, x: %d\n", start, wall_h, *x);
 
 }
