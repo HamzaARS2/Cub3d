@@ -3,14 +3,14 @@
 
 int	check_wall(t_vector3 *hitp, char **map)
 {
-    printf("py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
+    //printf("py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
 	if (isinf(hitp->y )|| isinf(hitp->x )|| hitp->y < 0 || hitp->x < 0
 		|| (int)(hitp->y / TILE_SIZE) > (15) || (int)(hitp->x
 			/ TILE_SIZE) > (31))
 		hitp->y = -1;
 	if (hitp->y == -1 || map[(int)(hitp->y / TILE_SIZE)][(int)(hitp->x / TILE_SIZE)] == '1')
     {
-        printf("HIT==> py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
+       // printf("HIT==> py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
 		return (0);
 	}
 	return (1);

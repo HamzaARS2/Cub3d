@@ -36,24 +36,26 @@ void	cast_rays(t_game *game)
 	double	rotate_angle;
 	double	rotate_spead;
 	double 	angle_shift;
+	int x;
 
-	printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
-	rotate_spead = 0;
-	angle_shift = ((double)60 / WIDTH ) * 4;
-	printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
-	//while(1);
+	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
+	x = 0;
+	rotate_spead = -30;
+	angle_shift = ((double)60 / WIDTH );
+	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
-	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle - 30);
-	while (rotate_spead < 60)
+	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + rotate_spead);
+	while (rotate_spead <= 30)
 	{
-		printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
-		bresenham_line(game);
+		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
+		bresenham_line(game, &x, rotate_spead);
 		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle +  angle_shift);
 		rotate_spead += angle_shift;
+		x++;
 	}
 	game->player->direction.rotatin_angle = rotate_angle;
-	printf("ang: %f\n", game->player->direction.rotatin_angle);
+	// printf("ang: %f\n", game->player->direction.rotatin_angle);
 }
 
 void	obj_update_mvdirection(t_game *game, int rotation)
@@ -64,8 +66,8 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	double new_y;
 	direction = &(game->player->direction);
 	
-	speed = 4;//game->player->speed;
-	direction->rotatin_angle += direction->turnDirection * ROTATION_SPEED;
+	speed = game->player->speed;
+	//direction->rotatin_angle += direction->turnDirection * ROTATION_SPEED;
 	direction->rotatin_angle = normalizeAngle(direction->rotatin_angle);
 	double distance_x = cos(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 	double distance_y = sin(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
@@ -78,5 +80,4 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	}
 	mv_move_object(game->player, new_x, new_y);
 	cast_rays(game);
-
 }

@@ -33,7 +33,7 @@ bool	 init_game(t_game *game, char *mapfile)
 
 void	run_game(t_game *game)
 {
-	rnd_draw_map(game);
+	//rnd_draw_map(game);
 	rnd_draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
 	// game loop.

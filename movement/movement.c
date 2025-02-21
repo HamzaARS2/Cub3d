@@ -75,12 +75,12 @@ void	mv_handle_moves(t_game *game)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
-		player->direction.turnDirection = -1;
-		obj_update_mvdirection(game, 0);
+		player->direction.rotatin_angle -= ROTATION_SPEED;
+		cast_rays(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
-		player->direction.turnDirection = 1;
-		obj_update_mvdirection(game, 0);	
+		player->direction.rotatin_angle += ROTATION_SPEED;
+		cast_rays(game);
 	}
 }
