@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:11 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:54:44 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ typedef struct s_colors {
 
 typedef struct s_mapscan {
 	t_textures  textures;
-    t_mperror    error;
+    t_mperror   error;
     t_colors    colors;
     char		**map;
 	char        mapfd;
-    t_point   start_pos;
+    t_point     start_pos;
+    t_point     mapsize;
 } t_mapscan;
 
 t_mapscan	*init_mapscan(char *mapfile);
@@ -87,7 +88,7 @@ bool        chk_format(char *mapfile);
 bool	    chk_color(char *fcolor, int *color);
 bool	    chk_map(t_mapscan *mapscan);
 // utils
-char	**ump_create_map(t_list *maplst, int mapsize);
+char	**ump_create_map(t_list *maplst, t_point mapsize);
 void	ump_clear(void *content);
 bool	ump_is_empty_line(char *line);
 bool	ump_color_toint(char *color_str, char **rgb, int *color);

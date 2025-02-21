@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:58:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	run_game(t_game *game)
 	rnd_draw_map(game);
 	rnd_draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
+	printf("mapszie: widthx: %i | heighty: %i\n", game->mapscan->mapsize.x, game->mapscan->mapsize.y);
 	// game loop.
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
