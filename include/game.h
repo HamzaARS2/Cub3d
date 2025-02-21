@@ -59,7 +59,7 @@ typedef struct s_game {
 } t_game;
 
 
-void	bresenham_line(t_game *game);
+void	bresenham_line(t_game *game, int *x, double angle);
 
 bool	init_game(t_game *game, char *mapfile);
 void	run_game(t_game *game);
