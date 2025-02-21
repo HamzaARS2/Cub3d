@@ -83,7 +83,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	t_draw		mat;
     t_object    *player;
     t_data      data;
-	t_vector3 	hit;
+	t_vector2 	hit;
 
     mat = (t_draw) {0};
     player = game->player;

@@ -1,7 +1,7 @@
 # include "../include/raycaster.h"
 #define next_tile 1.0E-8
 
-int	check_wall(t_vector3 *hitp, char **map)
+int	check_wall(t_vector2 *hitp, char **map)
 {
     //printf("py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
 	if (isinf(hitp->y )|| isinf(hitp->x )|| hitp->y < 0 || hitp->x < 0
@@ -28,7 +28,7 @@ void	vision_derction(double angel, int *v_d)
 		v_d[1] = looking_right;
 }
 
-void    find_wall_hit(t_game *game, t_vector3 *hit, double Xa, double Ya)
+void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 {
     char **map;
 
@@ -40,9 +40,9 @@ void    find_wall_hit(t_game *game, t_vector3 *hit, double Xa, double Ya)
     }
 }
 
-t_vector3 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
+t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
 {
-    t_vector3 hit;
+    t_vector2 hit;
     t_object *player;
     double Ax;
     double Ay;
@@ -76,9 +76,9 @@ t_vector3 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
     return hit;
 }
 
-t_vector3 vertical_intersection(t_game *game, float ray_angle, int *v_d)
+t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
 {
-    t_vector3 hit;
+    t_vector2 hit;
     t_object *player;
     double Bx;
     double By;
@@ -113,10 +113,10 @@ t_vector3 vertical_intersection(t_game *game, float ray_angle, int *v_d)
     return hit;
 }
 
-t_vector3 find_nearest_hit(t_game *game, float ray_angle)
+t_vector2 find_nearest_hit(t_game *game, float ray_angle)
 {
-    t_vector3 h_hit;
-    t_vector3 v_hit;
+    t_vector2 h_hit;
+    t_vector2 v_hit;
     t_object    *player;
     int v_d[2];
     double h_dist;

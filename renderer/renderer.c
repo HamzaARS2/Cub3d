@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:39:58 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:38 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ bool	rnd_draw_map(t_game *game)
 		x = -1;
 		while (map[y][++x])
 			if (map[y][x] == '1')
-				gfx_set_color(map_img,(t_vector2) {x, y}, get_rgba(51,175,255,255));
+				gfx_set_color(map_img,(t_point) {x, y}, get_rgba(51,175,255,255));
 			else if (ump_is_mpcomponent(map[y][x]))
-				gfx_set_color(map_img,(t_vector2) {x, y} , get_rgba(225, 221, 221, 255));
+				gfx_set_color(map_img,(t_point) {x, y} , get_rgba(225, 221, 221, 255));
 	}
 	return (true);
 }
 
 bool	rnd_draw_player(t_game *game)
 {
-	t_vector3 pos;
+	t_vector2 pos;
 
 	pos = game->player->position;
 	game->player->position.x += (OBJ_SIZE / 2);

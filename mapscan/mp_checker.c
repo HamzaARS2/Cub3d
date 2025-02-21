@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/18 13:29:51 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static t_mperror	chk_map_comp(char **map)
 }
 
 
-bool	chk_position(char **map, t_vector2 v2)
+bool	chk_position(char **map, t_point v2)
 {
 	if (v2.y == 0 || v2.x == 0 || !map[v2.y] || !map[v2.y + 1] || !map[v2.y - 1]
 		|| !map[v2.y][v2.x + 1])
@@ -104,8 +104,8 @@ bool	chk_position(char **map, t_vector2 v2)
 // TODO: save start position!.
 bool	chk_map(t_mapscan *mapscan)
 {
-	t_vector2 v2;
-	t_vector2 start_pos;
+	t_point v2;
+	t_point start_pos;
 	
 	v2.y = 0;
 	if (!chk_map_comp(mapscan->map))
@@ -122,7 +122,7 @@ bool	chk_map(t_mapscan *mapscan)
 				if (!chk_position(mapscan->map, v2))
 					return (false);
 				if (mapscan->map[v2.y][v2.x] != '0')
-					mapscan->start_pos = (t_vector2) {v2.x, v2.y};
+					mapscan->start_pos = (t_point) {v2.x, v2.y};
 			}
 		}
 		v2.y++;

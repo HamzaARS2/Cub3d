@@ -6,13 +6,13 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:39:09 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-t_object	*init_object(t_game *game, mlx_image_t *img ,t_vector2 pos)
+t_object	*init_object(t_game *game, mlx_image_t *img ,t_point pos)
 {
 	t_object *object;
 

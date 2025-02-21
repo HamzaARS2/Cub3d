@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2024/12/22 15:14:58 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:11 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef enum e_mperror {
     ERR_FILE_FORMAT     // Incorrect map file format
 } t_mperror;
 
-typedef struct s_vector2 {
+typedef struct s_point {
 	int x;
 	int y;
-} t_vector2;
+} t_point;
 
 typedef struct s_entry {
     char    id;
@@ -67,7 +67,7 @@ typedef struct s_mapscan {
     t_colors    colors;
     char		**map;
 	char        mapfd;
-    t_vector2   start_pos;
+    t_point   start_pos;
 } t_mapscan;
 
 t_mapscan	*init_mapscan(char *mapfile);

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:01:00 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	 init_game(t_game *game, char *mapfile)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
 	game->player = init_object(game, NULL, game->mapscan->start_pos);
-	gfx_set_color(game->player->image, (t_vector2){0} , get_rgba(33, 216, 184, 255));
+	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
 	game->drawing_board = gfx_create_image(game, WIDTH, HEIGHT);
 	return (true);
 }

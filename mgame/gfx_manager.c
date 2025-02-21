@@ -6,14 +6,14 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/01/16 16:57:01 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/game.h"
 
-void	gfx_set_color(mlx_image_t *image, t_vector2 coords, int color)
+void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
 {
 	int y;
 	int x;
