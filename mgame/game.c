@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/24 16:02:24 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:07:55 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	 init_game(t_game *game, char *mapfile)
 
 void	run_game(t_game *game)
 {
+	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
 	rnd_draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
