@@ -17,7 +17,8 @@ int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
         hitp->y = -1;
     else if (y_tile >= map_size.y || x_tile >= map_size.x)
         hitp->y = -1;
-
+    else if (map[y_tile][x_tile] == 0)
+        hitp->y = -1;
     if (hitp->y == -1 || map[y_tile][x_tile] == '1')
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/24 13:56:30 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:16:16 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "mapscan.h"
 
 #define WIDTH 1200
-#define HEIGHT 1500
+#define HEIGHT 1300
 
 #define TILE_SIZE 32
 #define OBJ_SIZE 4
