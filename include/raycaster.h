@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:51 by nhimad            #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:38 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:49:46 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@
 # include "mapscan.h"
 # include <math.h>
 
-# define looking_up 0
-# define looking_down 1
-# define looking_right 2
-# define looking_left 3
+typedef enum e_direction {
+		looking_up,
+		looking_down,
+		looking_right,
+		looking_left,
+} t_direction;
+
 # define RADIANS(d) (d * (M_PI / 180))
 # define FOV 60
 # define RES 4

@@ -2,14 +2,6 @@
 
 void draw_wall(t_game *game, double distance, double angle, int *x);
 
-int check_if_wall(char **map, int x, int y)
-{
-	if (y / TILE_SIZE > 30 || x / TILE_SIZE > 15)
-		return (printf("??y= %d ==>y_p %d||x= %d===> x_p %d\n\n", y,  y / TILE_SIZE, x,  x / TILE_SIZE), 1);		
-	
-	return (map[y / TILE_SIZE][x / TILE_SIZE] == '1');
-}
-
 void	set_direction(t_draw *mat, t_data *data)
 {
 	if (data->x1 < data->x2)
@@ -90,17 +82,17 @@ void	bresenham_line(t_game *game, int *x, double angle)
     data.x1 = player->position.x;
     data.y1 = player->position.y;
 	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
-    data.x2 = floor(hit.x);
-    data.y2 = floor(hit.y);
-	//printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
+    // data.x2 = floor(hit.x);
+    // data.y2 = floor(hit.y);
+	// //printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
 
-	mat.dx = abs(data.x2 - data.x1);
-	mat.dy = abs(data.y2 - data.y1); 
-	set_direction(&mat, &data);
-	drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
-	// double distance = sqrt(powf(player->position.x - hit.x, 2) + 
-    // powf(player->position.y - hit.y, 2));
-	// draw_wall(game, distance, angle, x);
+	// mat.dx = abs(data.x2 - data.x1);
+	// mat.dy = abs(data.y2 - data.y1); 
+	// set_direction(&mat, &data);
+	// drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
+	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
+    powf(player->position.y - hit.y, 2));
+	draw_wall(game, distance, angle, x);
 }
 
 void draw_wall(t_game *game, double distance, double angle, int *x)
@@ -108,7 +100,7 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	 double focal;
 	 double wall_h;
 	 double start;
-	 int 	index;
+	 int 	pixel_offset;
 
 	 focal = (double) (WIDTH / 2) / tan(RADIANS(FOV / 2));
 	 distance *= cos(RADIANS(angle));
@@ -116,17 +108,14 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	 start = (HEIGHT / 2) - (wall_h / 2);
 	 if (start < 0)
 	 	start = 0;
-	index = (wall_h - HEIGHT) / 2;
-	if (index < 0)
-		index = 0;
-	//printf("before==> start: %f, wall_h: %f, x: %d\n", start, wall_h, *x);
-	while(index < wall_h && start < HEIGHT - 1)
+	pixel_offset = (wall_h - HEIGHT) / 2;
+	if (pixel_offset < 0)
+		pixel_offset = 0;
+	while(pixel_offset < wall_h && start < HEIGHT - 1)
 	{
 		mlx_put_pixel(game->drawing_board, *x, 
 			start, get_rgba(51,175,255,255));
-		index++;
+		pixel_offset++;
 		start++;
 	}
-	printf("after ==> start: %f, wall_h: %f, x: %d\n", start, wall_h, *x);
-
 }

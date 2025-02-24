@@ -1,18 +1,25 @@
 # include "../include/raycaster.h"
 #define next_tile 1.0E-8
 
-int	check_wall(t_vector2 *hitp, char **map)
+int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
 {
-    //printf("py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
-	if (isinf(hitp->y )|| isinf(hitp->x )|| hitp->y < 0 || hitp->x < 0
-		|| (int)(hitp->y / TILE_SIZE) > (15) || (int)(hitp->x
-			/ TILE_SIZE) > (31))
-		hitp->y = -1;
-	if (hitp->y == -1 || map[(int)(hitp->y / TILE_SIZE)][(int)(hitp->x / TILE_SIZE)] == '1')
-    {
-       // printf("HIT==> py: %f y: %d and px: %f x: %d\n", hitp->y, (int)hitp->y / TILE_SIZE, hitp->x, (int)hitp->x / TILE_SIZE);
+    int x_tile;
+    int y_tile;
+
+    x_tile = (hitp->x / TILE_SIZE);
+    y_tile = (hitp->y / TILE_SIZE);
+    //printf("py: %f y: %d and px: %f x: %d\n", hitp->y, y_tile, hitp->x, x_tile);
+    if (isinf(hitp->y)|| isinf(hitp->x))
+        hitp->y = -1;
+    else if (hitp->y > HEIGHT || hitp->x > WIDTH)
+        hitp->y = -1;
+    else if (hitp->y < 0 || hitp->x < 0)
+        hitp->y = -1;
+    else if (y_tile >= map_size.y || x_tile >= map_size.x)
+        hitp->y = -1;
+
+    if (hitp->y == -1 || map[y_tile][x_tile] == '1')
 		return (0);
-	}
 	return (1);
 }
 
@@ -31,9 +38,11 @@ void	vision_derction(double angel, int *v_d)
 void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 {
     char **map;
+    t_point map_size;
 
     map = game->mapscan->map;
-    while (check_wall(hit, map))
+    map_size = game->mapscan->mapsize;
+    while (check_wall(hit, map, map_size))
     {
         hit->x = hit->x + Xa;
         hit->y = hit->y + Ya;

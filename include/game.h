@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:38 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:56:30 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
-#define WIDTH 1024
-#define HEIGHT 512
+#define WIDTH 1200
+#define HEIGHT 1500
 
 #define TILE_SIZE 32
 #define OBJ_SIZE 4
