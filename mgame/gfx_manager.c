@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:53:59 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
 	coords.x *= TILE_SIZE;
 	coords.y *= TILE_SIZE;
 	y = coords.y;
-	while (y < coords.y + TILE_SIZE - 1)
-	{
+	while (y < coords.y + TILE_SIZE)
+	{ 
 		x = coords.x;
-		while (x < coords.x + TILE_SIZE - 1)
+		while (x < coords.x + TILE_SIZE)
 			mlx_put_pixel(image, x++, y, color);
 		y++;
 	}

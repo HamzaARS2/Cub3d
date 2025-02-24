@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/24 14:16:16 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:01:33 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #include "mapscan.h"
 
-#define WIDTH 1200
-#define HEIGHT 1300
-
-#define TILE_SIZE 32
+#define WIDTH 1024
+#define HEIGHT 512
+#define MAP_WIDTH 100
+#define MAP_HEIGHT 100
+#define TILE_SIZE 16
 #define OBJ_SIZE 4
 #define ROTATION_SPEED 2
 # define RADIANS(d) (d * (M_PI / 180))
@@ -43,7 +44,7 @@ typedef struct s_vector2 {
 
 typedef struct s_object {
 	mlx_image_t	*image;
-	t_vector2	position;
+	t_point		position;
 	t_Dvector	direction;
 	float		speed;
 } t_object;
@@ -53,7 +54,8 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_list		*graphics;
 	t_object	*player;
-	t_point	mouse_pos;
+	t_point		mouse_pos;
+	mlx_image_t *map_img;
 	mlx_image_t *drawing_board;
 } t_game;
 
