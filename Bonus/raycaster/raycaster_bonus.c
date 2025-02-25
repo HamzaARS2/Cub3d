@@ -111,7 +111,7 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	pixel_offset = (wall_h - HEIGHT) / 2;
 	if (pixel_offset < 0)
 		pixel_offset = 0;
-	while(pixel_offset < wall_h && start < HEIGHT - 1)
+	while( pixel_offset < wall_h && start < HEIGHT - 1)
 	{
 		mlx_put_pixel(game->drawing_board, *x, 
 			start, get_rgba(51,175,255,255));

@@ -5,21 +5,21 @@ MLX := MLX42
 MLX_BUILD := $(MLX)/build
 MLX_LIB = $(MLX)/build/libmlx42.a -L'/Users/nhimad/.brew/opt/glfw/lib/' -Iinclude -lglfw -lm
 
-LIBFT_DIR := ./libft
+LIBFT_DIR := ./Mandatory/libft
 LIBFT := $(LIBFT_DIR)/libft.a
 
 HEADERS := $(MLX)/include
 
-GNL_FILES := gnl/get_next_line.c gnl/get_next_line_utils.c
+GNL_FILES := Mandatory/gnl/get_next_line.c Mandatory/gnl/get_next_line_utils.c
 
-MAIN_FILES = $(GNL_FILES) cub4d.c mapscan/mapscan.c mapscan/mp_reader.c mapscan/mp_utils.c \
-mapscan/mp_checker.c mgame/game.c mgame/game_utils.c mgame/gfx_manager.c mgame/object.c renderer/renderer.c \
-renderer/renderer_utils.c movement/movement.c raycaster/raycaster.c raycaster/raycaster_I.c
+MAIN_FILES = $(GNL_FILES) Mandatory/cub4d.c Mandatory/mapscan/mapscan.c Mandatory/mapscan/mp_reader.c Mandatory/mapscan/mp_utils.c \
+Mandatory/mapscan/mp_checker.c Mandatory/mgame/game.c Mandatory/mgame/game_utils.c Mandatory/mgame/gfx_manager.c Mandatory/mgame/object.c \
+Mandatory/renderer/renderer.c Mandatory/renderer/renderer_utils.c Mandatory/movement/movement.c Mandatory/raycaster/raycaster.c Mandatory/raycaster/raycaster_I.c
 
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)
 
-H = ./include/game.h
+H = ./Mandatory/include/game.h
 NAME = cub3D
 
 ADS := -fsanitize=address -g
