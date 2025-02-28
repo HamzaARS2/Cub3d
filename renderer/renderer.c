@@ -36,7 +36,7 @@ int	get_color(char **map, t_point p)
 	y = p.y / TILE_SIZE;
 	// HARD CODE
 	if (x < 0 || x >= 32 || y < 0 || y >= 15)
-		return (0);
+		return (255);
 	if (map[y][x] == '1')
 		return get_rgba(255, 0, 0, 255);
 	if (ump_is_mpcomponent(map[y][x]))
@@ -52,10 +52,6 @@ t_point	get_map_offset(t_object *player)
 
 	p.x = player->position.x - MAP_WIDTH / 2;
 	p.y = player->position.y - MAP_HEIGHT / 2;
-	if (p.x < 0)
-		p.x = 0;
-	if (p.y < 0)
-		p.y = 0;
 	return p;
 }
 
@@ -94,7 +90,6 @@ void rnd_draw_minimap(t_game *game)
 	{
 		p.x = 0;
 		offset.x = game->player->position.x - MAP_WIDTH / 2;
-		// if (offset.x < 0) offset.x = 0;
 		while (p.x < MAP_WIDTH)
 		{
 			if (p.y <= 1 || p.y >= MAP_HEIGHT - 2 || p.x <= 1 || p.x >= MAP_WIDTH - 2)

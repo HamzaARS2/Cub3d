@@ -50,7 +50,7 @@ void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
     }
 }
 
-t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
+t_vector2 horizontal_intersection(t_game *game, t_data data, float ray_angle, int *v_d)
 {
     t_vector2 hit;
     t_object *player;
@@ -64,20 +64,20 @@ t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
     player = game->player;
     if (v_d[0] == looking_up)
     {
-        Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE - next_tile;
+        Ay = floor(data.y1 / TILE_SIZE) * TILE_SIZE - next_tile;
         Ya = -TILE_SIZE;
     }
     else
     {
-        Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
+        Ay = floor(data.y1 / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
         Ya = TILE_SIZE;
     }
     Xa = fabs(Ya / tan(ray_angle));
     if (v_d[1] == looking_right)
-        Ax = player->position.x + fabs((Ay - player->position.y) / tan(ray_angle))  - next_tile;
+        Ax = data.x1 + fabs((Ay - data.y1) / tan(ray_angle))  - next_tile;
     else
     {
-        Ax = player->position.x - fabs((Ay - player->position.y) / tan(ray_angle)) + next_tile;
+        Ax = data.x1 - fabs((Ay - data.y1) / tan(ray_angle)) + next_tile;
         Xa *= -1;
     }   
     hit.x = Ax;
@@ -86,7 +86,7 @@ t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
     return hit;
 }
 
-t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
+t_vector2 vertical_intersection(t_game *game, t_data data, float ray_angle, int *v_d)
 {
     t_vector2 hit;
     t_object *player;
@@ -100,21 +100,21 @@ t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
     player = game->player;
     if (v_d[1] == looking_right)
     {
-        Bx = floor(player->position.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
+        Bx = floor(data.x1 / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
         Xa = TILE_SIZE;
     }
     else
     {
-        Bx = floor(player->position.x / TILE_SIZE) * TILE_SIZE - next_tile;
+        Bx = floor(data.x1 / TILE_SIZE) * TILE_SIZE - next_tile;
         Xa = -TILE_SIZE;
     }
     
     Ya = fabs(Xa * tan(ray_angle));
     if (v_d[0] == looking_down)
-        By = player->position.y + fabs((player->position.x - Bx) * tan(ray_angle)) - next_tile;
+        By = data.y1 + fabs((data.x1 - Bx) * tan(ray_angle)) - next_tile;
     else
     {
-        By = player->position.y - fabs((player->position.x - Bx) * tan(ray_angle)) + next_tile;
+        By = data.y1 - fabs((data.x1 - Bx) * tan(ray_angle)) + next_tile;
         Ya *= -1;
     }
     hit.x = Bx;
@@ -123,7 +123,7 @@ t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
     return hit;
 }
 
-t_vector2 find_nearest_hit(t_game *game, float ray_angle)
+t_vector2 find_nearest_hit(t_game *game, t_data data, float ray_angle)
 {
     t_vector2 h_hit;
     t_vector2 v_hit;
@@ -135,13 +135,13 @@ t_vector2 find_nearest_hit(t_game *game, float ray_angle)
     player = game->player;
     vision_derction(ray_angle, v_d);
     ray_angle = RADIANS(ray_angle);
-    h_hit = horizontal_intersection(game, ray_angle, v_d);
-    v_hit = vertical_intersection(game, ray_angle, v_d);
+    h_hit = horizontal_intersection(game, data, ray_angle, v_d);
+    v_hit = vertical_intersection(game, data, ray_angle, v_d);
     
-    h_dist = sqrt(powf(player->position.x - h_hit.x, 2) + 
-    powf(player->position.y - h_hit.y, 2));
-    v_dist = sqrt(powf(player->position.x - v_hit.x, 2) + 
-    powf(player->position.y - v_hit.y, 2));
+    h_dist = sqrt(powf(data.x1 - h_hit.x, 2) + 
+    powf(data.y1 - h_hit.y, 2));
+    v_dist = sqrt(powf(data.x1 - v_hit.x, 2) + 
+    powf(data.y1 - v_hit.y, 2));
     if (v_hit.y != -1 && (h_hit.y == -1 || h_dist > v_dist))
         return (v_hit);
     return (h_hit);

@@ -54,7 +54,6 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_list		*graphics;
 	t_object	*player;
-	mlx_image_t *vplayer;
 	t_point		mouse_pos;
 	mlx_image_t *map_img;
 	mlx_image_t *drawing_board;
