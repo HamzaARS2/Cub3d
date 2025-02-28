@@ -25,6 +25,8 @@ bool	 init_game(t_game *game, char *mapfile)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
 	game->player = init_object(game, NULL, game->mapscan->start_pos);
+	// virtual player
+	game->vplayer = gfx_create_image(game, OBJ_SIZE, OBJ_SIZE);
 	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
 	game->drawing_board = gfx_create_image(game, WIDTH, HEIGHT);
 	game->map_img = gfx_create_image(game, MAP_WIDTH, MAP_HEIGHT);
@@ -34,9 +36,12 @@ bool	 init_game(t_game *game, char *mapfile)
 
 void	run_game(t_game *game)
 {
-	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
+	rnd_draw_map(game);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
+	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
 	rnd_draw_player(game);
+	// virtual player
+	mlx_image_to_window(game->mlx, game->vplayer, game->mapscan->start_pos.x, game->mapscan->start_pos.y);
 	mlx_loop_hook(game->mlx, update, game);
 	// game loop.
 	mlx_loop(game->mlx);
@@ -52,7 +57,7 @@ void	update(void *param) {
 	// handling moving objects
 	
 	mv_handle_moves(game);
-	rnd_draw_map(game);
+	rnd_draw_minimap(game);
 	// mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	// game->mouse_pos.x -= game->player->position.x;
 	// game->mouse_pos.y -= game->player->position.y;

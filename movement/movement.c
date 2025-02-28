@@ -16,8 +16,8 @@ void	mv_move_object(t_object *object, int new_x, int new_y)
 {
 	object->position.x = new_x + (OBJ_SIZE / 2);
 	object->position.y = new_y + (OBJ_SIZE / 2);
-	object->image->instances[0].x = new_x;
-	object->image->instances[0].y = new_y;
+	// object->image->instances[0].x = new_x;
+	// object->image->instances[0].y = new_y;
 }
 
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)

@@ -22,9 +22,9 @@
 
 #define WIDTH 1024
 #define HEIGHT 512
-#define MAP_WIDTH 100
+#define MAP_WIDTH 200
 #define MAP_HEIGHT 100
-#define TILE_SIZE 16
+#define TILE_SIZE 32
 #define OBJ_SIZE 4
 #define ROTATION_SPEED 2
 # define RADIANS(d) (d * (M_PI / 180))
@@ -54,6 +54,7 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_list		*graphics;
 	t_object	*player;
+	mlx_image_t *vplayer;
 	t_point		mouse_pos;
 	mlx_image_t *map_img;
 	mlx_image_t *drawing_board;
@@ -74,6 +75,7 @@ void	gfx_set_color(mlx_image_t *image, t_point coords, int color);
 // renderer
 bool	rnd_draw_map(t_game *game);
 bool	rnd_draw_player(t_game *game);
+void rnd_draw_minimap(t_game *game);
 // movements
 void	mv_move_object(t_object *object, int new_x, int new_y);
 void	mv_handle_moves(t_game *game);

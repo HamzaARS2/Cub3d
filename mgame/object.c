@@ -72,9 +72,12 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	double distance_x = cos(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 	double distance_y = sin(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 		
-	new_x = round(game->player->image->instances[0].x + distance_x);
-	new_y = round(game->player->image->instances[0].y + distance_y);
-	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
+	new_x = round(game->player->position.x - (OBJ_SIZE / 2) + distance_x);
+	new_y = round(game->player->position.y - (OBJ_SIZE / 2) + distance_y);
+	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1')) {
+		game->vplayer->instances[0].x = new_x;
+		game->vplayer->instances[0].y = new_y;
 		mv_move_object(game->player, new_x, new_y);
+	}
 	cast_rays(game);
 }

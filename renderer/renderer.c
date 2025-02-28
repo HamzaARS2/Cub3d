@@ -52,41 +52,58 @@ t_point	get_map_offset(t_object *player)
 	return p;
 }
 
-bool	rnd_draw_map(t_game *game)
+bool    rnd_draw_map(t_game *game)
 {
-	t_point pp;
-	t_point offset;
-	char	**map;
-	t_point pencil;
-	
-	map = game->mapscan->map;
-	pp = game->player->position;
-	offset = get_map_offset(game->player);
-	pencil.y = 0;
-	while (pencil.y < MAP_HEIGHT)
+    int x;
+    int y;
+    char    **map;
+    mlx_image_t *image;
+    
+    map = game->mapscan->map;
+    image = gfx_create_image(game, WIDTH, HEIGHT);
+    mlx_image_to_window(game->mlx, image, 0, 0);
+    
+    y = -1;
+    while (map[++y])
+    {
+        x = -1;
+        while (map[y][++x])
+            if (map[y][x] == '1')
+                gfx_set_color(image,(t_point) {x, y}, get_rgba(51,175,255,255));
+            else if (ump_is_mpcomponent(map[y][x]))
+                gfx_set_color(image,(t_point) {x, y} , get_rgba(225, 221, 221, 255));
+    }
+    return (true);
+}
+
+void rnd_draw_minimap(t_game *game)
+{
+	t_point p;
+
+	p = (t_point) {0};
+	while (p.y < MAP_HEIGHT)
 	{
-		pencil.x = 0;
-		offset.x = game->player->position.x - 52;
-		while(pencil.x < MAP_WIDTH)
+		p.x = 0;
+		while (p.x < MAP_WIDTH)
 		{
-			mlx_put_pixel(game->map_img, pencil.x, pencil.y, get_color(game->mapscan->map, offset));
-			offset.x++;
-			pencil.x++;
+			if (p.y <= 1 || p.y >= MAP_HEIGHT - 2 || p.x <= 1 || p.x >= MAP_WIDTH - 2)
+				mlx_put_pixel(game->map_img, p.x, p.y, 255);
+			else
+				mlx_put_pixel(game->map_img, p.x, p.y, get_rgba(255,255,255,255));
+			p.x++;
 		}
-		offset.y++;
-		pencil.y++;
+		p.y++;
 	}
-	return (true);
 }
 
 bool	rnd_draw_player(t_game *game)
 {
-	t_point pos;
+	// t_point pos;
 
-	pos = game->player->position;
-	game->player->position.x += (OBJ_SIZE / 2);
-	game->player->position.y += (OBJ_SIZE / 2);
-	mlx_image_to_window(game->mlx, game->player->image, pos.x, pos.y);
+	// pos = game->player->position;
+	// game->player->position.x += (OBJ_SIZE / 2);
+	// game->player->position.y += (OBJ_SIZE / 2);
+	mlx_image_to_window(game->mlx, game->player->image, MAP_WIDTH / 2, MAP_HEIGHT / 2);
 	board_clean(game->drawing_board);
 	cast_rays(game);
 	return (true);
