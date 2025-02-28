@@ -29,22 +29,29 @@ void	set_color(mlx_image_t *img, t_point start, t_point end, int color)
 
 int	get_color(char **map, t_point p)
 {
-	if (p.x / TILE_SIZE >= 32) return (0);
-	if (p.y / TILE_SIZE >= 15) return (0);
-	if (map[p.y / TILE_SIZE][p.x / TILE_SIZE] == '1')
-		return get_rgba(51, 175, 255, 255);
-	else if (ump_is_mpcomponent(map[p.y / TILE_SIZE][p.x / TILE_SIZE]))
-		return get_rgba(225, 221, 221, 255);
+	int x;
+	int y;
+
+	x = p.x / TILE_SIZE;
+	y = p.y / TILE_SIZE;
+	// HARD CODE
+	if (x < 0 || x >= 32 || y < 0 || y >= 15)
+		return (0);
+	if (map[y][x] == '1')
+		return get_rgba(255, 0, 0, 255);
+	if (ump_is_mpcomponent(map[y][x]))
+		return get_rgba(0, 255, 0, 255);
 	return (0);
 }
+
 
 
 t_point	get_map_offset(t_object *player)
 {
 	t_point p;
 
-	p.x = player->position.x - 52;
-	p.y = player->position.y - 52;
+	p.x = player->position.x - MAP_WIDTH / 2;
+	p.y = player->position.y - MAP_HEIGHT / 2;
 	if (p.x < 0)
 		p.x = 0;
 	if (p.y < 0)
@@ -79,20 +86,26 @@ bool    rnd_draw_map(t_game *game)
 void rnd_draw_minimap(t_game *game)
 {
 	t_point p;
+	t_point offset;
 
 	p = (t_point) {0};
+	offset = get_map_offset(game->player);
 	while (p.y < MAP_HEIGHT)
 	{
 		p.x = 0;
+		offset.x = game->player->position.x - MAP_WIDTH / 2;
+		// if (offset.x < 0) offset.x = 0;
 		while (p.x < MAP_WIDTH)
 		{
 			if (p.y <= 1 || p.y >= MAP_HEIGHT - 2 || p.x <= 1 || p.x >= MAP_WIDTH - 2)
 				mlx_put_pixel(game->map_img, p.x, p.y, 255);
 			else
-				mlx_put_pixel(game->map_img, p.x, p.y, get_rgba(255,255,255,255));
+				mlx_put_pixel(game->map_img, p.x, p.y, get_color(game->mapscan->map, offset));
 			p.x++;
+			offset.x++;
 		}
 		p.y++;
+		offset.y++;
 	}
 }
 

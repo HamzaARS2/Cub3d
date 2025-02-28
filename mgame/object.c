@@ -75,8 +75,8 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	new_x = round(game->player->position.x - (OBJ_SIZE / 2) + distance_x);
 	new_y = round(game->player->position.y - (OBJ_SIZE / 2) + distance_y);
 	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1')) {
-		game->vplayer->instances[0].x = new_x;
-		game->vplayer->instances[0].y = new_y;
+		// game->vplayer->instances[0].x = new_x;
+		// game->vplayer->instances[0].y = new_y;
 		mv_move_object(game->player, new_x, new_y);
 	}
 	cast_rays(game);

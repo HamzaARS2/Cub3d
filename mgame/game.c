@@ -36,12 +36,12 @@ bool	 init_game(t_game *game, char *mapfile)
 
 void	run_game(t_game *game)
 {
-	rnd_draw_map(game);
-	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
+	// rnd_draw_map(game);
 	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
+	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
 	rnd_draw_player(game);
 	// virtual player
-	mlx_image_to_window(game->mlx, game->vplayer, game->mapscan->start_pos.x, game->mapscan->start_pos.y);
+	// mlx_image_to_window(game->mlx, game->vplayer, game->mapscan->start_pos.x, game->mapscan->start_pos.y);
 	mlx_loop_hook(game->mlx, update, game);
 	// game loop.
 	mlx_loop(game->mlx);

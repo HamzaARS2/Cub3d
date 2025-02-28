@@ -89,10 +89,10 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	mat.dx = abs(data.x2 - data.x1);
 	mat.dy = abs(data.y2 - data.y1); 
 	set_direction(&mat, &data);
-	drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
-	// double distance = sqrt(powf(player->position.x - hit.x, 2) + 
-    // powf(player->position.y - hit.y, 2));
-	// draw_wall(game, distance, angle, x);
+	// drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
+	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
+    powf(player->position.y - hit.y, 2));
+	draw_wall(game, distance, angle, x);
 }
 
 void draw_wall(t_game *game, double distance, double angle, int *x)
