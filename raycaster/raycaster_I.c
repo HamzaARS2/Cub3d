@@ -53,7 +53,7 @@ void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 t_vector2 horizontal_intersection(t_game *game, t_data data, float ray_angle, int *v_d)
 {
     t_vector2 hit;
-    t_object *player;
+    t_player *player;
     double Ax;
     double Ay;
     double Xa;
@@ -89,7 +89,7 @@ t_vector2 horizontal_intersection(t_game *game, t_data data, float ray_angle, in
 t_vector2 vertical_intersection(t_game *game, t_data data, float ray_angle, int *v_d)
 {
     t_vector2 hit;
-    t_object *player;
+    t_player *player;
     double Bx;
     double By;
     double Xa;
@@ -127,7 +127,7 @@ t_vector2 find_nearest_hit(t_game *game, t_data data, float ray_angle)
 {
     t_vector2 h_hit;
     t_vector2 v_hit;
-    t_object    *player;
+    t_player    *player;
     int v_d[2];
     double h_dist;
     double v_dist;
@@ -147,3 +147,29 @@ t_vector2 find_nearest_hit(t_game *game, t_data data, float ray_angle)
     return (h_hit);
 }
 
+void	cast_rays(t_game *game)
+{
+	double	rotate_angle;
+	double	rotate_spead;
+	double 	angle_shift;
+	int x;
+
+	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
+	x = 0;
+	rotate_spead = -30;
+	angle_shift = ((double)60 / WIDTH );
+	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
+	board_clean(game->drawing_board);
+	rotate_angle = game->player->direction.rotatin_angle;
+	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + rotate_spead);
+	while (rotate_spead <= 30)
+	{
+		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
+		bresenham_line(game, &x, rotate_spead);
+		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle +  angle_shift);
+		rotate_spead += angle_shift;
+		x++;
+	}
+	game->player->direction.rotatin_angle = rotate_angle;
+	// printf("ang: %f\n", game->player->direction.rotatin_angle);
+}

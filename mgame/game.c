@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/24 16:07:55 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/01 10:52:34 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	if (!game->mlx)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
-	game->player = init_object(game, NULL, game->mapscan->start_pos);
+	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
 	game->drawing_board = gfx_create_image(game, WIDTH, HEIGHT);
 	game->map_img = gfx_create_image(game, MAP_WIDTH, MAP_HEIGHT);
@@ -34,10 +34,9 @@ bool	 init_game(t_game *game, char *mapfile)
 
 void	run_game(t_game *game)
 {
-	rnd_draw_map(game);
 	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
-	rnd_draw_player(game);
+	draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
 	// game loop.
 	mlx_loop(game->mlx);
@@ -53,7 +52,7 @@ void	update(void *param) {
 	// handling moving objects
 	
 	mv_handle_moves(game);
-	rnd_draw_minimap(game);
+	draw_minimap(game);
 	// mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	// game->mouse_pos.x -= game->player->position.x;
 	// game->mouse_pos.y -= game->player->position.y;
