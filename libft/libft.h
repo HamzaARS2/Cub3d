@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 22:06:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/18 12:33:43 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:19:43 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+char	*get_next_line(int fd);
+// size_t	ft_strlen(char *str);
+size_t	is_exists(char *str, char c);
+char	*sclear(char **s);
+char	*strcombine(char *s1, char *s2);
 
 int					ft_isalpha(int c);
 int					ft_toupper(int c);

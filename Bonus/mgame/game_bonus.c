@@ -6,11 +6,13 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/22 17:18:32 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/01 13:31:05 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
+
+void handle_cursor_movement(double xpos, double ypos, void* param);
 
 bool	 init_game(t_game *game, char *mapfile)
 {
@@ -24,22 +26,42 @@ bool	 init_game(t_game *game, char *mapfile)
 	if (!game->mlx)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
-	game->player = init_object(game, NULL, game->mapscan->start_pos);
+	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
 	game->drawing_board = gfx_create_image(game, WIDTH, HEIGHT);
+	game->map_img = gfx_create_image(game, MAP_WIDTH, MAP_HEIGHT);
 	return (true);
 }
 
 
 void	run_game(t_game *game)
 {
-	rnd_draw_map(game);
-	rnd_draw_player(game);
+	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
+	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
+	draw_player(game);
+	mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
 	mlx_loop_hook(game->mlx, update, game);
-	printf("mapszie: widthx: %i | heighty: %i\n", game->mapscan->mapsize.x, game->mapscan->mapsize.y);
+	//printf("mapszie: widthx: %i | heighty: %i\n", game->mapscan->mapsize.x, game->mapscan->mapsize.y);
 	// game loop.
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
+}
+void handle_cursor_movement(double xpos, double ypos, void* param)
+{
+	t_game *game;
+	double angle;
+	int x_d;
+
+	//mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	game = param;
+	angle = game->player->direction.rotatin_angle;
+	x_d = xpos - game->mouse_pos.x;
+	angle = normalizeAngle(angle + x_d * 0.15);
+	game->player->direction.rotatin_angle = angle;
+	game->mouse_pos.x = xpos;
+	game->mouse_pos.y = -1;
+	//printf("xpos: %f-----mpx: %d \n", xpos, game->mouse_pos.x);
+	
 }
 
 void	update(void *param) {
@@ -50,7 +72,13 @@ void	update(void *param) {
 	mlx = game->mlx;
 	// handling moving objects
 	
+	if (game->mouse_pos.y == -1)
+	{
+		game->mouse_pos.y = 0;
+		cast_rays(game);
+	}
 	mv_handle_moves(game);
+	draw_minimap(game);
 	// mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	// game->mouse_pos.x -= game->player->position.x;
 	// game->mouse_pos.y -= game->player->position.y;

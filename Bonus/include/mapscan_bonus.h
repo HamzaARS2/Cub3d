@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapscan.h                                          :+:      :+:    :+:   */
+/*   mapscan_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:54:44 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:38:18 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdbool.h>
-# include "../libft/libft.h"
-# include "get_next_line.h"
+# include "../../libft/libft.h"
 
 typedef enum e_mperror {
 	NO_ERROR,			// Map is valid

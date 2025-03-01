@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:48:27 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-void	mv_move_object(t_object *object, int new_x, int new_y)
+void	mv_move_player(t_player *object, int new_x, int new_y)
 {
 	object->position.x = new_x + (OBJ_SIZE / 2);
 	object->position.y = new_y + (OBJ_SIZE / 2);
-	object->image->instances[0].x = new_x;
-	object->image->instances[0].y = new_y;
 }
 
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
@@ -45,11 +43,12 @@ bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
 
 void	mv_handle_moves(t_game *game)
 {
-	t_object *player;
+	t_player *player;
 
 	player = game->player;
 	player->direction.turnDirection = 0;
 	player->direction.walkDirection = 0;
+	mlx_get_mouse_pos(game->mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 

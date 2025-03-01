@@ -73,14 +73,14 @@ double normalizeAngle(double angle)
 void	bresenham_line(t_game *game, int *x, double angle)
 {
 	t_draw		mat;
-    t_object    *player;
+    t_player    *player;
     t_data      data;
 	t_vector2 	hit;
 
     mat = (t_draw) {0};
     player = game->player;
-    data.x1 = player->position.x;
-    data.y1 = player->position.y;
+    // data.x1 = player->position.x;
+    // data.y1 = player->position.y;
 	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
     // data.x2 = floor(hit.x);
     // data.y2 = floor(hit.y);
