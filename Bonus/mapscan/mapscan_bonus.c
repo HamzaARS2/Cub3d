@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mapscan.h"
+#include "../include/mapscan_bonus.h"
 
 t_mapscan	*init_mapscan(char *mapfile)	
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 void	mv_move_player(t_player *object, int new_x, int new_y)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mapscan.h"
+#include "../include/mapscan_bonus.h"
 
 bool	chk_format(char *mapfile)
 {

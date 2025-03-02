@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "../../MLX42/include/MLX42/MLX42.h"
-#include "mapscan.h"
+#include "mapscan_bonus.h"
 
 #define WIDTH 1200
 #define HEIGHT 1100

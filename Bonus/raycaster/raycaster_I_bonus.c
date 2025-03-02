@@ -1,4 +1,4 @@
-# include "../include/raycaster.h"
+# include "../include/raycaster_bonus.h"
 #define next_tile 1.0E-8
 
 int	check_wall(t_vector2 *hitp, char **map, t_point map_size)

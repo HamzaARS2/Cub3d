@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 int	get_color(t_mapscan *mapscan, t_point p)
 {

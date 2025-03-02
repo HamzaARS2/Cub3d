@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 {

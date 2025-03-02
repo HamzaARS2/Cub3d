@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 void handle_cursor_movement(double xpos, double ypos, void* param);
 

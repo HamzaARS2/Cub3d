@@ -1,4 +1,4 @@
-# include "../include/raycaster.h"
+# include "../include/raycaster_bonus.h"
 
 void draw_wall(t_game *game, double distance, double angle, int *x);
 

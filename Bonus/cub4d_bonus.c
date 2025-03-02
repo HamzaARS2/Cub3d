@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "include/cub4d_bonus.h"
 
 void	foo() {
 	system("leaks -q cub3D");

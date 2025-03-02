@@ -2,9 +2,9 @@
 # define CUB4D_H
 
 
-#include "mapscan.h"
-#include "game.h"
-#include "raycaster.h"
+#include "mapscan_bonus.h"
+#include "game_bonus.h"
+#include "raycaster_bonus.h"
 
 
 

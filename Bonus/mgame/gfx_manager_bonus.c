@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
 {

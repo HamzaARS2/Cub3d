@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 // Remove later!
 void	print_map(t_mapscan *mapscan)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mapscan.h"
+#include "../include/mapscan_bonus.h"
 
 // Checks for data id in the line string.
 // Can Post invalid data error if the id is not correct.

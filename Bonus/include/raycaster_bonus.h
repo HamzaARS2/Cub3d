@@ -13,8 +13,8 @@
 #ifndef RAYCASTER_H
 # define RAYCASTER_H
 
-# include "game.h"
-# include "mapscan.h"
+# include "game_bonus.h"
+# include "mapscan_bonus.h"
 # include <math.h>
 
 typedef enum e_direction {
