@@ -87,7 +87,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	//printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
 
 	// mat.dx = abs(data.x2 - data.x1);
-	// mat.dy = abs(data.y2 - data.y1); 
+	// mat.dy = abs(data.y2 - data.y1);
 	// set_direction(&mat, &data);
 	// drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
 	double distance = sqrt(powf(player->position.x - hit.x, 2) + 

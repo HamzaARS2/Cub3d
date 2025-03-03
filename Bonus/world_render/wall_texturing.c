@@ -15,7 +15,11 @@ void    load_textures(t_game *game)
 }
 
 int	get_texture_color(t_game *game, int tex_offset_x, int tex_offset_y) {
-	mlx_image_t * tex = game->textures.north_texture;
+    mlx_image_t *tex;
+    if (game->is_vertical_hit)
+	    tex = game->textures.east_texture;
+    else
+        tex = game->textures.north_texture;
 	int texel_color = ((tex->width * tex_offset_y) + tex_offset_x) * 4;
     // if (texel_color >= tex->width * tex->height)
     //     return get_rgba(255,0,0,255);
@@ -53,7 +57,7 @@ void    render_wall_texture(t_game *game, double distance, double angle, int x, 
     while (y < wall_bot_pixel)
     {
         int dft = y + (wall_strip_height / 2) - (HEIGHT / 2);
-        tex_offset_y = ((y - wall_top_pixel) * ((float)game->textures.north_texture->height / wall_strip_height));
+        tex_offset_y = (dft * ((float)game->textures.north_texture->height / wall_strip_height));
         int color = get_texture_color(game, tex_offset_x, tex_offset_y);
         mlx_put_pixel(game->drawing_board, x, y, color);
         y++;

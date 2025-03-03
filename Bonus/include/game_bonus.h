@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   game_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 13:58:33 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 13:26:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <math.h>
 #include "../../MLX42/include/MLX42/MLX42.h"
 #include "mapscan_bonus.h"
+#include "world_render_bonus.h"
 
 #define WIDTH 1200
 #define HEIGHT 1100
@@ -51,12 +52,6 @@ typedef struct s_player {
 	float		speed;
 } t_player;
 
-typedef struct s_textures {
-	mlx_image_t *north_texture;
-	mlx_image_t *south_texture;
-	mlx_image_t *east_texture;
-	mlx_image_t *west_texture;
-} t_textures;
 
 typedef struct s_game {
 	t_mapscan	*mapscan;

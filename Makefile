@@ -3,7 +3,7 @@ MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 MLX := MLX42
 MLX_BUILD := $(MLX)/build
-MLX_LIB = $(MLX)/build/libmlx42.a -L'/Users/nhimad/.brew/opt/glfw/lib/' -Iinclude -lglfw -lm
+MLX_LIB = $(MLX)/build/libmlx42.a -Iinclude -lglfw -lm
 
 LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a
@@ -16,7 +16,7 @@ Mandatory/movement/movement.c Mandatory/raycaster/raycaster.c Mandatory/raycaste
 
 BONUS_FILES := Bonus/cub4d_bonus.c Bonus/mapscan/mapscan_bonus.c Bonus/mapscan/mp_checker_bonus.c Bonus/mapscan/mp_reader_bonus.c Bonus/mapscan/mp_utils_bonus.c \
 Bonus/mgame/game_bonus.c Bonus/mgame/game_utils_bonus.c Bonus/mgame/gfx_manager_bonus.c Bonus/mgame/minimap_bonus.c Bonus/mgame/player_bonus.c \
-Bonus/movement/movement_bonus.c Bonus/raycaster/raycaster_bonus.c Bonus/raycaster/raycaster_I_bonus.c Bonus/textures/wall_texturing.c
+Bonus/movement/movement_bonus.c Bonus/raycaster/raycaster_bonus.c Bonus/raycaster/raycaster_I_bonus.c Bonus/world_render/wall_texturing.c
 
 OBJS_FILES = $(MAIN_FILES:.c=.o)
 BONUS_OBJS_FILES = $(BONUS_FILES:.c=.o)

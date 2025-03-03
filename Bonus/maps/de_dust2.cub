@@ -1,8 +1,8 @@
 C 255,8,1
-NO /home/helarras/1337P/Cub3d/Bonus/maps/wall32x32.png
+NO Bonus/maps/wall32x32.png
 SO ./path_to_the_south_texture
 
-EA ./path_to_the_east_texture
+EA /Users/helarras/Desktop/Cub3d/Bonus/maps/Tile_13-128x128.png
 WE ./path_to_the_west_texture
 
 F 244,1,23
