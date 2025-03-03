@@ -46,12 +46,12 @@ typedef struct s_entry {
     char    *value;
 } t_entry;
 
-typedef struct s_textures {
+typedef struct s_texpath{
     char *north_tex;
     char *south_tex;
     char *east_tex;
     char *west_tex;
-} t_textures;
+} t_texpath;
 
 typedef struct s_colors {
     char    *fcolor_str;
@@ -61,7 +61,7 @@ typedef struct s_colors {
 } t_colors;
 
 typedef struct s_mapscan {
-	t_textures  textures;
+	t_texpath   texpaths;
     t_mperror   error;
     t_colors    colors;
     char		**map;

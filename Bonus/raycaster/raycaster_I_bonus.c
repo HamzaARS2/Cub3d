@@ -142,8 +142,10 @@ t_vector2 find_nearest_hit(t_game *game, float ray_angle)
     powf(player->position.y - h_hit.y, 2));
     v_dist = sqrt(powf(player->position.x - v_hit.x, 2) + 
     powf(player->position.y - v_hit.y, 2));
+    game->is_vertical_hit = true;
     if (v_hit.y != -1 && (h_hit.y == -1 || h_dist > v_dist))
         return (v_hit);
+    game->is_vertical_hit = false;
     return (h_hit);
 }
 
@@ -162,7 +164,8 @@ void	cast_rays(t_game *game)
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
 	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + rotate_spead);
-	while (rotate_spead <= 30)
+	
+    while (rotate_spead <= 30)
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
 		bresenham_line(game, &x, rotate_spead);

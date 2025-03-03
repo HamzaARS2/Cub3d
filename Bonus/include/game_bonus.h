@@ -51,15 +51,25 @@ typedef struct s_player {
 	float		speed;
 } t_player;
 
+typedef struct s_textures {
+	mlx_image_t *north_texture;
+	mlx_image_t *south_texture;
+	mlx_image_t *east_texture;
+	mlx_image_t *west_texture;
+} t_textures;
+
 typedef struct s_game {
 	t_mapscan	*mapscan;
+	t_textures	textures;
 	mlx_t		*mlx;
 	t_list		*graphics;
 	t_player	*player;
 	t_point		mouse_pos;
 	mlx_image_t *map_img;
 	mlx_image_t *drawing_board;
+	bool		is_vertical_hit;
 } t_game;
+
 
 
 void	bresenham_line(t_game *game, int *x, double angle);
@@ -88,6 +98,9 @@ void	obj_update_mvdirection(t_game *game, int rotation);
 t_mapscan	*readmap(char *mapfile);
 void	board_clean(mlx_image_t *drawing_board);
 
+// textures
+void    load_textures(t_game *game);
+void    render_wall_texture(t_game *game, double distance, double angle, int x, t_vector2);
 void	cast_rays(t_game *game);
 
 double normalizeAngle(double angle);

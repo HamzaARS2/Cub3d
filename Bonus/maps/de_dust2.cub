@@ -1,5 +1,5 @@
 C 255,8,1
-NO ./path_to_the_north_texture
+NO /home/helarras/1337P/Cub3d/Bonus/maps/wall32x32.png
 SO ./path_to_the_south_texture
 
 EA ./path_to_the_east_texture
