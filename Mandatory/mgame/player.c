@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 15:11:55 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:11:19 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	return (object);
 }
 
-void	obj_update_mvdirection(t_game *game, int rotation)
+void	obj_update_mvdirection(t_game *game, float rotation)
 {
 	t_Dvector *direction;
 	double speed;

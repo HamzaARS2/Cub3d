@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 13:58:33 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:11:39 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	mv_handle_moves(t_game *game);
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object
 t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos);
-void	obj_update_mvdirection(t_game *game, int rotation);
+void	obj_update_mvdirection(t_game *game, float rotation);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
