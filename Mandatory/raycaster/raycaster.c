@@ -79,17 +79,12 @@ void	bresenham_line(t_game *game, int *x, double angle)
     t_player    *player;
     t_data      data;
 	t_vector2 	hit;
-	t_ray_dat	ray_dat;
+	t_ray_dat	ray_dat; //here we store hit poit cordination, and direction
 
     mat = (t_draw) {0};
     player = game->player;
-    // data.x1 = player->position.x;
-    // data.y1 = player->position.y;
 	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
 	hit = ray_dat.hitp;
-
-	//printf("ray v_h: %c, ray_diraction: %c, x : %f, y: %f\n", ray_dat.ver_hor, ray_dat.direction, ray_dat.hitp.x, ray_dat.hitp.y);
-	//while (1);
 	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
     powf(player->position.y - hit.y, 2));
 	draw_wall(game, distance, angle, x);
@@ -102,7 +97,7 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	 double start;
 	 int 	pixel_offset;
 
-	 focal = (double) (WIDTH / 2) / tan(RADIANS(FOV / 2));
+	 focal = (double) (WIDTH / 2) / tan(RADIANS((FOV / 2)));
 	 distance *= cos(angle);
 	 wall_h = (25 / distance) * focal;
 	 start = (HEIGHT / 2) - (wall_h / 2);

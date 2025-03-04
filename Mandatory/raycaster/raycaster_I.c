@@ -174,25 +174,26 @@ t_ray_dat find_nearest_hit(t_game *game, float ray_angle)
 void	cast_rays(t_game *game)
 {
 	double	rotate_angle;
-	double	rotate_spead;
+	double	ray_angle;
 	double 	angle_shift;
 	int x;
 
 	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
-	rotate_spead = RADIANS(-30);
+	ray_angle = RADIANS(-30);
 	angle_shift = ((double)RADIANS(60) / WIDTH );
 	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
-	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + rotate_spead);
-	while (rotate_spead <= RADIANS(30))
+	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + ray_angle);
+    while (ray_angle < RADIANS(30) && x < WIDTH)
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
-		bresenham_line(game, &x, rotate_spead);
+		bresenham_line(game, &x, ray_angle);
 		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle +  angle_shift);
-		rotate_spead += angle_shift;
+		ray_angle += angle_shift;
 		x++;
+        printf("angle SHIFT value: %f\n", ray_angle);
 	}
 	game->player->direction.rotatin_angle = rotate_angle;
 	// printf("ang: %f\n", game->player->direction.rotatin_angle);
