@@ -6,13 +6,13 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/03 14:14:35 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:47:07 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-void	mv_move_player(t_player *object, int new_x, int new_y)
+void	mv_move_player(t_player *object, float new_x, float new_y)
 {
 	object->position.x = new_x + (OBJ_SIZE / 2);
 	object->position.y = new_y + (OBJ_SIZE / 2);
@@ -64,21 +64,21 @@ void	mv_handle_moves(t_game *game)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{	
 		player->direction.walkDirection = 1;
-		obj_update_mvdirection(game, 90);
+		obj_update_mvdirection(game, RADIANS(90));
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{	
 		player->direction.walkDirection = -1;
-		obj_update_mvdirection(game, 90);
+		obj_update_mvdirection(game, RADIANS(90));
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
-		player->direction.rotatin_angle -= ROTATION_SPEED;
+		player->direction.rotatin_angle -= RADIANS(ROTATION_SPEED);
 		cast_rays(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
-		player->direction.rotatin_angle += ROTATION_SPEED;
+		player->direction.rotatin_angle += RADIANS(ROTATION_SPEED);
 		cast_rays(game);
 	}
 }

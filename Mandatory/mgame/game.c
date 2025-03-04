@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 13:31:05 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:54:53 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void handle_cursor_movement(double xpos, double ypos, void* param)
 	game = param;
 	angle = game->player->direction.rotatin_angle;
 	x_d = xpos - game->mouse_pos.x;
-	angle = normalizeAngle(angle + x_d * 0.15);
+	angle = normalizeAngle(angle + x_d * 0.0015);
 	game->player->direction.rotatin_angle = angle;
 	game->mouse_pos.x = xpos;
 	game->mouse_pos.y = -1;

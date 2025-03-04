@@ -102,8 +102,8 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	 double start;
 	 int 	pixel_offset;
 
-	 focal = (double) (WIDTH / 2) / tan(RADIANS(FOV / 2));
-	 distance *= cos(RADIANS(angle));
+	 focal = (double) (WIDTH / 2) / tan((FOV / 2));
+	 distance *= cos((angle));
 	 wall_h = (25 / distance) * focal;
 	 start = (HEIGHT / 2) - (wall_h / 2);
 	 if (start < 0)

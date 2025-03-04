@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster.h                                        :+:      :+:    :+:   */
+/*   raycaster_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:51 by nhimad            #+#    #+#             */
-/*   Updated: 2025/02/22 16:49:46 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:42:39 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCASTER_H
 # define RAYCASTER_H
 
-# include "game.h"
-# include "mapscan.h"
+# include "game_bonus.h"
+# include "mapscan_bonus.h"
 # include <math.h>
 
 typedef enum e_direction {

@@ -26,11 +26,11 @@ int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
 
 void	vision_derction(double angel, int *v_d)
 {
-	if (angel > 180)
+	if (angel > M_PI)
 		v_d[0] = looking_up;
 	else
 		v_d[0] = looking_down;
-	if (angel > 90 && angel < 270)
+	if (angel > M_PI_2 && angel < 1.5 * M_PI)
 		v_d[1] = looking_left;
 	else
 		v_d[1] = looking_right;
@@ -123,7 +123,31 @@ t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
     return hit;
 }
 
-t_vector2 find_nearest_hit(t_game *game, float ray_angle)
+t_ray_dat get_ray_data(t_vector2 hit, int *v_d, char c)
+{
+    t_ray_dat ray_dat;
+
+    ray_dat.hitp = hit;
+    if (c == 'V' )
+    {
+        ray_dat.ver_hor = c;
+        if (v_d[1] == looking_left)
+            ray_dat.direction = 'W';
+        else
+            ray_dat.direction = 'E';
+    }
+    else if (c == 'H')
+    {
+        ray_dat.ver_hor = c;
+        if (v_d[0] == looking_up)
+            ray_dat.direction = 'N';
+        else
+            ray_dat.direction = 'S';
+    }
+    return (ray_dat);
+}
+
+t_ray_dat find_nearest_hit(t_game *game, float ray_angle)
 {
     t_vector2 h_hit;
     t_vector2 v_hit;
@@ -131,10 +155,10 @@ t_vector2 find_nearest_hit(t_game *game, float ray_angle)
     int v_d[2];
     double h_dist;
     double v_dist;
+    t_ray_dat ray_data;
 
     player = game->player;
     vision_derction(ray_angle, v_d);
-    ray_angle = RADIANS(ray_angle);
     h_hit = horizontal_intersection(game, ray_angle, v_d);
     v_hit = vertical_intersection(game, ray_angle, v_d);
     
@@ -143,8 +167,8 @@ t_vector2 find_nearest_hit(t_game *game, float ray_angle)
     v_dist = sqrt(powf(player->position.x - v_hit.x, 2) + 
     powf(player->position.y - v_hit.y, 2));
     if (v_hit.y != -1 && (h_hit.y == -1 || h_dist > v_dist))
-        return (v_hit);
-    return (h_hit);
+        return (get_ray_data(v_hit, v_d, 'V'));
+    return (get_ray_data(h_hit, v_d, 'H'));
 }
 
 void	cast_rays(t_game *game)
@@ -156,13 +180,13 @@ void	cast_rays(t_game *game)
 
 	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
-	rotate_spead = -30;
-	angle_shift = ((double)60 / WIDTH );
+	rotate_spead = RADIANS(-30);
+	angle_shift = ((double)RADIANS(60) / WIDTH );
 	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
 	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + rotate_spead);
-	while (rotate_spead <= 30)
+	while (rotate_spead <= RADIANS(30))
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
 		bresenham_line(game, &x, rotate_spead);

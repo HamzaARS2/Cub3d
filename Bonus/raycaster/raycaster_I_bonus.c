@@ -134,7 +134,6 @@ t_vector2 find_nearest_hit(t_game *game, float ray_angle)
 
     player = game->player;
     vision_derction(ray_angle, v_d);
-    ray_angle = RADIANS(ray_angle);
     h_hit = horizontal_intersection(game, ray_angle, v_d);
     v_hit = vertical_intersection(game, ray_angle, v_d);
     
