@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 15:11:55 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/05 12:03:02 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	object->direction = (t_Dvector) {0};
 	//object->direction.rotatin_angle = 270;
 	if (!img)
-		object->image = gfx_create_image(game, OBJ_SIZE, OBJ_SIZE);
+		object->image = gfx_create_image(game->mlx, game->world->graphics, OBJ_SIZE, OBJ_SIZE);
 	else
 		object->image = img;
 	return (object);
@@ -45,8 +45,8 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	double distance_x = cos(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 	double distance_y = sin(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
 		
-	new_x = round(game->player->position.x - (OBJ_SIZE / 2) + distance_x);
-	new_y = round(game->player->position.y - (OBJ_SIZE / 2) + distance_y);
+	new_x = game->player->position.x - (OBJ_SIZE / 2) + distance_x;
+	new_y = game->player->position.y - (OBJ_SIZE / 2) + distance_y;
 	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
 		mv_move_player(game->player, new_x, new_y);
 	cast_rays(game);
@@ -54,6 +54,7 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 
 bool	draw_player(t_game *game)
 {
+	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
 	mlx_image_to_window(game->mlx, game->player->image, MAP_WIDTH / 2, MAP_HEIGHT / 2);
 	board_clean(game->drawing_board);
 	cast_rays(game);

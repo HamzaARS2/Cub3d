@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 13:48:27 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 15:23:57 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game_bonus.h"
 
-void	mv_move_player(t_player *object, int new_x, int new_y)
+void	mv_move_player(t_player *object, double new_x, double new_y)
 {
 	object->position.x = new_x + (OBJ_SIZE / 2);
 	object->position.y = new_y + (OBJ_SIZE / 2);
@@ -48,7 +48,7 @@ void	mv_handle_moves(t_game *game)
 	player = game->player;
 	player->direction.turnDirection = 0;
 	player->direction.walkDirection = 0;
-	mlx_get_mouse_pos(game->mlx, &game->mouse_pos.x, &game->mouse_pos.y);
+	//mlx_get_mouse_pos(game->mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 
