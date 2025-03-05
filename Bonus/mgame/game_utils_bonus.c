@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 // Remove later!
 void	print_map(t_mapscan *mapscan)
 {
 	printf("floor: %s | ceilling: %s\n", mapscan->colors.fcolor_str, mapscan->colors.ccolor_str);
 	
-	printf("id: %c | path: %s\n", 'N', mapscan->textures.north_tex);
-	printf("id: %c | path: %s\n", 'S', mapscan->textures.south_tex);
-	printf("id: %c | path: %s\n", 'E', mapscan->textures.east_tex);
-	printf("id: %c | path: %s\n", 'W', mapscan->textures.west_tex);
+	printf("id: %c | path: %s\n", 'N', mapscan->texpaths.north_tex);
+	printf("id: %c | path: %s\n", 'S', mapscan->texpaths.south_tex);
+	printf("id: %c | path: %s\n", 'E', mapscan->texpaths.east_tex);
+	printf("id: %c | path: %s\n", 'W', mapscan->texpaths.west_tex);
 
 	int i = 0;
 	while (mapscan->map[i])

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gfx_manager.c                                      :+:      :+:    :+:   */
+/*   gfx_manager_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/22 11:53:59 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:23:43 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../include/game.h"
+#include "../include/gfx_manager_bonus.h"
 
 void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
 {
@@ -21,16 +21,16 @@ void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
 	coords.x *= TILE_SIZE;
 	coords.y *= TILE_SIZE;
 	y = coords.y;
-	while (y < coords.y + TILE_SIZE)
-	{ 
+	while (y < coords.y + TILE_SIZE - 1)
+	{
 		x = coords.x;
-		while (x < coords.x + TILE_SIZE)
+		while (x < coords.x + TILE_SIZE - 1)
 			mlx_put_pixel(image, x++, y, color);
 		y++;
 	}
 }
 
-mlx_image_t	*gfx_create_teximage(t_game *game, char *tex_path)
+mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list *graphics, char *tex_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -38,20 +38,20 @@ mlx_image_t	*gfx_create_teximage(t_game *game, char *tex_path)
 	texture = mlx_load_png(tex_path);
 	if (!texture)
 		return (NULL);
-	image = mlx_texture_to_image(game->mlx, texture);
-	ft_lstadd_back(&game->graphics, ft_lstnew(image));
+	image = mlx_texture_to_image(mlx, texture);
+	ft_lstadd_back(&graphics, ft_lstnew(image));
 	mlx_delete_texture(texture);
 	return (image);
 }
 
-mlx_image_t	*gfx_create_image(t_game *game, int width, int height)
+mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list *graphics, int width, int height)
 {
 	mlx_image_t	*image;
 
-	image = mlx_new_image(game->mlx, width, height);
+	image = mlx_new_image(mlx, width, height);
 	if (!image)
 		return (NULL);
-	ft_lstadd_back(&game->graphics, ft_lstnew(image));
+	ft_lstadd_back(&graphics, ft_lstnew(image));
 	return (image);
 }
 

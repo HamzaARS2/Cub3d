@@ -1,4 +1,4 @@
-# include "../include/raycaster.h"
+# include "../include/raycaster_bonus.h"
 
 void draw_wall(t_game *game, double distance, double angle, int *x);
 
@@ -76,7 +76,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
     t_player    *player;
     t_data      data;
 	t_vector2 	hit;
-
+	bool		is_vertical_hit;
     mat = (t_draw) {0};
     player = game->player;
     // data.x1 = player->position.x;
@@ -84,16 +84,19 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
     // data.x2 = floor(hit.x);
     // data.y2 = floor(hit.y);
-	// //printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
+	//printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
 
-	mat.dx = abs(data.x2 - data.x1);
-	mat.dy = abs(data.y2 - data.y1); 
-	set_direction(&mat, &data);
+	// mat.dx = abs(data.x2 - data.x1);
+	// mat.dy = abs(data.y2 - data.y1);
+	// set_direction(&mat, &data);
 	// drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
 	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
     powf(player->position.y - hit.y, 2));
 	draw_wall(game, distance, angle, x);
+	// render_wall_texture(game, distance , angle, *x, hit);
 }
+
+
 
 void draw_wall(t_game *game, double distance, double angle, int *x)
 {
@@ -102,8 +105,8 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	 double start;
 	 int 	pixel_offset;
 
-	 focal = (double) (WIDTH / 2) / tan((FOV / 2));
-	 distance *= cos((angle));
+	 focal = (double) (WIDTH / 2) / tan(RADIANS(FOV / 2));
+	 distance *= cos(RADIANS(angle));
 	 wall_h = (25 / distance) * focal;
 	 start = (HEIGHT / 2) - (wall_h / 2);
 	 if (start < 0)
@@ -119,3 +122,5 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 		start++;
 	}
 }
+
+//get_rgba(51,175,255,255)

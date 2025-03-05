@@ -1,5 +1,5 @@
-#ifndef CUB4D_BONUS_H
-# define CUB4D_BONUS_H
+#ifndef CUB4D_H
+# define CUB4D_H
 
 
 #include "mapscan_bonus.h"

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mapscan.h"
+#include "../include/mapscan_bonus.h"
 
 t_mapscan	*init_mapscan(char *mapfile)	
 {
@@ -33,7 +33,7 @@ t_mapscan	*init_mapscan(char *mapfile)
 	}
 	mapscan->map = NULL;
 	mapscan->mapsize = (t_point) {0};
-	mapscan->textures = (t_textures) {NULL};
+	mapscan->texpaths = (t_texpath) {NULL};
 	mapscan->error = NO_ERROR;
 	mapscan->colors = (t_colors) {0};
 	return (mapscan);
@@ -101,15 +101,15 @@ bool	mp_post_error(t_mperror error)
 void	mp_clearmap(t_mapscan *mapscan)
 {
 	int i;
-	t_textures textures;
+	t_texpath textures;
 	
 	i = 0;
 	if (!mapscan)
 		return ;
-	free(mapscan->textures.north_tex);
-	free(mapscan->textures.south_tex);
-	free(mapscan->textures.east_tex);
-	free(mapscan->textures.west_tex);
+	free(mapscan->texpaths.north_tex);
+	free(mapscan->texpaths.south_tex);
+	free(mapscan->texpaths.east_tex);
+	free(mapscan->texpaths.west_tex);
 	free(mapscan->colors.fcolor_str);
 	free(mapscan->colors.ccolor_str);
 	while (mapscan->map && mapscan->map[i])

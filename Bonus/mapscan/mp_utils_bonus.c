@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mapscan.h"
+#include "../include/mapscan_bonus.h"
 
 void	ump_clear(void *content)
 {

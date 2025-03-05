@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/mapscan.h"
+#include "../include/mapscan_bonus.h"
 
 // Checks for data id in the line string.
 // Can Post invalid data error if the id is not correct.
@@ -46,14 +46,14 @@ bool	rdr_readtex(t_mapscan *mapscan, char *line)
 		return (false);
 	if ((line[id + 2] < 9 || line[id + 2] > 13) && line[id + 2] != 32)
 		return (false);
-	if (line[id] == 'N' && !mapscan->textures.north_tex)
-		mapscan->textures.north_tex = ft_strtrim(line + id + 2, " \n\t");
-	else if (line[id] == 'S' && !mapscan->textures.south_tex)
-		mapscan->textures.south_tex = ft_strtrim(line + id + 2, " \n\t");
-	else if (line[id] == 'E' && !mapscan->textures.east_tex)
-		mapscan->textures.east_tex = ft_strtrim(line + id + 2, " \n\t");
-	else if (line[id] == 'W' && !mapscan->textures.west_tex)
-		mapscan->textures.west_tex = ft_strtrim(line + id + 2, " \n\t");
+	if (line[id] == 'N' && !mapscan->texpaths.north_tex)
+		mapscan->texpaths.north_tex = ft_strtrim(line + id + 2, " \n\t");
+	else if (line[id] == 'S' && !mapscan->texpaths.south_tex)
+		mapscan->texpaths.south_tex = ft_strtrim(line + id + 2, " \n\t");
+	else if (line[id] == 'E' && !mapscan->texpaths.east_tex)
+		mapscan->texpaths.east_tex = ft_strtrim(line + id + 2, " \n\t");
+	else if (line[id] == 'W' && !mapscan->texpaths.west_tex)
+		mapscan->texpaths.west_tex = ft_strtrim(line + id + 2, " \n\t");
 	else
 		mapscan->error = ERR_DUPLICATED_DATA;
 	return (true);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster_bonus.h                                  :+:      :+:    :+:   */
+/*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:51 by nhimad            #+#    #+#             */
-/*   Updated: 2025/03/03 17:42:39 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/02/22 16:49:46 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ typedef struct s_draw
 int		check_if_wall(char **map, int x, int y);
 void	set_direction(t_draw *mat, t_data *data);
 double	normalizeAngle(double angle);
-t_vector2 find_nearest_hit(t_game *game, t_data data, float ray_angle);
+t_vector2 find_nearest_hit(t_game *game, float ray_angle);
 void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map);
 #endif
