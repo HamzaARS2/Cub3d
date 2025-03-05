@@ -93,6 +93,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
     powf(player->position.y - hit.y, 2));
 	draw_wall(game, distance, angle, x);
+	// render_wall_texture(game, distance , angle, *x, hit);
 }
 
 

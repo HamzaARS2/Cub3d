@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 13:58:33 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:17:35 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef struct s_vector2 {
 	double y;
 } t_vector2;
 
+typedef struct s_hit_data {
+	t_vector2	hit_p;
+	bool 		ver_hor;
+	char		direction;
+} t_hit_data;
+
 typedef struct s_player {
 	mlx_image_t	*image;
 	t_vector2	position;
@@ -77,12 +83,12 @@ void		gfx_set_color(mlx_image_t *image, t_point coords, int color);
 bool	draw_player(t_game *game);
 void 	draw_minimap(t_game *game);
 // movements
-void	mv_move_player(t_player *object, int new_x, int new_y);
+void	mv_move_player(t_player *object, float new_x, float new_y);
 void	mv_handle_moves(t_game *game);
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object
 t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos);
-void	obj_update_mvdirection(t_game *game, int rotation);
+void	obj_update_mvdirection(t_game *game, float rotation);
 
 // utils
 t_mapscan	*readmap(char *mapfile);

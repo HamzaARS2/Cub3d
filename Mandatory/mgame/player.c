@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 15:11:55 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:24:58 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	return (object);
 }
 
-void	obj_update_mvdirection(t_game *game, int rotation)
+void	obj_update_mvdirection(t_game *game, float rotation)
 {
 	t_Dvector *direction;
 	double speed;
@@ -42,11 +42,11 @@ void	obj_update_mvdirection(t_game *game, int rotation)
 	speed = game->player->speed;
 	//direction->rotatin_angle += direction->turnDirection * ROTATION_SPEED;
 	direction->rotatin_angle = normalizeAngle(direction->rotatin_angle);
-	double distance_x = cos(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
-	double distance_y = sin(RADIANS(normalizeAngle(direction->rotatin_angle + rotation))) * (direction->walkDirection * speed);
+	double distance_x = cos(normalizeAngle(direction->rotatin_angle + rotation)) * (direction->walkDirection * speed);
+	double distance_y = sin(normalizeAngle(direction->rotatin_angle + rotation)) * (direction->walkDirection * speed);
 		
-	new_x = round(game->player->position.x - (OBJ_SIZE / 2) + distance_x);
-	new_y = round(game->player->position.y - (OBJ_SIZE / 2) + distance_y);
+	new_x = game->player->position.x - (OBJ_SIZE / 2) + distance_x;
+	new_y = game->player->position.y - (OBJ_SIZE / 2) + distance_y;
 	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1'))
 		mv_move_player(game->player, new_x, new_y);
 	cast_rays(game);
