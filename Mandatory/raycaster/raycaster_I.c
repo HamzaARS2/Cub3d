@@ -186,15 +186,18 @@ void	cast_rays(t_game *game)
 	board_clean(game->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
 	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + ray_angle);
-    while (ray_angle < RADIANS(30) && x < WIDTH)
+
+    printf("angle SHIFT value: %f\n", ray_angle);
+    while (ray_angle < RADIANS(30)&& x < WIDTH)
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
 		bresenham_line(game, &x, ray_angle);
 		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle +  angle_shift);
 		ray_angle += angle_shift;
 		x++;
-        printf("angle SHIFT value: %f\n", ray_angle);
+        //printf("angle SHIFT value: %f\n", ray_angle);
 	}
 	game->player->direction.rotatin_angle = rotate_angle;
 	// printf("ang: %f\n", game->player->direction.rotatin_angle);
 }
+//0.523599

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/03 17:54:53 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/06 11:25:21 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ bool	 init_game(t_game *game, char *mapfile)
 {
 	mlx_image_t *obj_img;
 	
-	game->graphics = NULL;
 	game->mapscan = readmap(mapfile);
 	if (!game->mapscan)
 		return (false);
@@ -26,16 +25,17 @@ bool	 init_game(t_game *game, char *mapfile)
 	if (!game->mlx)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
+	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
-	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
-	game->drawing_board = gfx_create_image(game, WIDTH, HEIGHT);
-	game->map_img = gfx_create_image(game, MAP_WIDTH, MAP_HEIGHT);
+	game->drawing_board = gfx_create_image(game->mlx, game->world->graphics, WIDTH, HEIGHT);
+	game->map_img = gfx_create_image(game->mlx, game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	return (true);
 }
 
 
 void	run_game(t_game *game)
 {
+	wd_load_textures(game->world, game->mapscan->texpaths);
 	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
 	draw_player(game);

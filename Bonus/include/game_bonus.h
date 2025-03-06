@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/03 16:48:00 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:59:17 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_game {
 	t_point		mouse_pos;
 	mlx_image_t *map_img;
 	mlx_image_t *drawing_board;
-	bool		is_vertical_hit;
 } t_game;
 
 

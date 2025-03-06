@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:06:36 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
 	}
 }
 
-mlx_image_t	*gfx_create_teximage(t_game *game, char *tex_path)
+mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list *graphics, char *tex_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -38,20 +38,20 @@ mlx_image_t	*gfx_create_teximage(t_game *game, char *tex_path)
 	texture = mlx_load_png(tex_path);
 	if (!texture)
 		return (NULL);
-	image = mlx_texture_to_image(game->mlx, texture);
-	ft_lstadd_back(&game->graphics, ft_lstnew(image));
+	image = mlx_texture_to_image(mlx, texture);
+	ft_lstadd_back(&graphics, ft_lstnew(image));
 	mlx_delete_texture(texture);
 	return (image);
 }
 
-mlx_image_t	*gfx_create_image(t_game *game, int width, int height)
+mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list *graphics, int width, int height)
 {
 	mlx_image_t	*image;
 
-	image = mlx_new_image(game->mlx, width, height);
+	image = mlx_new_image(mlx, width, height);
 	if (!image)
 		return (NULL);
-	ft_lstadd_back(&game->graphics, ft_lstnew(image));
+	ft_lstadd_back(&graphics, ft_lstnew(image));
 	return (image);
 }
 

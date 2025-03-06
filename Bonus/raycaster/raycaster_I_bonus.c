@@ -142,10 +142,8 @@ t_vector2 find_nearest_hit(t_game *game, float ray_angle)
     powf(player->position.y - h_hit.y, 2));
     v_dist = sqrt(powf(player->position.x - v_hit.x, 2) + 
     powf(player->position.y - v_hit.y, 2));
-    game->is_vertical_hit = true;
     if (v_hit.y != -1 && (h_hit.y == -1 || h_dist > v_dist))
         return (v_hit);
-    game->is_vertical_hit = false;
     return (h_hit);
 }
 

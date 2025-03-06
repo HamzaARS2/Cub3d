@@ -12,7 +12,8 @@ HEADERS := $(MLX)/include
 
 MAIN_FILES = Mandatory/cub4d.c Mandatory/mapscan/mapscan.c Mandatory/mapscan/mp_reader.c Mandatory/mapscan/mp_utils.c \
 Mandatory/mapscan/mp_checker.c Mandatory/mgame/game.c Mandatory/mgame/game_utils.c Mandatory/mgame/gfx_manager.c Mandatory/mgame/player.c \
-Mandatory/movement/movement.c Mandatory/raycaster/raycaster.c Mandatory/raycaster/raycaster_I.c Mandatory/mgame/minimap.c
+Mandatory/movement/movement.c Mandatory/raycaster/raycaster.c Mandatory/raycaster/raycaster_I.c Mandatory/mgame/minimap.c \
+Mandatory/world/world.c
 
 BONUS_FILES := Bonus/cub4d_bonus.c Bonus/mapscan/mapscan_bonus.c Bonus/mapscan/mp_checker_bonus.c Bonus/mapscan/mp_reader_bonus.c Bonus/mapscan/mp_utils_bonus.c \
 Bonus/mgame/game_bonus.c Bonus/mgame/game_utils_bonus.c Bonus/mgame/gfx_manager_bonus.c Bonus/mgame/minimap_bonus.c Bonus/mgame/player_bonus.c \

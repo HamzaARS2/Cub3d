@@ -87,6 +87,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	hit = ray_dat.hitp;
 	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
     powf(player->position.y - hit.y, 2));
+	// printf("hit %c, direction %c\n", ray_dat.ver_hor, ray_dat.direction);
 	draw_wall(game, distance, angle, x);
 }
 
