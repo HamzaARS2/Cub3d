@@ -183,11 +183,11 @@ void	cast_rays(t_game *game)
 	ray_angle = RADIANS(-30);
 	angle_shift = ((double)RADIANS(60) / WIDTH );
 	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
-	board_clean(game->drawing_board);
+	board_clean(game->world->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
 	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + ray_angle);
 
-    printf("angle SHIFT value: %f\n", ray_angle);
+    // printf("angle SHIFT value: %f\n", ray_angle);
     while (ray_angle < RADIANS(30)&& x < WIDTH)
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);

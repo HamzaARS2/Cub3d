@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 11:25:21 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:39:53 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ bool	 init_game(t_game *game, char *mapfile)
 	if (!game->mlx)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
-	game->world = init_world(game->mlx, game->mapscan->colors);
+	game->world = init_world(game->mlx, game->world->drawing_board, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
-	game->drawing_board = gfx_create_image(game->mlx, game->world->graphics, WIDTH, HEIGHT);
 	game->map_img = gfx_create_image(game->mlx, game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	return (true);
 }
@@ -36,8 +35,10 @@ bool	 init_game(t_game *game, char *mapfile)
 void	run_game(t_game *game)
 {
 	wd_load_textures(game->world, game->mapscan->texpaths);
-	mlx_image_to_window(game->mlx, game->drawing_board, 0, 0);
+	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
+	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
+	wd_render_cf(game->world);
 	draw_player(game);
 	mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
 	mlx_loop_hook(game->mlx, update, game);

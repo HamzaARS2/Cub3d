@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 11:22:23 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:54:29 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	draw_player(t_game *game)
 {
 	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
 	mlx_image_to_window(game->mlx, game->player->image, MAP_WIDTH / 2, MAP_HEIGHT / 2);
-	board_clean(game->drawing_board);
+	board_clean(game->world->drawing_board);
 	cast_rays(game);
 	return (true);
 }

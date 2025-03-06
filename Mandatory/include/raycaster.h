@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:51 by nhimad            #+#    #+#             */
-/*   Updated: 2025/03/05 17:36:29 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:55:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define RAYCASTER_H
 
 # include "game.h"
-# include "mapscan.h"
 # include <math.h>
 
 typedef enum e_direction {
@@ -29,12 +28,7 @@ typedef enum e_direction {
 # define RES 4
 # define NUM_RAYS (WIDTH / RES)
 
-typedef struct s_ray_data
-{
-	t_vector2 hitp;
-	char 	ver_hor;
-	char 	direction;
-}	t_ray_dat;
+
 
 typedef struct s_data
 {

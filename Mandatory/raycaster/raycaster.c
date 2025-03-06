@@ -1,4 +1,5 @@
 # include "../include/raycaster.h"
+# include "../include/world.h"
 
 void draw_wall(t_game *game, double distance, double angle, int *x);
 
@@ -85,10 +86,11 @@ void	bresenham_line(t_game *game, int *x, double angle)
     player = game->player;
 	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
 	hit = ray_dat.hitp;
-	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
-    powf(player->position.y - hit.y, 2));
-	// printf("hit %c, direction %c\n", ray_dat.ver_hor, ray_dat.direction);
-	draw_wall(game, distance, angle, x);
+	ray_dat.current_column = *x;
+	ray_dat.distance = (sqrt(powf(player->position.x - hit.x, 2) + 
+    powf(player->position.y - hit.y, 2)) * cos(angle));
+	// draw_wall(game, distance, angle, x);
+	wd_render_walls(game->world, ray_dat);
 }
 
 void draw_wall(t_game *game, double distance, double angle, int *x)
@@ -109,7 +111,7 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 		pixel_offset = 0;
 	while( pixel_offset < wall_h && start < HEIGHT - 1)
 	{
-		mlx_put_pixel(game->drawing_board, *x, 
+		mlx_put_pixel(game->world->drawing_board, *x, 
 			start, get_rgba(51,175,255,255));
 		pixel_offset++;
 		start++;

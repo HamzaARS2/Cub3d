@@ -1,11 +1,11 @@
-C 255,8,1
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
+NO textures/Tile_02-128x128.png
+SO textures/Tile_02-128x128.png
 
-EA ./path_to_the_east_texture
-WE ./path_to_the_west_texture
+EA textures/Tile_02-128x128.png
+WE textures/Tile_02-128x128.png
 
-F 244,1,23
+C 0, 255, 0
+F 0, 0, 255
 
         111111111111111111111111
         100000000011000000000001
