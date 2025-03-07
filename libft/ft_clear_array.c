@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_clear_array(char **arr)
+void	ft_clear_array(void **arr)
 {
 	int i;
 

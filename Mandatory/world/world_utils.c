@@ -13,15 +13,7 @@
 #include "../include/world.h"
 #include "../include/raycaster.h"
 
-int	wd_get_texture_color(t_world *world, mlx_image_t *texture, int x, int y)
-{
-	int texel_color;
-	uint32_t **pixels = world->textures.north_pixels;
-	// texel_color = ((texture->width * y) + x) * 4;
-	return (pixels[y][x]);
-}
-
-mlx_image_t *wd_texture_bydirection(t_world *world, char direction)
+t_wd_texture wd_texture_bydirection(t_world *world, char direction)
 {
 	if (direction == 'N')
 		return (world->textures.north_texture);
@@ -57,3 +49,40 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info)
 		render_info.tex_offset_x = (int)rays_info.hitp.x % TILE_SIZE;
 	return (render_info);
 }
+
+static void	*free_array(void **array, int i)
+{
+	while (i >= 0 && array[i])
+		free(array[i--]);
+	free(array);
+	return (NULL);
+}
+
+
+uint32_t **wd_get_color_buffer(mlx_image_t *texture)
+{
+	int i;
+	int y;
+	int x;
+	uint32_t **pixels;
+
+	i = 0;
+	pixels = malloc(texture->height * sizeof(uint32_t *));
+	if (!pixels)
+		return (NULL);
+	y = -1;
+	while (++y < texture->height)
+	{
+		pixels[y] = malloc(texture->width * sizeof(uint32_t));
+		if (!pixels[y])
+			return (free_array((void **)pixels, y - 1));
+		x = 0;
+		while (x < texture->width)
+		{
+			pixels[y][x++] = get_rgba(texture->pixels[i], texture->pixels[i + 1], texture->pixels[i + 2], texture->pixels[i + 3]);
+			i += 4;
+		}
+	}
+	return (pixels);
+}
+

@@ -22,8 +22,8 @@
 #include "gfx_manager.h"
 #include "world.h"
 
-#define WIDTH 1200
-#define HEIGHT 1100
+#define WIDTH 1440
+#define HEIGHT 800
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250

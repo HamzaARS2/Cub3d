@@ -79,13 +79,13 @@ bool	ump_color_toint(char *color_str, char **rgb, int *color)
 
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 	{
-		ft_clear_array(rgb);
+		ft_clear_array((void **)rgb);
 		return (false);
 	}
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
-	ft_clear_array(rgb);
+	ft_clear_array((void **)rgb);
 	if (r > 255 || r < 0 || g > 255 || g < 0 
 		|| b > 255 || b < 0)
 		return (false);

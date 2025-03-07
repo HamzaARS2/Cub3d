@@ -1,9 +1,9 @@
 C 255,8,1
 NO Bonus/maps/wall32x32.png
-SO ./path_to_the_south_texture
+SO textures/Tile_08-128x128.png
 
-EA /Users/helarras/Desktop/Cub3d/Bonus/maps/Tile_13-128x128.png
-WE ./path_to_the_west_texture
+EA textures/Tile_10-128x128.png
+WE textures/Tile_17-128x128.png
 
 F 244,1,23
 

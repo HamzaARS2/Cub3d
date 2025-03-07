@@ -21,7 +21,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 		return (NULL);
 	object->position.x = pos.x * TILE_SIZE + (TILE_SIZE / 2) - (OBJ_SIZE / 2);
 	object->position.y = pos.y * TILE_SIZE + (TILE_SIZE / 2) - (OBJ_SIZE / 2);
-	object->speed = 2.0f;
+	object->speed = 5.0f;
 	object->direction = (t_Dvector) {0};
 	//object->direction.rotatin_angle = 270;
 	if (!img)

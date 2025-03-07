@@ -25,7 +25,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	if (!game->mlx)
 		return (false);
 	game->mouse_pos = game->mapscan->start_pos;
-	game->world = init_world(game->mlx, game->world->drawing_board, game->mapscan->colors);
+	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	return (true);
@@ -35,6 +35,7 @@ bool	 init_game(t_game *game, char *mapfile)
 void	run_game(t_game *game)
 {
 	wd_load_textures(game->world, game->mapscan->texpaths);
+	wd_prepare_colors(game->world);
 	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);

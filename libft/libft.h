@@ -79,7 +79,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 int					ft_iswhitespace(char c);
-void				ft_clear_array(char **arr);
+void				ft_clear_array(void **arr);
 int					ft_charcount(char *str, int c);
 int					get_rgba(int r, int g, int b, int a);
 int					ft_lstcontent_max(t_list *lst);

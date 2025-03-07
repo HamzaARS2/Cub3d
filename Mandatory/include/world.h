@@ -19,7 +19,6 @@
 
 # define TILE_SIZE 32
 # define OBJ_SIZE 4
-# define TEXTURES_SIZE 32
 
 typedef struct s_vector2 {
 	double x;
@@ -43,15 +42,16 @@ typedef struct s_render_info {
 	int tex_offset_y;
 } t_render_info;
 
+typedef struct s_wd_texture {
+	mlx_image_t *img;
+	uint32_t **pixels;
+} t_wd_texture;
+
 typedef struct s_textures {
-	mlx_image_t *north_texture;
-	mlx_image_t *south_texture;
-	mlx_image_t *east_texture;
-	mlx_image_t *west_texture;
-	uint32_t **north_pixels;
-    uint32_t **south_pixels;
-    uint32_t **east_pixels;
-    uint32_t **west_pixels;
+	t_wd_texture north_texture;
+	t_wd_texture south_texture;
+	t_wd_texture east_texture;
+	t_wd_texture west_texture;
 } t_textures;
 
 typedef struct s_world {
@@ -63,12 +63,13 @@ typedef struct s_world {
 	mlx_image_t *drawing_board;
 } t_world;
 
-t_world *init_world(mlx_t *mlx, mlx_image_t *drawing_board, t_colors colors);
+t_world *init_world(mlx_t *mlx, t_colors colors);
 
 void	wd_load_textures(t_world *world, t_texpath texpaths);
 void		wd_render_cf(t_world *world);
-int	wd_get_texture_color(t_world *world, mlx_image_t *texture, int x, int y);
-mlx_image_t *wd_texture_bydirection(t_world *world, char direction);
+t_wd_texture	wd_texture_bydirection(t_world *world, char direction);
 t_render_info wd_calc_render_info(t_ray_dat rays_info);
 void	wd_render_walls(t_world *world, t_ray_dat rays_info);
+uint32_t **wd_get_color_buffer(mlx_image_t *texture);
+void	wd_prepare_colors(t_world *world);
 #endif
