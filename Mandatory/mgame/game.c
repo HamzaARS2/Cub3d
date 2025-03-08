@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 13:39:53 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:40:29 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	run_game(t_game *game)
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
 	wd_render_cf(game->world);
 	draw_player(game);
-	mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
+	// mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
 	mlx_loop_hook(game->mlx, update, game);
 	//printf("mapszie: widthx: %i | heighty: %i\n", game->mapscan->mapsize.x, game->mapscan->mapsize.y);
 	// game loop.

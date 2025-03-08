@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 15:22:34 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/08 21:39:41 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
 	render_info.wall_strip_height = (TILE_SIZE / rays_info.distance) * projection;
 	// wall top pixel
 	render_info.wall_top_pixel = (HEIGHT / 2) - (render_info.wall_strip_height / 2);
-	if (render_info.wall_top_pixel < 0)
-		render_info.wall_top_pixel = 0;
+	// if (render_info.wall_top_pixel < 0) {
+	// 	render_info.wall_top_pixel = abs(render_info.wall_top_pixel);
+	// }
 	// wall bot pixel
 	render_info.wall_bot_pixel = (HEIGHT / 2) + (render_info.wall_strip_height / 2);
 	if (render_info.wall_bot_pixel > HEIGHT)

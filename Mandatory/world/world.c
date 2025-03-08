@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:15:50 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 15:21:12 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/08 21:41:08 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ void	wd_render_walls(t_world *world, t_ray_dat rays_info)
 	texture = wd_texture_bydirection(world, rays_info.direction);
 	info = wd_calc_render_info(rays_info, texture);
 	texel_ratio = ((float)texture.img->height / info.wall_strip_height);
-	y = info.wall_top_pixel;
-	
+	if (info.wall_top_pixel < 0) {
+		y = abs(info.wall_top_pixel);
+		info.wall_top_pixel = 0;
+		printf("y: %i\n", y);
+	} else
+		y = info.wall_top_pixel;
 	while (y < info.wall_bot_pixel - 1)
 	{
 		info.tex_offset_y = (y - info.wall_top_pixel) * texel_ratio;
