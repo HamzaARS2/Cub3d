@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 21:49:25 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:22:34 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ t_wd_texture wd_texture_bydirection(t_world *world, char direction)
 	return (world->textures.north_texture);
 }
 
-t_render_info wd_calc_render_info(t_ray_dat rays_info)
+t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
 {
 	int projection;
 	t_render_info render_info;
+	double offset_x;
 	
 	projection = (WIDTH / 2) / tan(RADIANS(FOV / 2));
 	// wall strip height
@@ -43,10 +44,14 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info)
 	if (render_info.wall_bot_pixel > HEIGHT)
 		render_info.wall_bot_pixel = HEIGHT;
 	// texture offset x
-	if (rays_info.ver_hor == 'V')
-		render_info.tex_offset_x = (int)rays_info.hitp.y % TILE_SIZE;
-	else
-		render_info.tex_offset_x = (int)rays_info.hitp.x % TILE_SIZE;
+	if (rays_info.ver_hor == 'V') {
+		offset_x = (rays_info.hitp.y / TILE_SIZE);
+		render_info.tex_offset_x = (offset_x - floor(offset_x)) * texture.img->width;
+	}
+	else {
+		offset_x = (rays_info.hitp.x / TILE_SIZE);
+		render_info.tex_offset_x = (offset_x - floor(offset_x)) * texture.img->width;
+	}
 	return (render_info);
 }
 

@@ -68,8 +68,9 @@ t_world *init_world(mlx_t *mlx, t_colors colors);
 void	wd_load_textures(t_world *world, t_texpath texpaths);
 void		wd_render_cf(t_world *world);
 t_wd_texture	wd_texture_bydirection(t_world *world, char direction);
-t_render_info wd_calc_render_info(t_ray_dat rays_info);
+t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture);
 void	wd_render_walls(t_world *world, t_ray_dat rays_info);
 uint32_t **wd_get_color_buffer(mlx_image_t *texture);
 void	wd_prepare_colors(t_world *world);
+
 #endif

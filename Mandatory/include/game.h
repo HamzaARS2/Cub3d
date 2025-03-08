@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 13:59:55 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:10:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #include "gfx_manager.h"
 #include "world.h"
 
-#define WIDTH 1440
-#define HEIGHT 800
+#define WIDTH 1280
+#define HEIGHT 1024
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250
