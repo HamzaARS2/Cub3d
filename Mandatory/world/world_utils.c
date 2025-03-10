@@ -104,9 +104,9 @@ void	wd_clear(t_world *world)
 	world->cf_img = NULL;
 	mlx_delete_image(world->mlx, world->drawing_board);
 	world->drawing_board = NULL;
-	ft_clear_array(world->textures.north_texture.pixels);
-	ft_clear_array(world->textures.south_texture.pixels);
-	ft_clear_array(world->textures.east_texture.pixels);
-	ft_clear_array(world->textures.west_texture.pixels);
+	ft_clear_array((void **)world->textures.north_texture.pixels);
+	ft_clear_array((void **)world->textures.south_texture.pixels);
+	ft_clear_array((void **)world->textures.east_texture.pixels);
+	ft_clear_array((void **)world->textures.west_texture.pixels);
 	free(world);
 }
