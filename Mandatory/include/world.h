@@ -73,5 +73,5 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture);
 void	wd_render_walls(t_world *world, t_ray_dat rays_info);
 uint32_t **wd_get_color_buffer(mlx_image_t *texture);
 void	wd_prepare_colors(t_world *world);
-
+void	wd_clear(t_world *world);
 #endif

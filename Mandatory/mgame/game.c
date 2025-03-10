@@ -89,4 +89,5 @@ void	update(void *param) {
 void	cleanup_game(t_game game)
 {
 	mp_clearmap(game.mapscan);
+	wd_clear(game.world);
 }

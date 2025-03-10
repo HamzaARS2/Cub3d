@@ -77,7 +77,7 @@ uint32_t **wd_get_color_buffer(mlx_image_t *texture)
 	uint32_t **pixels;
 
 	i = 0;
-	pixels = malloc(texture->height * sizeof(uint32_t *));
+	pixels = malloc((texture->height + 1) * sizeof(uint32_t *));
 	if (!pixels)
 		return (NULL);
 	y = -1;
@@ -93,6 +93,20 @@ uint32_t **wd_get_color_buffer(mlx_image_t *texture)
 			i += 4;
 		}
 	}
+	pixels[y] = NULL;
 	return (pixels);
 }
 
+void	wd_clear(t_world *world)
+{
+	gfx_clear(world->mlx, &world->graphics);
+	mlx_delete_image(world->mlx, world->cf_img);
+	world->cf_img = NULL;
+	mlx_delete_image(world->mlx, world->drawing_board);
+	world->drawing_board = NULL;
+	ft_clear_array(world->textures.north_texture.pixels);
+	ft_clear_array(world->textures.south_texture.pixels);
+	ft_clear_array(world->textures.east_texture.pixels);
+	ft_clear_array(world->textures.west_texture.pixels);
+	free(world);
+}
