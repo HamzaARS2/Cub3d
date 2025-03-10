@@ -27,7 +27,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->mouse_pos = game->mapscan->start_pos;
 	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
-	game->map_img = gfx_create_image(game->mlx, game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
+	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	return (true);
 }
 

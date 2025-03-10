@@ -24,17 +24,18 @@ t_world	*init_world(mlx_t *mlx, t_colors colors)
 	world->mlx = mlx;
 	world->graphics = NULL;
 	world->colors = colors;
-	world->cf_img = gfx_create_image(mlx, world->graphics, WIDTH, HEIGHT);
-	world->drawing_board = 	gfx_create_image(mlx, world->graphics, WIDTH, HEIGHT);
+	world->cf_img = gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
+	world->drawing_board = 	gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	return (world);
 }
 
 void	wd_load_textures(t_world *world, t_texpath texpaths)
 {
-	world->textures.north_texture.img = gfx_create_teximage(world->mlx, world->graphics, texpaths.north_tex);
-	world->textures.east_texture.img = gfx_create_teximage(world->mlx, world->graphics, texpaths.east_tex);
-	world->textures.south_texture.img = gfx_create_teximage(world->mlx, world->graphics, texpaths.south_tex);
-	world->textures.west_texture.img = gfx_create_teximage(world->mlx, world->graphics, texpaths.west_tex);
+	world->textures.north_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.north_tex);
+	world->textures.east_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.east_tex);
+	world->textures.south_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.south_tex);
+	world->textures.west_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.west_tex);
+	printf("size : %i\n", ft_lstsize(world->graphics));
 }
 
 void	wd_prepare_colors(t_world *world)

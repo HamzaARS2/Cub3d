@@ -25,7 +25,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	object->direction = (t_Dvector) {0};
 	//object->direction.rotatin_angle = 270;
 	if (!img)
-		object->image = gfx_create_image(game->mlx, game->world->graphics, OBJ_SIZE, OBJ_SIZE);
+		object->image = gfx_create_image(game->mlx, &game->world->graphics, OBJ_SIZE, OBJ_SIZE);
 	else
 		object->image = img;
 	return (object);

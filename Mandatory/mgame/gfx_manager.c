@@ -45,7 +45,7 @@ void	gfx_draw_rect(mlx_image_t *img, t_point start, t_point end , int color)
 	}
 }
 
-mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list *graphics, char *tex_path)
+mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -54,19 +54,19 @@ mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list *graphics, char *tex_path)
 	if (!texture)
 		return (NULL);
 	image = mlx_texture_to_image(mlx, texture);
-	ft_lstadd_back(&graphics, ft_lstnew(image));
+	ft_lstadd_back(graphics, ft_lstnew(image));
 	mlx_delete_texture(texture);
 	return (image);
 }
 
-mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list *graphics, int width, int height)
+mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int height)
 {
 	mlx_image_t	*image;
 
 	image = mlx_new_image(mlx, width, height);
 	if (!image)
 		return (NULL);
-	ft_lstadd_back(&graphics, ft_lstnew(image));
+	ft_lstadd_back(graphics, ft_lstnew(image));
 	return (image);
 }
 
