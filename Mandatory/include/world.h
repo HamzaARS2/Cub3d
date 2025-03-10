@@ -40,6 +40,7 @@ typedef struct s_render_info {
 	int wall_bot_pixel;
 	int tex_offset_x;
 	int tex_offset_y;
+	int pixel_offset;
 } t_render_info;
 
 typedef struct s_wd_texture {

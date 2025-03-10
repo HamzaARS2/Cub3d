@@ -37,13 +37,17 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
 	render_info.wall_strip_height = (TILE_SIZE / rays_info.distance) * projection;
 	// wall top pixel
 	render_info.wall_top_pixel = (HEIGHT / 2) - (render_info.wall_strip_height / 2);
-	// if (render_info.wall_top_pixel < 0) {
-	// 	render_info.wall_top_pixel = abs(render_info.wall_top_pixel);
-	// }
+	render_info.pixel_offset = 0;
+	if (render_info.wall_top_pixel < 0)
+	{
+		render_info.pixel_offset = -render_info.wall_top_pixel;
+		render_info.wall_top_pixel = 0;
+	}
 	// wall bot pixel
 	render_info.wall_bot_pixel = (HEIGHT / 2) + (render_info.wall_strip_height / 2);
 	if (render_info.wall_bot_pixel > HEIGHT)
 		render_info.wall_bot_pixel = HEIGHT;
+	
 	// texture offset x
 	if (rays_info.ver_hor == 'V') {
 		offset_x = (rays_info.hitp.y / TILE_SIZE);

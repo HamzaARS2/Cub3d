@@ -64,22 +64,17 @@ void	wd_render_walls(t_world *world, t_ray_dat rays_info)
 {
 	int y;
 	int color;
-	float texel_ratio;
+	float scale_factor;
 	t_render_info info;
 	t_wd_texture texture;
 
 	texture = wd_texture_bydirection(world, rays_info.direction);
 	info = wd_calc_render_info(rays_info, texture);
-	texel_ratio = ((float)texture.img->height / info.wall_strip_height);
-	if (info.wall_top_pixel < 0) {
-		y = abs(info.wall_top_pixel);
-		info.wall_top_pixel = 0;
-		printf("y: %i\n", y);
-	} else
-		y = info.wall_top_pixel;
+	scale_factor = ((float)texture.img->height / info.wall_strip_height);
+	y = info.wall_top_pixel;
 	while (y < info.wall_bot_pixel - 1)
 	{
-		info.tex_offset_y = (y - info.wall_top_pixel) * texel_ratio;
+		info.tex_offset_y = (info.pixel_offset++) * scale_factor;
 		color = texture.pixels[info.tex_offset_y][info.tex_offset_x];
 		mlx_put_pixel(world->drawing_board, rays_info.current_column, y++, color);
 	}
