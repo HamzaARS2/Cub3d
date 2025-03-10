@@ -71,3 +71,18 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int heig
 }
 
 // TODO: function to clear allocated images.
+void    gfx_clear(mlx_t *mlx, t_list **graphics)
+{
+	t_list *temp;
+	mlx_image_t *current_img;
+
+	while (*graphics)
+	{
+		current_img = (mlx_image_t *)(*graphics)->content;
+		mlx_delete_image(mlx, current_img);
+		temp = *graphics;
+		*graphics = (*graphics)->next;
+		free(temp);
+		temp = NULL;
+	}
+}

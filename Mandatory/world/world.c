@@ -35,7 +35,6 @@ void	wd_load_textures(t_world *world, t_texpath texpaths)
 	world->textures.east_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.east_tex);
 	world->textures.south_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.south_tex);
 	world->textures.west_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.west_tex);
-	printf("size : %i\n", ft_lstsize(world->graphics));
 }
 
 void	wd_prepare_colors(t_world *world)
