@@ -6,13 +6,13 @@
 void    anim_load_frames(t_animator *animator, t_list **graphics)
 {
     int i;
-    char framepath[11];
-    char base_path[] = "wp_frame_";
+    char framepath[53];
+    char base_path[] = "Mandatory/textures/balrog_frames/idle/wp_frame_";
 
     i = 0;
     while (i < animator->max_frames)
     {
-        snprintf(framepath, sizeof(framepath), base_path, i);
+        snprintf(framepath, sizeof(framepath), "%s%i.png", base_path, i);
         animator->frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
         i++;
     }
