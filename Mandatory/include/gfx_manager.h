@@ -15,7 +15,7 @@
 
 # include "../../MLX42/include/MLX42/MLX42.h"
 # include "../../libft/libft.h"
-
+# include "world.h"
 mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path);
 mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int height);
 void		gfx_set_color(mlx_image_t *image, t_point coords, int color);
