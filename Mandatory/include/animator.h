@@ -10,8 +10,8 @@ typedef struct s_animator {
     mlx_image_t *frames[50];
     int max_frames;
     int current_frame;
-    int frame_count;
-    int frame_rate;
+    double last_update_time;
+    double frame_time;
     bool is_playing;
     bool is_looping;
     bool is_hidden;

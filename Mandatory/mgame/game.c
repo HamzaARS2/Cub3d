@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 14:03:48 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:29:43 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
-	game->animator = init_animator(game->mlx, 13, true, false);
+	game->animator = init_animator(game->mlx, 30, true, false);
 	return (true);
 }
 
@@ -82,10 +82,10 @@ void	update(void *param) {
 	// 	game->mouse_pos.y = 0;
 	// 	cast_rays(game);
 	// }
-	mv_handle_moves(game);
-	draw_minimap(game);
 	anim_update(game->animator);
 	anim_render(game->animator);
+	mv_handle_moves(game);
+	draw_minimap(game);
 	// mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
 	// game->mouse_pos.x -= game->player->position.x;
 	// game->mouse_pos.y -= game->player->position.y;

@@ -15,20 +15,24 @@ t_animator *init_animator(mlx_t *mlx, int max_frames, bool is_looping, bool is_h
     animator->is_looping = is_looping;
     animator->is_hidden = is_hidden;
     animator->current_frame = 0;
-    animator->frame_count = 0;
-    animator->frame_rate = 5;
+    animator->frame_time = 0.08;
+    animator->last_update_time = mlx_get_time();
     animator->is_playing = false;
     return (animator);
 }
 
 void    anim_update(t_animator *animator)
 {
+    double current_time;
     if (!animator->is_playing)
         return ;
-    if (++animator->frame_count >= animator->frame_rate)
+    current_time = mlx_get_time();
+    // printf("current time: %f\n", current_time);
+    // if (++animator->frame_count >= animator->frame_rate)
+    if (current_time - animator->last_update_time >= animator->frame_time)
     {
         animator->current_frame++;
-        animator->frame_count = 0;
+        animator->last_update_time = current_time;
     }
     if (animator->current_frame >= animator->max_frames)
     {

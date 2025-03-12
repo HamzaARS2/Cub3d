@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 11:38:01 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:22:51 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include "world.h"
 #include "animator.h"
 
-#define WIDTH 1500
-#define HEIGHT 900
+#define WIDTH 1440
+#define HEIGHT 960
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250
