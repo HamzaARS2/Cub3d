@@ -18,6 +18,7 @@ t_animator *init_animator(mlx_t *mlx, int max_frames, bool is_looping, bool is_h
     animator->frame_count = 0;
     animator->frame_rate = 5;
     animator->is_playing = false;
+    return (animator);
 }
 
 void    anim_update(t_animator *animator)
