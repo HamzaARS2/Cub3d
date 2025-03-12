@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 19:40:29 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:03:48 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	update(void *param) {
 	mlx = game->mlx;
 	// handling moving objects
 	
-	if (game->mouse_pos.y == -1)
-	{
-		game->mouse_pos.y = 0;
-		cast_rays(game);
-	}
+	// if (game->mouse_pos.y == -1)
+	// {
+	// 	game->mouse_pos.y = 0;
+	// 	cast_rays(game);
+	// }
 	mv_handle_moves(game);
 	draw_minimap(game);
 	anim_update(game->animator);
@@ -96,4 +96,5 @@ void	cleanup_game(t_game game)
 	mp_clearmap(game.mapscan);
 	wd_clear(game.world);
 	free(game.player);
+	free(game.animator);
 }

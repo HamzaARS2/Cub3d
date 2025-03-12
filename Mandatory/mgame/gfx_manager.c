@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 11:56:30 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:18:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,13 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int heig
 void    gfx_clear(mlx_t *mlx, t_list **graphics)
 {
 	t_list *temp;
-	mlx_image_t *current_img;
-
-	while (*graphics)
+	t_list *current;
+	
+	current = *graphics;
+	while (current)
 	{
-		current_img = (mlx_image_t *)(*graphics)->content;
-		mlx_delete_image(mlx, current_img);
-		temp = *graphics;
-		*graphics = (*graphics)->next;
+		temp = current;
+		current = current->next;
 		free(temp);
 		temp = NULL;
 	}
