@@ -46,7 +46,7 @@ void    anim_render(t_animator *animator)
         return ;
     frame = animator->frames[animator->current_frame];
     if (!frame->count)
-        mlx_image_to_window(animator->mlx, frame, 0, HEIGHT / 2);
+        mlx_image_to_window(animator->mlx, frame, (WIDTH / 2) - (frame->width / 2), HEIGHT - frame->height);
     else
         frame->enabled = true;
     previous_frame = animator->current_frame - 1;

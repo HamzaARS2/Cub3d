@@ -6,7 +6,7 @@
 void    anim_load_frames(t_animator *animator, t_list **graphics)
 {
     int i;
-    char framepath[53];
+    char framepath[54];
     char base_path[] = "Mandatory/textures/balrog_frames/idle/wp_frame_";
 
     i = 0;

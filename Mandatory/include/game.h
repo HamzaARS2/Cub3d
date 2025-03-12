@@ -21,9 +21,10 @@
 #include "mapscan.h"
 #include "gfx_manager.h"
 #include "world.h"
+#include "animator.h"
 
 #define WIDTH 1280
-#define HEIGHT 1024
+#define HEIGHT 800
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250
@@ -56,6 +57,7 @@ typedef struct s_game {
 	t_player	*player;
 	t_point		mouse_pos;
 	mlx_image_t *map_img;
+	t_animator  *animator;
 } t_game;
 
 

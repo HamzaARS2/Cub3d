@@ -27,12 +27,12 @@ BONUS_HEADER = ./Bonus/include/game_bonus.h
 NAME = cub3D
 BONUS_NAME = cub3D_bonus
 
-ADS := -fsanitize=address -g
+ADS := -fsanitize=address -g 
 
 all: libmlx $(NAME)
 
 bonus: libmlx $(BONUS_OBJS_FILES) $(LIBFT) $(BONUS_HEADER)
-	$(CC) $(ADS) $(CFLAGS) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX_LIB) -o $(BONUS_NAME)
+	$(CC) $(ADS) $(CFLAGS) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $(BONUS_NAME)
 
 libmlx:
 	@cmake $(MLX) -B $(MLX_BUILD)
@@ -45,7 +45,7 @@ $(LIBFT):
 	$(CC) $(ADS) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS_FILES) $(LIBFT) $(HEADER)
-	$(CC) $(ADS) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB) -o $@
+	$(CC) $(ADS) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $@
 
 clean:
 	rm -rf $(OBJS_FILES)

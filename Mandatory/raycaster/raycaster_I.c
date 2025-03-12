@@ -1,4 +1,5 @@
 # include "../include/raycaster.h"
+# include <math.h>
 #define next_tile 1.0E-8
 
 int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
@@ -177,7 +178,7 @@ void	cast_rays(t_game *game)
 	double	ray_angle;
 	double 	angle_shift;
 	int x;
-idl
+
 	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
 	ray_angle = RADIANS(-30);
