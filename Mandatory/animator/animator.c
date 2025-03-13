@@ -3,7 +3,7 @@
 #include "../include/animator.h"
 #include "../include/game.h"
 
-t_animator *init_animator(mlx_t *mlx, int max_frames, bool is_looping, bool is_hidden)
+t_animator *init_animator(mlx_t *mlx, bool is_looping)
 {
     t_animator *animator;
 
@@ -11,32 +11,33 @@ t_animator *init_animator(mlx_t *mlx, int max_frames, bool is_looping, bool is_h
     if (!animator)
         return (NULL);
     animator->mlx = mlx;
-    animator->max_frames = max_frames;
-    animator->is_looping = is_looping;
-    animator->is_hidden = is_hidden;
-    animator->current_frame = 0;
-    animator->frame_time = 0.08;
-    animator->last_update_time = mlx_get_time();
     animator->is_playing = false;
+    animator->last_update_time = mlx_get_time();
+    animator->is_looping = is_looping;
+    anim_init_animstate(&animator->idle, 48, 0.08);
+    anim_init_animstate(&animator->attack1, 90, 0.01);
+    // anim_init_animstate(&animator->attack2, 37, 0.05, false);
+    animator->current_animstate = &animator->idle;
     return (animator);
 }
 
 void    anim_update(t_animator *animator)
 {
+    t_animstate *animstate;
     double current_time;
+
     if (!animator->is_playing)
         return ;
     current_time = mlx_get_time();
-    // printf("current time: %f\n", current_time);
-    // if (++animator->frame_count >= animator->frame_rate)
-    if (current_time - animator->last_update_time >= animator->frame_time)
+    animstate = animator->current_animstate;
+    if (current_time - animator->last_update_time >= animstate->frame_time)
     {
-        animator->current_frame++;
+        animstate->current_frame++;
         animator->last_update_time = current_time;
     }
-    if (animator->current_frame >= animator->max_frames)
+    if (animstate->current_frame >= animstate->max_frames)
     {
-        animator->current_frame = 0;
+        animstate->current_frame = 0;
         if (!animator->is_looping)
             animator->is_playing = false;
     }
@@ -44,20 +45,40 @@ void    anim_update(t_animator *animator)
 
 void    anim_render(t_animator *animator)
 {
+    t_animstate *animstate;
     mlx_image_t *frame;
     int previous_frame;
 
+    animstate = animator->current_animstate;
     if (animator->is_hidden)
         return ;
-    frame = animator->frames[animator->current_frame];
-    if (!frame->count)
+    frame = animstate->frames[animstate->current_frame];
+    if (!frame->count) {
         mlx_image_to_window(animator->mlx, frame, (WIDTH / 2) - (frame->width / 2), HEIGHT - frame->height);
+    }
     else
         frame->enabled = true;
-    previous_frame = animator->current_frame - 1;
+    previous_frame = animstate->current_frame - 1;
     if (previous_frame < 0)
-        previous_frame = animator->max_frames - 1;
-    animator->frames[previous_frame]->enabled = false;
+        previous_frame = animstate->max_frames - 1;
+    animstate->frames[previous_frame]->enabled = false;
+}
+
+void    anim_set_state(t_animator *animator, t_state state)
+{
+    t_animstate *current_anim;
+
+    current_anim = animator->current_animstate;
+    current_anim->frames[current_anim->current_frame]->enabled = false;
+    current_anim->current_frame = 0;
+    if (state == IDLE)
+    animator->current_animstate = &animator->idle;
+    if (state == ATTACK1)
+    animator->current_animstate = &animator->attack1;
+    if (state == ATTACK2)
+        animator->current_animstate = &animator->attack2;
+    
+    animator->last_update_time = mlx_get_time();
 }
 
 void    anim_play(t_animator *animator)
