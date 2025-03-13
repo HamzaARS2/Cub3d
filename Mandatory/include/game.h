@@ -24,7 +24,7 @@
 #include "animator.h"
 
 #define WIDTH 1440
-#define HEIGHT 960
+#define HEIGHT 800
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250
