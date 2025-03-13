@@ -64,10 +64,11 @@ void    anim_load_attack2(t_animator *animator, t_list **graphics)
     }
 }
 
-void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame_time)
+void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame_time, bool is_looping)
 {
     animstate->max_frames = max_frames;
     animstate->current_frame = 0;
     animstate->frame_time = frame_time;
     animstate->is_hidden = true;
+    animstate->is_looping;
 }

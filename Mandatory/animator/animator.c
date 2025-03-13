@@ -14,8 +14,8 @@ t_animator *init_animator(mlx_t *mlx, bool is_looping)
     animator->is_playing = false;
     animator->last_update_time = mlx_get_time();
     animator->is_looping = is_looping;
-    anim_init_animstate(&animator->idle, 100, 0.04);
-    anim_init_animstate(&animator->attack1, 18, 0.04);
+    anim_init_animstate(&animator->idle, 100, 0.04, true);
+    anim_init_animstate(&animator->attack1, 18, 0.04, false);
     // anim_init_animstate(&animator->attack2, 37, 0.05, false);
     animator->current_animstate = &animator->idle;
     return (animator);
@@ -37,9 +37,13 @@ void    anim_update(t_animator *animator)
     }
     if (animstate->current_frame >= animstate->max_frames)
     {
-        animstate->current_frame = 0;
-        if (!animator->is_looping)
-            animator->is_playing = false;
+        if (!animstate->is_looping)
+        {
+            animstate->current_frame = animstate->max_frames - 1;;
+            anim_set_state(animator, IDLE);
+        }
+        else
+            animstate->current_frame = 0;
     }
 }
 

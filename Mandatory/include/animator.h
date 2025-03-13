@@ -17,6 +17,7 @@ typedef struct s_animstate {
     int current_frame;
     double frame_time;
     bool    is_hidden;
+    bool    is_looping;
 } t_animstate;
 
 typedef struct s_animator {
@@ -47,7 +48,7 @@ void    anim_play(t_animator *animator);
 
 void    anim_load_frames(t_animator *animator, t_list **graphics);
 
-void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame_time);
+void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame_time, bool is_looping);
 
 void    anim_load_idle(t_animator *animator, t_list **graphics);
 
