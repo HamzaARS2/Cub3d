@@ -14,8 +14,8 @@ t_animator *init_animator(mlx_t *mlx, bool is_looping)
     animator->is_playing = false;
     animator->last_update_time = mlx_get_time();
     animator->is_looping = is_looping;
-    anim_init_animstate(&animator->idle, 48, 0.08);
-    anim_init_animstate(&animator->attack1, 90, 0.01);
+    anim_init_animstate(&animator->idle, 100, 0.04);
+    anim_init_animstate(&animator->attack1, 18, 0.04);
     // anim_init_animstate(&animator->attack2, 37, 0.05, false);
     animator->current_animstate = &animator->idle;
     return (animator);

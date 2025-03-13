@@ -12,7 +12,7 @@ typedef enum e_state {
 } t_state;
 
 typedef struct s_animstate {
-    mlx_image_t *frames[91];
+    mlx_image_t *frames[100];
     int max_frames;
     int current_frame;
     double frame_time;
