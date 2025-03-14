@@ -53,6 +53,7 @@ void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame
 void    anim_load_idle(t_animator *animator, t_list **graphics);
 
 void    anim_load_attack1(t_animator *animator, t_list **graphics);
+void    anim_load_attack2(t_animator *animator, t_list **graphics);
 
 void    anim_set_state(t_animator *animator, t_state state);
 #endif

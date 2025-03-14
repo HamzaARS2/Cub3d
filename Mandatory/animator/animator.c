@@ -16,7 +16,7 @@ t_animator *init_animator(mlx_t *mlx, bool is_looping)
     animator->is_looping = is_looping;
     anim_init_animstate(&animator->idle, 100, 0.04, true);
     anim_init_animstate(&animator->attack1, 18, 0.04, false);
-    // anim_init_animstate(&animator->attack2, 37, 0.05, false);
+    anim_init_animstate(&animator->attack2, 18, 0.04, false);
     animator->current_animstate = &animator->idle;
     return (animator);
 }
@@ -76,9 +76,9 @@ void    anim_set_state(t_animator *animator, t_state state)
     current_anim->frames[current_anim->current_frame]->enabled = false;
     current_anim->current_frame = 0;
     if (state == IDLE)
-    animator->current_animstate = &animator->idle;
+        animator->current_animstate = &animator->idle;
     if (state == ATTACK1)
-    animator->current_animstate = &animator->attack1;
+        animator->current_animstate = &animator->attack1;
     if (state == ATTACK2)
         animator->current_animstate = &animator->attack2;
     

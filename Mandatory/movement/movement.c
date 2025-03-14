@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 13:05:35 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:48:45 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ void	mv_handle_moves(t_game *game)
 	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
 		anim_set_state(game->animator, ATTACK1);
 	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_RIGHT))
-		anim_set_state(game->animator, IDLE);
+		anim_set_state(game->animator, ATTACK2);
 
 }

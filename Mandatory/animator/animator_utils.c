@@ -52,14 +52,14 @@ void    anim_load_attack2(t_animator *animator, t_list **graphics)
     int i;
     char framepath[60];
     char base_path[] = "Mandatory/textures/balrog_frames/attack2/frame_";
-    t_animstate attack2_state;
+    t_animstate *attack2_state;
     
-    attack2_state = animator->attack2;
+    attack2_state = &animator->attack2;
     i = 0;
-    while (i < attack2_state.max_frames)
+    while (i < animator->attack2.max_frames)
     {
         snprintf(framepath, sizeof(framepath), "%s%i.png", base_path, i);
-        attack2_state.frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        animator->attack2.frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
         i++;
     }
 }
@@ -70,5 +70,5 @@ void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame
     animstate->current_frame = 0;
     animstate->frame_time = frame_time;
     animstate->is_hidden = true;
-    animstate->is_looping;
+    animstate->is_looping = is_looping;
 }

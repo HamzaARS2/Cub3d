@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 19:29:43 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:51:38 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	run_game(t_game *game)
 	wd_load_textures(game->world, game->mapscan->texpaths);
 	anim_load_idle(game->animator, &game->world->graphics);
 	anim_load_attack1(game->animator, &game->world->graphics);
+	anim_load_attack2(game->animator, &game->world->graphics);
 	wd_prepare_colors(game->world);
 	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
