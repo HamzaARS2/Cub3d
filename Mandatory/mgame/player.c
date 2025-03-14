@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 14:02:41 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:03:37 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,15 @@ void	obj_update_mvdirection(t_game *game, float rotation)
 
 bool	draw_player(t_game *game)
 {
-	gfx_set_color(game->player->image, (t_point){0} , get_rgba(33, 216, 184, 255));
-	mlx_image_to_window(game->mlx, game->player->image, MAP_WIDTH / 2, MAP_HEIGHT / 2);
+	t_point start;
+	t_point end;
+	t_player *player;
+
+	player = game->player;
+	start = (t_point) {0, 0};
+	end = (t_point) {OBJ_SIZE, OBJ_SIZE};
+	mlx_image_to_window(game->mlx, player->image, MAP_WIDTH / 2, MAP_HEIGHT / 2);
+	gfx_draw_rect(player->image, start, end, get_rgba(33, 216, 184, 255));
 	board_clean(game->world->drawing_board);
 	cast_rays(game);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 21:39:41 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:20:11 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,6 @@ uint32_t **wd_get_color_buffer(mlx_image_t *texture)
 void	wd_clear(t_world *world)
 {
 	gfx_clear(world->mlx, &world->graphics);
-	mlx_delete_image(world->mlx, world->cf_img);
-	world->cf_img = NULL;
-	mlx_delete_image(world->mlx, world->drawing_board);
-	world->drawing_board = NULL;
 	ft_clear_array((void **)world->textures.north_texture.pixels);
 	ft_clear_array((void **)world->textures.south_texture.pixels);
 	ft_clear_array((void **)world->textures.east_texture.pixels);

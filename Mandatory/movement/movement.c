@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:28:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/03 17:47:07 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/14 11:48:45 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,9 @@ void	mv_handle_moves(t_game *game)
 		player->direction.rotatin_angle += RADIANS(ROTATION_SPEED);
 		cast_rays(game);
 	}
+	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
+		anim_set_state(game->animator, ATTACK1);
+	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_RIGHT))
+		anim_set_state(game->animator, ATTACK2);
+
 }

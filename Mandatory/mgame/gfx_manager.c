@@ -6,29 +6,12 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 11:44:55 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:18:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/game.h"
-
-void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
-{
-	int y;
-	int x;
-	
-	coords.x *= TILE_SIZE;
-	coords.y *= TILE_SIZE;
-	y = coords.y;
-	while (y < coords.y + TILE_SIZE - 1)
-	{
-		x = coords.x;
-		while (x < coords.x + TILE_SIZE - 1)
-			mlx_put_pixel(image, x++, y, color);
-		y++;
-	}
-}
 
 void	gfx_draw_rect(mlx_image_t *img, t_point start, t_point end , int color)
 {
@@ -74,14 +57,13 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int heig
 void    gfx_clear(mlx_t *mlx, t_list **graphics)
 {
 	t_list *temp;
-	mlx_image_t *current_img;
-
-	while (*graphics)
+	t_list *current;
+	
+	current = *graphics;
+	while (current)
 	{
-		current_img = (mlx_image_t *)(*graphics)->content;
-		mlx_delete_image(mlx, current_img);
-		temp = *graphics;
-		*graphics = (*graphics)->next;
+		temp = current;
+		current = current->next;
 		free(temp);
 		temp = NULL;
 	}

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 19:40:29 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:51:38 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
+	game->animator = init_animator(game->mlx, true);
 	return (true);
 }
 
@@ -35,6 +36,9 @@ bool	 init_game(t_game *game, char *mapfile)
 void	run_game(t_game *game)
 {
 	wd_load_textures(game->world, game->mapscan->texpaths);
+	anim_load_idle(game->animator, &game->world->graphics);
+	anim_load_attack1(game->animator, &game->world->graphics);
+	anim_load_attack2(game->animator, &game->world->graphics);
 	wd_prepare_colors(game->world);
 	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
@@ -43,6 +47,7 @@ void	run_game(t_game *game)
 	draw_player(game);
 	// mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
 	mlx_loop_hook(game->mlx, update, game);
+	anim_play(game->animator);
 	//printf("mapszie: widthx: %i | heighty: %i\n", game->mapscan->mapsize.x, game->mapscan->mapsize.y);
 	// game loop.
 	mlx_loop(game->mlx);
@@ -74,11 +79,13 @@ void	update(void *param) {
 	mlx = game->mlx;
 	// handling moving objects
 	
-	if (game->mouse_pos.y == -1)
-	{
-		game->mouse_pos.y = 0;
-		cast_rays(game);
-	}
+	// if (game->mouse_pos.y == -1)
+	// {
+	// 	game->mouse_pos.y = 0;
+	// 	cast_rays(game);
+	// }
+	anim_update(game->animator);
+	anim_render(game->animator);
 	mv_handle_moves(game);
 	draw_minimap(game);
 	// mlx_get_mouse_pos(mlx, &game->mouse_pos.x, &game->mouse_pos.y);
@@ -91,4 +98,5 @@ void	cleanup_game(t_game game)
 	mp_clearmap(game.mapscan);
 	wd_clear(game.world);
 	free(game.player);
+	free(game.animator);
 }

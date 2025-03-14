@@ -19,6 +19,7 @@
 
 # define TILE_SIZE 32
 # define OBJ_SIZE 4
+# define CROSSHAIR_PATH "Mandatory/textures/crosshair/crosshair_64.png"
 
 typedef struct s_vector2 {
 	double x;
@@ -60,6 +61,7 @@ typedef struct s_world {
 	t_list		*graphics;
 	t_colors	colors;
 	t_textures	textures;
+	mlx_image_t *crosshair;
 	mlx_image_t *cf_img;
 	mlx_image_t *drawing_board;
 } t_world;

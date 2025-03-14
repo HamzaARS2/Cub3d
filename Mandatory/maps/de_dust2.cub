@@ -1,7 +1,7 @@
-NO textures/wall32x32.png
-SO textures/Tile_04-128x128.png
-EA textures/Tile_14-128x128.png
-WE textures/Tile_16-128x128.png
+NO Mandatory/textures/Tile_25-128x128.png
+SO Mandatory/textures/Tile_04-128x128.png
+EA Mandatory/textures/Tile_14-128x128.png
+WE Mandatory/textures/Tile_16-128x128.png
 
 C 0, 255, 0
 F 0, 0, 255
