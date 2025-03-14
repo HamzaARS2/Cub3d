@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/14 11:53:55 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:39:45 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 #define ROTATION_SPEED 2
 # define RADIANS(d) (d * (M_PI / 180))
-
 
 
 typedef struct s_Dvector  {

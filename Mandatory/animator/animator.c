@@ -58,7 +58,7 @@ void    anim_render(t_animator *animator)
         return ;
     frame = animstate->frames[animstate->current_frame];
     if (!frame->count) {
-        mlx_image_to_window(animator->mlx, frame, (WIDTH / 2) - (frame->width / 2), HEIGHT - frame->height);
+        mlx_image_to_window(animator->mlx, frame, (WIDTH / 2) - ((frame->width / 2)), HEIGHT - frame->height);
     }
     else
         frame->enabled = true;

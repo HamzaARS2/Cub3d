@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:15:50 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/08 21:41:08 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:20:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_world	*init_world(mlx_t *mlx, t_colors colors)
 	world->mlx = mlx;
 	world->graphics = NULL;
 	world->colors = colors;
+	world->crosshair = gfx_create_teximage(mlx, &world->graphics, CROSSHAIR_PATH);
 	world->cf_img = gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	world->drawing_board = 	gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	return (world);
@@ -58,6 +59,8 @@ void	wd_render_cf(t_world *world)
 	start = (t_point) {0, HEIGHT / 2};
 	end = (t_point) {WIDTH, HEIGHT};
 	gfx_draw_rect(world->cf_img, start, end, world->colors.fcolor);
+	// drawing the crosshair
+	mlx_image_to_window(world->mlx, world->crosshair, (WIDTH / 2) - (world->crosshair->width / 2), HEIGHT / 2);
 }
 
 void	wd_render_walls(t_world *world, t_ray_dat rays_info)
