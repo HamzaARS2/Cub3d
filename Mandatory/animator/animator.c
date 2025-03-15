@@ -16,7 +16,7 @@ t_animator *init_animator(mlx_t *mlx, bool is_looping)
     animator->is_looping = is_looping;
     anim_init_animstate(&animator->idle, 100, 0.04, true);
     anim_init_animstate(&animator->attack1, 35, 0.02, false);
-    anim_init_animstate(&animator->attack2, 30, 0.02, false);
+    anim_init_animstate(&animator->attack2, 28, 0.02, false);
     animator->current_animstate = &animator->idle;
     return (animator);
 }
@@ -57,9 +57,8 @@ void    anim_render(t_animator *animator)
     if (animator->is_hidden)
         return ;
     frame = animstate->frames[animstate->current_frame];
-    if (!frame->count) {
+    if (!frame->count)
         mlx_image_to_window(animator->mlx, frame, (WIDTH / 2) - ((frame->width / 2)), HEIGHT - frame->height);
-    }
     else
         frame->enabled = true;
     previous_frame = animstate->current_frame - 1;

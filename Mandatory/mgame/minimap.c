@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 13:12:52 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:11:32 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	get_color(t_mapscan *mapscan, t_point p)
 	if (x < 0 || x >= mapscan->mapsize.x || y < 0 || y >= mapscan->mapsize.y)
 		return (255);
 	if (mapscan->map[y][x] == '1')
-		return get_rgba(255, 0, 0, 255);
+		return get_rgba(51,175,255,255);
 	if (ump_is_mpcomponent(mapscan->map[y][x]))
-		return get_rgba(0, 255, 0, 255);
+		return get_rgba(252,250,255,255);
 	return (255);
 }
 
