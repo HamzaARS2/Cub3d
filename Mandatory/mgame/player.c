@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 16:07:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 12:03:37 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:59:06 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	object->position.x = pos.x * TILE_SIZE + (TILE_SIZE / 2) - (OBJ_SIZE / 2);
 	object->position.y = pos.y * TILE_SIZE + (TILE_SIZE / 2) - (OBJ_SIZE / 2);
 	object->speed = 3.0f;
-	object->direction = (t_Dvector) {0};
+	object->direction = (t_Dvector) {};
 	//object->direction.rotatin_angle = 270;
 	if (!img)
 		object->image = gfx_create_image(game->mlx, &game->world->graphics, OBJ_SIZE, OBJ_SIZE);

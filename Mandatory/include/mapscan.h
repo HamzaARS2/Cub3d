@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/06 11:04:08 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:01:25 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_mapscan {
 	char        mapfd;
     t_point     start_pos;
     t_point     mapsize;
+    char        c_direction;
 } t_mapscan;
 
 t_mapscan	*init_mapscan(char *mapfile);

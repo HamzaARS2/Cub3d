@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2025/02/21 18:45:05 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:21:11 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,9 @@ bool	chk_position(char **map, t_point v2)
 	return (true);
 }
 
-// TODO: save start position!.
 bool	chk_map(t_mapscan *mapscan)
 {
 	t_point v2;
-	t_point start_pos;
 	
 	v2.y = 0;
 	if (!chk_map_comp(mapscan->map))

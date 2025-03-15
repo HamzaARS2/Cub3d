@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 13:37:06 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:27:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	obj_update_mvdirection(t_game *game, float rotation);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
+bool	load_resources(t_game *game);
+
 void	board_clean(mlx_image_t *drawing_board);
 
 void	cast_rays(t_game *game);
