@@ -3,51 +3,47 @@
 #include "../include/animator.h"
 #include "../include/gfx_manager.h"
 
-void    anim_load_frames(t_animator *animator, t_list **graphics)
+bool    anim_load_idle(t_animator *animator, t_list **graphics)
 {
     int i;
     char framepath[60];
     char base_path[] = "Mandatory/textures/balrog_frames/idle/frame_";
+    t_animstate *idle_state;
 
+    idle_state = &animator->idle;
     i = 0;
-    while (i < animator->max_frames)
+    while (i < idle_state->max_frames)
     {
         snprintf(framepath, sizeof(framepath), "%s%i.png", base_path, i);
-        animator->frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        idle_state->frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        if (!idle_state->frames[i])
+            return (false);
         i++;
     }
+    return (true);
 }
 
-void    anim_load_idle(t_animator *animator, t_list **graphics)
-{
-    int i;
-    char framepath[60];
-    char base_path[] = "Mandatory/textures/balrog_frames/idle/frame_";
-    i = 0;
-    while (i < animator->idle.max_frames)
-    {
-        snprintf(framepath, sizeof(framepath), "%s%i.png", base_path, i);
-        animator->idle.frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
-        i++;
-    }
-}
-
-void    anim_load_attack1(t_animator *animator, t_list **graphics)
+bool    anim_load_attack1(t_animator *animator, t_list **graphics)
 {
     int i;
     char framepath[60];
     char base_path[] = "Mandatory/textures/balrog_frames/attack1/frame_";
+    t_animstate *attack1_state;
 
+    attack1_state = &animator->attack1;
     i = 0;
-    while (i < animator->attack1.max_frames)
+    while (i < attack1_state->max_frames)
     {
         snprintf(framepath, sizeof(framepath), "%s%i.png", base_path, i);
-        animator->attack1.frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        attack1_state->frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        if (!attack1_state->frames[i])
+            return (false);
         i++;
     }
+    return (true);
 }
 
-void    anim_load_attack2(t_animator *animator, t_list **graphics)
+bool    anim_load_attack2(t_animator *animator, t_list **graphics)
 {
     int i;
     char framepath[60];
@@ -56,12 +52,15 @@ void    anim_load_attack2(t_animator *animator, t_list **graphics)
     
     attack2_state = &animator->attack2;
     i = 0;
-    while (i < animator->attack2.max_frames)
+    while (i < attack2_state->max_frames)
     {
         snprintf(framepath, sizeof(framepath), "%s%i.png", base_path, i);
-        animator->attack2.frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        attack2_state->frames[i] = gfx_create_teximage(animator->mlx, graphics, framepath);
+        if (!attack2_state->frames[i])
+            return (false);
         i++;
     }
+    return (true);
 }
 
 void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame_time, bool is_looping)

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:15:50 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/14 14:20:47 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:03:19 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,33 @@ t_world	*init_world(mlx_t *mlx, t_colors colors)
 	world->mlx = mlx;
 	world->graphics = NULL;
 	world->colors = colors;
-	world->crosshair = gfx_create_teximage(mlx, &world->graphics, CROSSHAIR_PATH);
 	world->cf_img = gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	world->drawing_board = 	gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	return (world);
 }
 
-void	wd_load_textures(t_world *world, t_texpath texpaths)
+bool	wd_load_textures(t_world *world, t_texpath texpaths)
 {
+	ft_memset(&world->textures.north_texture, 0, sizeof(t_wd_texture));
+	ft_memset(&world->textures.east_texture, 0, sizeof(t_wd_texture));
+	ft_memset(&world->textures.south_texture, 0, sizeof(t_wd_texture));
+	ft_memset(&world->textures.west_texture, 0, sizeof(t_wd_texture));
+	world->crosshair = gfx_create_teximage(world->mlx, &world->graphics, CROSSHAIR_PATH);
+	if (!world->crosshair)
+		return (false);
 	world->textures.north_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.north_tex);
+	if (!world->textures.north_texture.img)
+		return (false);
 	world->textures.east_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.east_tex);
+	if (!world->textures.east_texture.img)
+		return (false);
 	world->textures.south_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.south_tex);
+	if (!world->textures.south_texture.img)
+		return (false);
 	world->textures.west_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.west_tex);
+	if (!world->textures.west_texture.img)
+		return (false);
+	return (true);
 }
 
 void	wd_prepare_colors(t_world *world)

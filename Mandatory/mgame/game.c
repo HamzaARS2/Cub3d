@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/14 16:29:53 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 14:14:27 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,27 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	game->animator = init_animator(game->mlx, true);
+	bool	is_loaded;
+	
+	is_loaded = wd_load_textures(game->world, game->mapscan->texpaths);
+	if (!is_loaded)
+		 return (false);
+	is_loaded = anim_load_idle(game->animator, &game->world->graphics);
+	if (!is_loaded)
+		 return (false);
+	is_loaded = anim_load_attack1(game->animator, &game->world->graphics);
+	if (!is_loaded)
+		 return (false);
+	is_loaded = anim_load_attack2(game->animator, &game->world->graphics);
+	if (!is_loaded)
+		 return (false);
 	return (true);
 }
 
 
 void	run_game(t_game *game)
 {
-	wd_load_textures(game->world, game->mapscan->texpaths);
-	anim_load_idle(game->animator, &game->world->graphics);
-	anim_load_attack1(game->animator, &game->world->graphics);
-	anim_load_attack2(game->animator, &game->world->graphics);
+	
 	wd_prepare_colors(game->world);
 	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);

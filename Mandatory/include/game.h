@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 13:09:47 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:37:06 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250
-
-#define MAP_WALL_COLOR 0x329da8
-#define MAP_WALL_SPACE 0x129da8
 
 #define ROTATION_SPEED 2
 # define RADIANS(d) (d * (M_PI / 180))
