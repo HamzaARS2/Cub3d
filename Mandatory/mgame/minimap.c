@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 13:11:32 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:46:48 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	get_color(t_mapscan *mapscan, t_point p)
 	int x;
 	int y;
 
-	x = p.x / TILE_SIZE;
-	y = p.y / TILE_SIZE;
+	x = floor((double) p.x / TILE_SIZE);
+	y = floor((double) p.y / TILE_SIZE);
 	if (x < 0 || x >= mapscan->mapsize.x || y < 0 || y >= mapscan->mapsize.y)
 		return (255);
 	if (mapscan->map[y][x] == '1')
