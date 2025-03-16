@@ -10,7 +10,7 @@ LIBFT := $(LIBFT_DIR)/libft.a
 
 HEADERS := $(MLX)/include
 
-MAIN_FILES = Mandatory/cub4d.c Mandatory/mapscan/mapscan.c Mandatory/mapscan/mp_reader.c Mandatory/mapscan/mp_utils.c \
+MAIN_FILES = Mandatory/cub3d.c Mandatory/mapscan/mapscan.c Mandatory/mapscan/mp_reader.c Mandatory/mapscan/mp_utils.c \
 Mandatory/mapscan/mp_checker.c Mandatory/mgame/game.c Mandatory/mgame/game_utils.c Mandatory/mgame/gfx_manager.c Mandatory/mgame/player.c \
 Mandatory/movement/movement.c Mandatory/raycaster/raycaster.c Mandatory/raycaster/raycaster_I.c \
 Mandatory/world/world.c Mandatory/world/world_utils.c Mandatory/animator/animator.c Mandatory/animator/animator_utils.c

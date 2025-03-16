@@ -54,7 +54,6 @@ typedef struct s_game {
 	t_world		*world;
 	mlx_t		*mlx;
 	t_player	*player;
-	t_point		mouse_pos;
 	t_animator  *animator;
 } t_game;
 

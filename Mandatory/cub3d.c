@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub4d.h"
+#include "include/cub3d.h"
 
 void	foo() {
 	system("leaks -q cub3D");
@@ -25,9 +25,6 @@ int	main(int ac, char **av) {
 		cleanup_game(game);
 		return (EXIT_FAILURE);
 	}
-	mlx_set_mouse_pos(game.mlx, WIDTH / 2, HEIGHT / 2);
-	mlx_get_mouse_pos(game.mlx, &game.mouse_pos.x, &game.mouse_pos.y);
-	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
 	run_game(&game);
 	cleanup_game(game);
 	return (EXIT_SUCCESS);

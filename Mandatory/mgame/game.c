@@ -12,8 +12,6 @@
 
 #include "../include/game.h"
 
-void handle_cursor_movement(double xpos, double ypos, void* param);
-
 bool	 init_game(t_game *game, char *mapfile)
 {
 	mlx_image_t *obj_img;
@@ -40,29 +38,11 @@ void	run_game(t_game *game)
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
 	wd_render_cf(game->world);
 	draw_player(game);
-	mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
 	mlx_loop_hook(game->mlx, update, game);
 	anim_play(game->animator);
 	// game loop.
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
-}
-void handle_cursor_movement(double xpos, double ypos, void* param)
-{
-	t_game *game;
-	double angle;
-	int x_d;
-
-	game = param;
-	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
-	angle = game->player->direction.rotatin_angle;
-	x_d = xpos - game->mouse_pos.x;
-	angle = normalizeAngle(angle + x_d * 0.0015);
-	game->player->direction.rotatin_angle = angle;
-	game->mouse_pos.x = xpos;
-	game->mouse_pos.y = -1;
-	//printf("xpos: %f-----mpx: %d \n", xpos, game->mouse_pos.x);
-	
 }
 
 void	update(void *param) {
@@ -72,11 +52,6 @@ void	update(void *param) {
 	game = param;
 	mlx = game->mlx;
 	
-	if (game->mouse_pos.y == -1)
-	{
-		game->mouse_pos.y = 0;
-		cast_rays(game);
-	}
 	anim_update(game->animator);
 	anim_render(game->animator);
 	mv_handle_moves(game);
