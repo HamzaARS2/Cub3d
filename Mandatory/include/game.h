@@ -55,7 +55,6 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_player	*player;
 	t_point		mouse_pos;
-	mlx_image_t *map_img;
 	t_animator  *animator;
 } t_game;
 
@@ -69,7 +68,7 @@ void	cleanup_game(t_game game);
 
 // renderer
 bool	draw_player(t_game *game);
-void 	draw_minimap(t_game *game);
+
 // movements
 void	mv_move_player(t_player *object, float new_x, float new_y);
 void	mv_handle_moves(t_game *game);

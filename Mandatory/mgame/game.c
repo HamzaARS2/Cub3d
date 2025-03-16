@@ -26,7 +26,6 @@ bool	 init_game(t_game *game, char *mapfile)
 		return (false);
 	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
-	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	game->animator = init_animator(game->mlx, true);
 	if (!load_resources(game))
 		return (false);
@@ -39,7 +38,6 @@ void	run_game(t_game *game)
 	wd_prepare_colors(game->world);
 	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
-	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
 	wd_render_cf(game->world);
 	draw_player(game);
 	mlx_cursor_hook(game->mlx, handle_cursor_movement, game);
@@ -82,7 +80,6 @@ void	update(void *param) {
 	anim_update(game->animator);
 	anim_render(game->animator);
 	mv_handle_moves(game);
-	draw_minimap(game);
 }
 
 void	cleanup_game(t_game game)
