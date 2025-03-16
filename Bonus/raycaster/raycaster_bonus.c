@@ -1,4 +1,5 @@
 # include "../include/raycaster_bonus.h"
+# include "../include/world_bonus.h"
 
 void draw_wall(t_game *game, double distance, double angle, int *x);
 
@@ -63,10 +64,13 @@ void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map)
 
 double normalizeAngle(double angle) 
 {
+	double two_pi;
+
+	two_pi = 2 * M_PI;
 	while (angle < 0)
-		angle += 360;
-	while (angle >= 360)
-		angle -= 360;
+		angle += two_pi;
+	while (angle >= two_pi)
+		angle -= two_pi;
 	return (angle);
 }
 
@@ -76,27 +80,18 @@ void	bresenham_line(t_game *game, int *x, double angle)
     t_player    *player;
     t_data      data;
 	t_vector2 	hit;
-	bool		is_vertical_hit;
+	t_ray_dat	ray_dat; //here we store hit poit cordination, and direction
+
     mat = (t_draw) {0};
     player = game->player;
-    // data.x1 = player->position.x;
-    // data.y1 = player->position.y;
-	hit = find_nearest_hit(game, game->player->direction.rotatin_angle);
-    // data.x2 = floor(hit.x);
-    // data.y2 = floor(hit.y);
-	//printf("CHOSENn==> py: %d y: %d and px: %d x: %d\n\n", data.y2, (int)data.y2 / TILE_SIZE, data.x2, (int)data.x2 / TILE_SIZE);
-
-	// mat.dx = abs(data.x2 - data.x1);
-	// mat.dy = abs(data.y2 - data.y1);
-	// set_direction(&mat, &data);
-	// drawing_loop(game->drawing_board, &data, mat, game->mapscan->map);
-	double distance = sqrt(powf(player->position.x - hit.x, 2) + 
-    powf(player->position.y - hit.y, 2));
-	draw_wall(game, distance, angle, x);
-	// render_wall_texture(game, distance , angle, *x, hit);
+	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
+	hit = ray_dat.hitp;
+	ray_dat.current_column = *x;
+	ray_dat.distance = (sqrt(powf(player->position.x - hit.x, 2) + 
+    powf(player->position.y - hit.y, 2)) * cos(angle));
+	// draw_wall(game, distance, angle, x);
+	wd_render_walls(game->world, ray_dat);
 }
-
-
 
 void draw_wall(t_game *game, double distance, double angle, int *x)
 {
@@ -105,8 +100,8 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 	 double start;
 	 int 	pixel_offset;
 
-	 focal = (double) (WIDTH / 2) / tan(RADIANS(FOV / 2));
-	 distance *= cos(RADIANS(angle));
+	 focal = (double) (WIDTH / 2) / tan(RADIANS((FOV / 2)));
+	 distance *= cos(angle);
 	 wall_h = (25 / distance) * focal;
 	 start = (HEIGHT / 2) - (wall_h / 2);
 	 if (start < 0)
@@ -116,11 +111,9 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 		pixel_offset = 0;
 	while( pixel_offset < wall_h && start < HEIGHT - 1)
 	{
-		mlx_put_pixel(game->drawing_board, *x, 
+		mlx_put_pixel(game->world->drawing_board, *x, 
 			start, get_rgba(51,175,255,255));
 		pixel_offset++;
 		start++;
 	}
 }
-
-//get_rgba(51,175,255,255)

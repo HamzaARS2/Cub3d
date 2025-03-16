@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapscan_bonus.h                                    :+:      :+:    :+:   */
+/*   mapscan.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 15:38:18 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/03/15 16:01:25 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_entry {
     char    *value;
 } t_entry;
 
-typedef struct s_texpath{
+typedef struct s_texpath {
     char *north_tex;
     char *south_tex;
     char *east_tex;
@@ -61,13 +61,14 @@ typedef struct s_colors {
 } t_colors;
 
 typedef struct s_mapscan {
-	t_texpath   texpaths;
+	t_texpath  texpaths;
     t_mperror   error;
     t_colors    colors;
     char		**map;
 	char        mapfd;
     t_point     start_pos;
     t_point     mapsize;
+    char        c_direction;
 } t_mapscan;
 
 t_mapscan	*init_mapscan(char *mapfile);

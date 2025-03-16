@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gfx_manager_bonus.c                                :+:      :+:    :+:   */
+/*   gfx_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/03 14:23:43 by helarras         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:18:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../include/gfx_manager_bonus.h"
+#include "../include/game_bonus.h"
 
-void	gfx_set_color(mlx_image_t *image, t_point coords, int color)
+void	gfx_draw_rect(mlx_image_t *img, t_point start, t_point end , int color)
 {
-	int y;
 	int x;
-	
-	coords.x *= TILE_SIZE;
-	coords.y *= TILE_SIZE;
-	y = coords.y;
-	while (y < coords.y + TILE_SIZE - 1)
+	int y;
+
+	y = start.y;
+	while (y < end.y)
 	{
-		x = coords.x;
-		while (x < coords.x + TILE_SIZE - 1)
-			mlx_put_pixel(image, x++, y, color);
+		x = start.x;
+		while (x < end.x)
+			mlx_put_pixel(img, x++, y, color);
 		y++;
 	}
 }
 
-mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list *graphics, char *tex_path)
+mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -39,20 +37,34 @@ mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list *graphics, char *tex_path)
 	if (!texture)
 		return (NULL);
 	image = mlx_texture_to_image(mlx, texture);
-	ft_lstadd_back(&graphics, ft_lstnew(image));
+	ft_lstadd_back(graphics, ft_lstnew(image));
 	mlx_delete_texture(texture);
 	return (image);
 }
 
-mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list *graphics, int width, int height)
+mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int height)
 {
 	mlx_image_t	*image;
 
 	image = mlx_new_image(mlx, width, height);
 	if (!image)
 		return (NULL);
-	ft_lstadd_back(&graphics, ft_lstnew(image));
+	ft_lstadd_back(graphics, ft_lstnew(image));
 	return (image);
 }
 
 // TODO: function to clear allocated images.
+void    gfx_clear(mlx_t *mlx, t_list **graphics)
+{
+	t_list *temp;
+	t_list *current;
+	
+	current = *graphics;
+	while (current)
+	{
+		temp = current;
+		current = current->next;
+		free(temp);
+		temp = NULL;
+	}
+}
