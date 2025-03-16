@@ -31,11 +31,5 @@ bool	load_resources(t_game *game)
 {
 	if (!wd_load_textures(game->world, game->mapscan->texpaths))
 		 return (false);
-	if (!anim_load_idle(game->animator, &game->world->graphics))
-		 return (false);
-	if (!anim_load_attack1(game->animator, &game->world->graphics))
-		 return (false);
-	if (!anim_load_attack2(game->animator, &game->world->graphics))
-		 return (false);
 	return (true);
 }

@@ -21,7 +21,6 @@
 #include "mapscan.h"
 #include "gfx_manager.h"
 #include "world.h"
-#include "animator.h"
 
 #define WIDTH 1440
 #define HEIGHT 800
@@ -54,7 +53,6 @@ typedef struct s_game {
 	t_world		*world;
 	mlx_t		*mlx;
 	t_player	*player;
-	t_animator  *animator;
 } t_game;
 
 

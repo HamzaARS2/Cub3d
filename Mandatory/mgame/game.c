@@ -24,7 +24,6 @@ bool	 init_game(t_game *game, char *mapfile)
 		return (false);
 	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
-	game->animator = init_animator(game->mlx, true);
 	if (!load_resources(game))
 		return (false);
 	return (true);
@@ -39,7 +38,6 @@ void	run_game(t_game *game)
 	wd_render_cf(game->world);
 	draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
-	anim_play(game->animator);
 	// game loop.
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
@@ -52,8 +50,6 @@ void	update(void *param) {
 	game = param;
 	mlx = game->mlx;
 	
-	anim_update(game->animator);
-	anim_render(game->animator);
 	mv_handle_moves(game);
 }
 
@@ -62,5 +58,4 @@ void	cleanup_game(t_game game)
 	mp_clearmap(game.mapscan);
 	wd_clear(game.world);
 	free(game.player);
-	free(game.animator);
 }
