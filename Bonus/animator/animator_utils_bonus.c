@@ -6,8 +6,8 @@
 bool    anim_load_idle(t_animator *animator, t_list **graphics)
 {
     int i;
-    char framepath[60];
-    char base_path[] = "Mandatory/textures/balrog_frames/idle/frame_";
+    char framepath[80];
+    char base_path[] = "Bonus/textures/zombie/idle/frame_";
     t_animstate *idle_state;
 
     idle_state = &animator->idle;
@@ -26,8 +26,8 @@ bool    anim_load_idle(t_animator *animator, t_list **graphics)
 bool    anim_load_attack1(t_animator *animator, t_list **graphics)
 {
     int i;
-    char framepath[60];
-    char base_path[] = "Mandatory/textures/balrog_frames/attack1/frame_";
+    char framepath[80];
+    char base_path[] = "Bonus/textures/zombie/attack1/frame_";
     t_animstate *attack1_state;
 
     attack1_state = &animator->attack1;
@@ -46,8 +46,8 @@ bool    anim_load_attack1(t_animator *animator, t_list **graphics)
 bool    anim_load_attack2(t_animator *animator, t_list **graphics)
 {
     int i;
-    char framepath[60];
-    char base_path[] = "Mandatory/textures/balrog_frames/attack2/frame_";
+    char framepath[80];
+    char base_path[] = "Bonus/textures/zombie/attack2/frame_";
     t_animstate *attack2_state;
     
     attack2_state = &animator->attack2;
