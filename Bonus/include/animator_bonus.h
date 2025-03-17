@@ -16,7 +16,6 @@ typedef struct s_animstate {
     int max_frames;
     int current_frame;
     double frame_time;
-    bool    is_hidden;
     bool    is_looping;
 } t_animstate;
 
@@ -26,13 +25,9 @@ typedef struct s_animator {
     t_animstate idle;
     t_animstate attack1;
     t_animstate attack2;
-    mlx_image_t *frames[50];
     int max_frames;
-    int current_frame;
     double last_update_time;
-    double frame_time;
     bool is_playing;
-    bool is_looping;
     bool is_hidden;
 } t_animator;
 
