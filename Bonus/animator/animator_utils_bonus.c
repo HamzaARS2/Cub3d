@@ -68,6 +68,5 @@ void    anim_init_animstate(t_animstate *animstate, int max_frames, double frame
     animstate->max_frames = max_frames;
     animstate->current_frame = 0;
     animstate->frame_time = frame_time;
-    animstate->is_hidden = true;
     animstate->is_looping = is_looping;
 }
