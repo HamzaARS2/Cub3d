@@ -1,15 +1,13 @@
 # include "../include/raycaster_bonus.h"
-# include <math.h>
 #define next_tile 1.0E-8
 
-int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
+int	check_wall(t_game *game, t_vector2 *hitp, char **map, t_point map_size)
 {
     int x_tile;
     int y_tile;
 
     x_tile = (hitp->x / TILE_SIZE);
     y_tile = (hitp->y / TILE_SIZE);
-    //printf("py: %f y: %d and px: %f x: %d\n", hitp->y, y_tile, hitp->x, x_tile);
     if (isinf(hitp->y)|| isinf(hitp->x))
         hitp->y = -1;
     else if (hitp->y > HEIGHT || hitp->x > WIDTH)
@@ -22,6 +20,11 @@ int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
         hitp->y = -1;
     if (hitp->y == -1 || map[y_tile][x_tile] == '1')
 		return (0);
+    if (game->door.door_ray.hitp.x == -1 && map[y_tile][x_tile] == 'D')
+    {
+        game->door.door_ray.hitp.x = hitp->x;
+        game->door.door_ray.hitp.y = hitp->y;
+    }
 	return (1);
 }
 
@@ -41,10 +44,11 @@ void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 {
     char **map;
     t_point map_size;
+    t_door door;
 
     map = game->mapscan->map;
     map_size = game->mapscan->mapsize;
-    while (check_wall(hit, map, map_size))
+    while (check_wall(game, hit, map, map_size))
     {
         hit->x = hit->x + Xa;
         hit->y = hit->y + Ya;
@@ -60,8 +64,8 @@ t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
     double Xa;
     double Ya;
     
-    hit.x = 0;
-    hit.y = 0;
+    hit = (t_vector2){0};
+    game->door.door_ray.hitp = (t_vector2){-1};
     player = game->player;
     if (v_d[0] == looking_up)
     {
@@ -84,6 +88,7 @@ t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
     hit.x = Ax;
     hit.y = Ay;
     find_wall_hit(game, &hit, Xa, Ya);
+    game->door.door_ray.ver_hor = 'H';
     return hit;
 }
 
@@ -121,6 +126,7 @@ t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
     hit.x = Bx;
     hit.y = By;
     find_wall_hit(game, &hit, Xa, Ya);
+    game->door.door_ray.ver_hor = 'V';
     return hit;
 }
 
@@ -150,26 +156,44 @@ t_ray_dat get_ray_data(t_vector2 hit, int *v_d, char c)
 
 t_ray_dat find_nearest_hit(t_game *game, float ray_angle)
 {
-    t_vector2 h_hit;
-    t_vector2 v_hit;
+    t_vector2 h_hit[2];
+    t_vector2 v_hit[2];
     t_player    *player;
     int v_d[2];
     double h_dist;
     double v_dist;
-    t_ray_dat ray_data;
+    //t_ray_dat ray_data;
 
     player = game->player;
     vision_derction(ray_angle, v_d);
-    h_hit = horizontal_intersection(game, ray_angle, v_d);
-    v_hit = vertical_intersection(game, ray_angle, v_d);
+    h_hit[0] = horizontal_intersection(game, ray_angle, v_d);
+    h_hit[1] = game->door.door_ray.hitp;
+    v_hit[0] = vertical_intersection(game, ray_angle, v_d);
+    v_hit[1] = game->door.door_ray.hitp;
     
-    h_dist = sqrt(powf(player->position.x - h_hit.x, 2) + 
-    powf(player->position.y - h_hit.y, 2));
-    v_dist = sqrt(powf(player->position.x - v_hit.x, 2) + 
-    powf(player->position.y - v_hit.y, 2));
-    if (v_hit.y != -1 && (h_hit.y == -1 || h_dist > v_dist))
-        return (get_ray_data(v_hit, v_d, 'V'));
-    return (get_ray_data(h_hit, v_d, 'H'));
+    h_dist = sqrt(powf(player->position.x - h_hit[0].x, 2) + 
+    powf(player->position.y - h_hit[0].y, 2));
+    v_dist = sqrt(powf(player->position.x - v_hit[0].x, 2) + 
+    powf(player->position.y - v_hit[0].y, 2));
+
+    double h_door_dist = sqrt(powf(player->position.x - h_hit[1].x, 2) +
+    powf(player->position.y - h_hit[1].y, 2));
+    double v_door_dist = sqrt(powf(player->position.x - v_hit[1].x, 2) +
+    powf(player->position.y - v_hit[1].y, 2));
+    if (h_hit[1].x != -1 && (v_hit[1].x == -1 || h_door_dist < v_door_dist))
+    {
+        game->door.door_ray.hitp = h_hit[1];
+        game->door.door_ray.ver_hor = 'H';
+    }
+    else if (v_hit[1].x != -1 && (h_hit[1].x == -1 || v_door_dist < h_door_dist))
+    {
+        game->door.door_ray.hitp = v_hit[1];
+        game->door.door_ray.ver_hor = 'V';
+    }
+   
+    if (v_hit[0].y != -1 && (h_hit[0].y == -1 || h_dist > v_dist))
+        return (get_ray_data(v_hit[0], v_d, 'V'));
+    return (get_ray_data(h_hit[0], v_d, 'H'));
 }
 
 void	cast_rays(t_game *game)
@@ -179,6 +203,7 @@ void	cast_rays(t_game *game)
 	double 	angle_shift;
 	int x;
 
+    board_clean(game->world->door_img);
 	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
 	ray_angle = RADIANS(-30);

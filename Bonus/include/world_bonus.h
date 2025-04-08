@@ -64,6 +64,7 @@ typedef struct s_world {
 	mlx_image_t *crosshair;
 	mlx_image_t *cf_img;
 	mlx_image_t *drawing_board;
+	mlx_image_t *door_img;
 } t_world;
 
 t_world *init_world(mlx_t *mlx, t_colors colors);

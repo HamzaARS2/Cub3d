@@ -48,12 +48,18 @@ typedef struct s_player {
 	t_Dvector	direction;
 	float		speed;
 } t_player;
+typedef struct s_door {
+	t_ray_dat door_ray;
+	bool closed;
+	bool open;
+}	t_door;
 
 typedef struct s_game {
 	t_mapscan	*mapscan;
 	t_world		*world;
 	mlx_t		*mlx;
 	t_player	*player;
+	t_door		door;
 	t_point		mouse_pos;
 	mlx_image_t *map_img;
 	t_animator  *animator;

@@ -39,6 +39,7 @@ void	run_game(t_game *game)
 	wd_prepare_colors(game->world);
 	mlx_image_to_window(game->mlx, game->world->cf_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->world->drawing_board, 0, 0);
+	mlx_image_to_window(game->mlx, game->world->door_img, 0, 0);
 	mlx_image_to_window(game->mlx, game->map_img, 0, 0);
 	wd_render_cf(game->world);
 	draw_player(game);

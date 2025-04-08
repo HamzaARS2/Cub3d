@@ -26,6 +26,7 @@ t_world	*init_world(mlx_t *mlx, t_colors colors)
 	world->colors = colors;
 	world->cf_img = gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	world->drawing_board = 	gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
+	world->door_img = gfx_create_image(mlx, &world->graphics, WIDTH, HEIGHT);
 	return (world);
 }
 

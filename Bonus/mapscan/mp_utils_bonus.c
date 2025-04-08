@@ -68,7 +68,7 @@ char	**ump_create_map(t_list *maplst, t_point mapsize)
 bool	ump_is_mpcomponent(char c)
 {
 	return (c == '1' || c == '0' || c == 'N'
-		|| c == 'S' || c == 'E' || c == 'W');
+		|| c == 'S' || c == 'E' || c == 'W' || c == 'D');
 }
 
 bool	ump_color_toint(char *color_str, char **rgb, int *color)
