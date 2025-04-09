@@ -89,8 +89,11 @@ void	bresenham_line(t_game *game, int *x, double angle)
 
 	game->door.door_ray.distance = (sqrt(powf(player->position.x - game->door.door_ray.hitp.x, 2) + 
 	powf(player->position.y - game->door.door_ray.hitp.y, 2)) * cos(angle));
+
+	//here i draw the door, notice there is a door struct in game struct, so you work with it.
 	if (game->door.door_ray.hitp.x != -1)
 		draw_wall(game, game->door.door_ray.distance, angle, x);
+
 	wd_render_walls(game->world, ray_dat);
 }
 
