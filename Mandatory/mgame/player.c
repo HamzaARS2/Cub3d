@@ -31,7 +31,7 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	return (object);
 }
 
-void	obj_update_mvdirection(t_game *game, float rotation)
+void	obj_update_mvdirection(t_game *game, double rotation)
 {
 	t_Dvector *direction;
 	double speed;

@@ -74,7 +74,7 @@ double normalizeAngle(double angle)
 	return (angle);
 }
 
-void	bresenham_line(t_game *game, int *x, double angle)
+void	bresenham_line(t_game *game, int x, double angle)
 {
 	t_draw		mat;
     t_player    *player;
@@ -86,7 +86,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
     player = game->player;
 	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
 	hit = ray_dat.hitp;
-	ray_dat.current_column = *x;
+	ray_dat.current_column = x;
 	ray_dat.distance = (sqrt(powf(player->position.x - hit.x, 2) + 
     powf(player->position.y - hit.y, 2)) * cos(angle));
 	// draw_wall(game, distance, angle, x);

@@ -82,13 +82,13 @@ void	wd_render_walls(t_world *world, t_ray_dat rays_info)
 {
 	int y;
 	int color;
-	float scale_factor;
+	double scale_factor;
 	t_render_info info;
 	t_wd_texture texture;
 
 	texture = wd_texture_bydirection(world, rays_info.direction);
 	info = wd_calc_render_info(rays_info, texture);
-	scale_factor = ((float)texture.img->height / info.wall_strip_height);
+	scale_factor = ((double)texture.img->height / info.wall_strip_height);
 	y = info.wall_top_pixel;
 	while (y < info.wall_bot_pixel - 1)
 	{

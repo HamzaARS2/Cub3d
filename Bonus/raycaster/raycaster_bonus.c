@@ -74,7 +74,7 @@ double normalizeAngle(double angle)
 	return (angle);
 }
 
-void	bresenham_line(t_game *game, int *x, double angle)
+void	bresenham_line(t_game *game, int x, double angle)
 {
     t_player    *player;
 	t_vector2 	hit;
@@ -83,7 +83,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
     player = game->player;
 	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
 	hit = ray_dat.hitp;
-	ray_dat.current_column = *x;
+	ray_dat.current_column = x;
 	ray_dat.distance = (sqrt(powf(player->position.x - hit.x, 2) + 
     powf(player->position.y - hit.y, 2)) * cos(angle));
 
@@ -97,7 +97,7 @@ void	bresenham_line(t_game *game, int *x, double angle)
 	wd_render_walls(game->world, ray_dat);
 }
 
-void draw_wall(t_game *game, double distance, double angle, int *x)
+void draw_wall(t_game *game, double distance, double angle, int x)
 {
 	 double focal;
 	 double wall_h;
@@ -115,7 +115,7 @@ void draw_wall(t_game *game, double distance, double angle, int *x)
 		pixel_offset = 0;
 	while( pixel_offset < wall_h && start < HEIGHT - 1)
 	{
-		mlx_put_pixel(game->world->door_img, *x, 
+		mlx_put_pixel(game->world->door_img, x, 
 			start, get_rgba(51,175,255,255));
 		pixel_offset++;
 		start++;

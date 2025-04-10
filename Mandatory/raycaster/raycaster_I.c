@@ -37,7 +37,7 @@ void	vision_derction(double angel, int *v_d)
 		v_d[1] = looking_right;
 }
 
-void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
+void     find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 {
     char **map;
     t_point map_size;
@@ -51,7 +51,7 @@ void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
     }
 }
 
-t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
+t_vector2 horizontal_intersection(t_game *game, double ray_angle, int *v_d)
 {
     t_vector2 hit;
     t_player *player;
@@ -87,7 +87,7 @@ t_vector2 horizontal_intersection(t_game *game, float ray_angle, int *v_d)
     return hit;
 }
 
-t_vector2 vertical_intersection(t_game *game, float ray_angle, int *v_d)
+t_vector2 vertical_intersection(t_game *game, double ray_angle, int *v_d)
 {
     t_vector2 hit;
     t_player *player;
@@ -148,7 +148,7 @@ t_ray_dat get_ray_data(t_vector2 hit, int *v_d, char c)
     return (ray_dat);
 }
 
-t_ray_dat find_nearest_hit(t_game *game, float ray_angle)
+t_ray_dat find_nearest_hit(t_game *game, double ray_angle)
 {
     t_vector2 h_hit;
     t_vector2 v_hit;
@@ -181,8 +181,8 @@ void	cast_rays(t_game *game)
 
 	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
-	ray_angle = RADIANS(-30);
-	angle_shift = ((double)RADIANS(60) / WIDTH );
+	ray_angle = RADIANS((FOV / 2) * -1);
+	angle_shift = (double)RADIANS(FOV) / WIDTH;
 	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
 	board_clean(game->world->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
@@ -192,7 +192,7 @@ void	cast_rays(t_game *game)
     while (ray_angle < RADIANS(30)&& x < WIDTH)
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
-		bresenham_line(game, &x, ray_angle);
+		bresenham_line(game, x, ray_angle);
 		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle +  angle_shift);
 		ray_angle += angle_shift;
 		x++;

@@ -12,7 +12,7 @@
 
 #include "../include/game.h"
 
-void	mv_move_player(t_player *object, float new_x, float new_y)
+void	mv_move_player(t_player *object, double new_x, double new_y)
 {
 	object->position.x = new_x + (OBJ_SIZE / 2);
 	object->position.y = new_y + (OBJ_SIZE / 2);

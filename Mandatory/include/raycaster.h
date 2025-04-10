@@ -51,6 +51,6 @@ typedef struct s_draw
 int		check_if_wall(char **map, int x, int y);
 void	set_direction(t_draw *mat, t_data *data);
 double	normalizeAngle(double angle);
-t_ray_dat find_nearest_hit(t_game *game, float ray_angle);
+t_ray_dat find_nearest_hit(t_game *game, double ray_angle);
 void	drawing_loop(mlx_image_t *image, t_data *data, t_draw mat, char **map);
 #endif

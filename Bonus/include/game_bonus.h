@@ -46,7 +46,7 @@ typedef struct s_player {
 	mlx_image_t	*image;
 	t_vector2	position;
 	t_Dvector	direction;
-	float		speed;
+	double		speed;
 } t_player;
 typedef struct s_door {
 	t_ray_dat door_ray;
@@ -77,12 +77,12 @@ void	cleanup_game(t_game game);
 bool	draw_player(t_game *game);
 void 	draw_minimap(t_game *game);
 // movements
-void	mv_move_player(t_player *object, float new_x, float new_y);
+void	mv_move_player(t_player *object, double new_x, double new_y);
 void	mv_handle_moves(t_game *game);
 bool	mv_check_collusion(int new_x, int new_y, char **map, char comp);
 // object
 t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos);
-void	obj_update_mvdirection(t_game *game, float rotation);
+void	obj_update_mvdirection(t_game *game, double rotation);
 
 // utils
 t_mapscan	*readmap(char *mapfile);
