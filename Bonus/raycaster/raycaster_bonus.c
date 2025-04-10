@@ -1,7 +1,7 @@
 # include "../include/raycaster_bonus.h"
 # include "../include/world_bonus.h"
 
-void draw_wall(t_game *game, double distance, double angle, int *x);
+void draw_wall(t_game *game, double distance, double angle, int x);
 
 void	set_direction(t_draw *mat, t_data *data)
 {

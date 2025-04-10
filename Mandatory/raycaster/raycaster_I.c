@@ -12,9 +12,7 @@ int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
     //printf("py: %f y: %d and px: %f x: %d\n", hitp->y, y_tile, hitp->x, x_tile);
     if (isinf(hitp->y)|| isinf(hitp->x))
         hitp->y = -1;
-    else if (hitp->y > HEIGHT || hitp->x > WIDTH)
-        hitp->y = -1;
-    else if (hitp->y < 0 || hitp->x < 0)
+    else if ((int)hitp->y < 0 || (int)hitp->x < 0)
         hitp->y = -1;
     else if (y_tile >= map_size.y || x_tile >= map_size.x)
         hitp->y = -1;

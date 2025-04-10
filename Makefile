@@ -28,7 +28,7 @@ BONUS_HEADER = ./Bonus/include/game_bonus.h
 NAME = cub3D
 BONUS_NAME = cub3D_bonus
 
-# ADS := -fsanitize=address -g 
+ADS := -fsanitize=address -g 
 
 all: libmlx $(NAME)
 
