@@ -28,6 +28,9 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	game->animator = init_animator(game->mlx, true);
+	game->door.closed = true;
+	game->door.open = false;
+	game->door.disp_ratio = 100;
 	if (!load_resources(game))
 		return (false);
 	return (true);
@@ -83,6 +86,16 @@ void	update(void *param) {
 	anim_update(game->animator);
 	anim_render(game->animator);
 	mv_handle_moves(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_C))
+	{
+		game->door.closed = true;
+		cast_rays(game);
+	}
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
+	{
+		game->door.closed = false;
+		cast_rays(game);
+	}
 	draw_minimap(game);
 }
 

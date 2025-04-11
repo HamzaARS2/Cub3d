@@ -18,7 +18,7 @@ void	mv_move_player(t_player *object, double new_x, double new_y)
 	object->position.y = new_y + (OBJ_SIZE / 2);
 }
 
-bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
+bool	mv_check_collusion(int new_x, int new_y, char **map, t_game *game)
 {
 	t_point top_left;
 	t_point top_right;
@@ -33,10 +33,12 @@ bool	mv_check_collusion(int new_x, int new_y, char **map, char comp)
 	bot_left.y = (new_y + OBJ_SIZE + 1) / TILE_SIZE;
 	bot_right.x = (new_x + OBJ_SIZE + 1) / TILE_SIZE;
 	bot_right.y = (new_y + OBJ_SIZE + 1) / TILE_SIZE;
-	if (map[top_left.y][top_left.x] == comp
-		|| map[top_right.y][top_right.x] == comp
-		|| map[bot_left.y][bot_left.x] == comp
-		|| map[bot_right.y][bot_right.x] == comp)
+	if (map[top_left.y][top_left.x] == '1'
+		|| map[top_right.y][top_right.x] == '1'
+		|| map[bot_left.y][bot_left.x] == '1'
+		|| map[bot_right.y][bot_right.x] == '1'
+		|| (map[bot_right.y][bot_right.x] == 'D'
+		&& game->door.closed))
 		return (false);
 	return (true);
 }
@@ -73,12 +75,12 @@ void	mv_handle_moves(t_game *game)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
-		player->direction.rotatin_angle -= RADIANS(ROTATION_SPEED);
+		player->direction.rotatin_angle = normalizeAngle(player->direction.rotatin_angle - RADIANS(ROTATION_SPEED));
 		cast_rays(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
-		player->direction.rotatin_angle += RADIANS(ROTATION_SPEED);
+		player->direction.rotatin_angle = normalizeAngle(player->direction.rotatin_angle + RADIANS(ROTATION_SPEED));
 		cast_rays(game);
 	}
 	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))

@@ -25,9 +25,11 @@ int	main(int ac, char **av) {
 		cleanup_game(game);
 		return (EXIT_FAILURE);
 	}
-	mlx_set_mouse_pos(game.mlx, WIDTH / 2, HEIGHT / 2);
-	mlx_get_mouse_pos(game.mlx, &game.mouse_pos.x, &game.mouse_pos.y);
-	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
+	// must delet this:
+	game.door.closed = false;
+	//mlx_set_mouse_pos(game.mlx, WIDTH / 2, HEIGHT / 2);
+	//mlx_get_mouse_pos(game.mlx, &game.mouse_pos.x, &game.mouse_pos.y);
+	//mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
 	run_game(&game);
 	cleanup_game(game);
 	return (EXIT_SUCCESS);
