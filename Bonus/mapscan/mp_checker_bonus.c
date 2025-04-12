@@ -119,7 +119,7 @@ bool	chk_map(t_mapscan *mapscan)
 			{
 				if (!chk_position(mapscan->map, v2))
 					return (false);
-				if (mapscan->map[v2.y][v2.x] != '0')
+				if (mapscan->map[v2.y][v2.x] != '0' && mapscan->map[v2.y][v2.x] != 'D')
 					mapscan->start_pos = (t_point) {v2.x, v2.y};
 			}
 		}

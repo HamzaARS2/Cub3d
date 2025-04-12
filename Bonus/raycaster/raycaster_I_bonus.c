@@ -99,8 +99,8 @@ t_vector2 vertical_intersection(t_game *game, double ray_angle, int *v_d)
     double Xa;
     double Ya;
     
-    hit.x = 0;
-    hit.y = 0;
+    hit = (t_vector2){0};
+    game->door.door_ray.hitp = (t_vector2){-1};
     player = game->player;
     if (v_d[1] == looking_right)
     {
@@ -201,27 +201,22 @@ void	cast_rays(t_game *game)
 	double 	angle_shift;
 	int x;
 
-    board_clean(game->world->door_img);
-	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
 	ray_angle = RADIANS(-30);
 	angle_shift = ((double)RADIANS(60) / WIDTH );
-	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
+    board_clean(game->world->door_img);
 	board_clean(game->world->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
-	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + ray_angle);
+	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle
+     + ray_angle);
 
-    // printf("angle SHIFT value: %f\n", ray_angle);
     while (ray_angle < RADIANS(30)&& x < WIDTH)
 	{
-		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
 		bresenham_line(game, x, ray_angle);
-		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle +  angle_shift);
+		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle
+         +  angle_shift);
 		ray_angle += angle_shift;
 		x++;
-        //printf("angle SHIFT value: %f\n", ray_angle);
 	}
 	game->player->direction.rotatin_angle = rotate_angle;
-	// printf("ang: %f\n", game->player->direction.rotatin_angle);
 }
-//0.523599

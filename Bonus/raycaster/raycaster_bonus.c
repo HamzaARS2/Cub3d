@@ -91,64 +91,14 @@ void	bresenham_line(t_game *game, int x, double angle)
 	powf(player->position.y - game->door.door_ray.hitp.y, 2)) * cos(angle));
 
 	//here i draw the door, notice there is a door struct in game struct, so you work with it.
-
 	if (ray_dat.distance < game->door.door_ray.distance)
-		game->door.door_ray.hitp.x = -1;
-	if (game->door.door_ray.hitp.x != -1)
+		game->door.door_ray.hitp.x = -1.0;
+	if (game->door.door_ray.hitp.x != -1.0)
 		draw_wall(game, game->door.door_ray.distance, angle, x);
 
 	wd_render_walls(game->world, ray_dat);
 }
 
-void open_door(t_game *game)
-{
-// 	static int sleep;
-
-// 	if (sleep == 100)
-// 	{
-// 		// if (game->door.closed && game->door.disp_ratio > 0)
-// 		// 	game->door.disp_ratio--; 
-// 		// else if (game->door.disp_ratio == 0)
-// 		// {
-// 		// 	game->door.closed = false;
-// 		// 	game->door.open = true;
-// 		// }
-// 		sleep = 0;
-// 	}
-// 	sleep++;
-	int sleep;
-
-	sleep = 0;
-	while (sleep < 100)
-	{
-		if (game->door.open && game->door.disp_ratio  > 0)
-			game->door.disp_ratio--; 
-		else if (game->door.disp_ratio == 10)
-		{
-			game->door.closed = true;
-			game->door.open = false;
-		}
-		sleep++;
-	}
-}
-
-void close_door(t_game *game)
-{
-	// int sleep;
-
-	// sleep = 0;
-	// while (sleep < 100)
-	// {
-	// 	if (game->door.open && game->door.disp_ratio  < 100)
-	// 		game->door.disp_ratio++; 
-	// 	else if (game->door.disp_ratio == 33)
-	// 	{
-	// 		game->door.closed = true;
-	// 		game->door.open = false;
-	// 	}
-	// 	sleep++;
-	// }
-}
 
 void draw_wall(t_game *game, double distance, double angle, int x)
 {
@@ -157,31 +107,37 @@ void draw_wall(t_game *game, double distance, double angle, int x)
 	 double start;
 	 int 	pixel_offset;
 
-	 focal = (double) (WIDTH / 2) / tan(RADIANS((FOV / 2)));
-	 distance *= cos(angle);
-	 wall_h = (25 / distance) * focal;
 
-	 if (!game->door.closed)
-	 {
-	 	return;
-	 }
-	else if (game->door.closed)
+	if (game->door.closed || (game->door.open && game->door.door_ray.distance > 20))
 	{
-		double xz = wall_h *(1 - (game->door.disp_ratio / 100.0));
-
-		start = (HEIGHT / 2) - (wall_h / 2) + xz;
+		//DELET this code and replace it with door texture function.
+		////////////////////////////////////////////
+		focal = (double) (WIDTH / 2) / tan(RADIANS((FOV / 2)));
+		distance *= cos(angle);
+		wall_h = (32 / distance) * focal;
+		game->door.closed =true;
+		start = (HEIGHT / 2) - (wall_h / 2);
 		if (start < 0)
 			start = 0;
 		pixel_offset = (wall_h - HEIGHT) / 2;
 		if (pixel_offset < 0)
 			pixel_offset = 0;
-		while( pixel_offset < wall_h - xz && start < HEIGHT)
+
+		while(pixel_offset < wall_h && start < HEIGHT)
 		{
 			mlx_put_pixel(game->world->door_img, x, 
 				start, get_rgba(51,175,255,255));
 			pixel_offset++;
 			start++;
 		}
+		///////////////////////////////////
+	}
+	else if (!game->door.closed && game->door.door_ray.distance > TILE_SIZE + 10)
+		game->door.closed = true;
+	else if (!game->door.closed)
+	{
+		game->door.open = false;
+	 	return;
 	}
 
 }

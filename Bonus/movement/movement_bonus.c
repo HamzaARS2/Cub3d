@@ -25,21 +25,27 @@ bool	mv_check_collusion(int new_x, int new_y, char **map, t_game *game)
 	t_point bot_left;
 	t_point bot_right;
 
-	top_left.x = (new_x - 1) / TILE_SIZE;
-	top_left.y = (new_y - 1) / TILE_SIZE;
-	top_right.x = (new_x + OBJ_SIZE + 1) / TILE_SIZE;
-	top_right.y = (new_y - 1) / TILE_SIZE;
-	bot_left.x = (new_x - 1) / TILE_SIZE;
-	bot_left.y = (new_y + OBJ_SIZE + 1) / TILE_SIZE;
-	bot_right.x = (new_x + OBJ_SIZE + 1) / TILE_SIZE;
-	bot_right.y = (new_y + OBJ_SIZE + 1) / TILE_SIZE;
+	top_left.x = (new_x - (OBJ_SIZE / 2) - 2)/ TILE_SIZE;
+	top_left.y = (new_y - (OBJ_SIZE / 2) - 2) / TILE_SIZE;
+	top_right.x = (new_x + (OBJ_SIZE / 2) + 2) / TILE_SIZE;
+	top_right.y = (new_y - (OBJ_SIZE / 2) - 2) / TILE_SIZE;
+	bot_left.x = (new_x - (OBJ_SIZE / 2) - 2) / TILE_SIZE;
+	bot_left.y = (new_y + (OBJ_SIZE / 2) + 2) / TILE_SIZE;
+	bot_right.x = (new_x + (OBJ_SIZE / 2) + 2) / TILE_SIZE;
+	bot_right.y = (new_y + (OBJ_SIZE / 2) + 2) / TILE_SIZE;
+
 	if (map[top_left.y][top_left.x] == '1'
 		|| map[top_right.y][top_right.x] == '1'
 		|| map[bot_left.y][bot_left.x] == '1'
 		|| map[bot_right.y][bot_right.x] == '1'
-		|| (map[bot_right.y][bot_right.x] == 'D'
-		&& game->door.closed))
+		)
 		return (false);
+	if ((map[top_left.y][top_left.x] == 'D'
+		|| map[top_right.y][top_right.x] == 'D'
+		|| map[bot_left.y][bot_left.x] == 'D'
+		|| map[bot_right.y][bot_right.x] == 'D')
+		&& game->door.closed)
+			return (false);
 	return (true);
 }
 

@@ -88,12 +88,13 @@ void	update(void *param) {
 	mv_handle_moves(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_C))
 	{
-		game->door.closed = true;
+		game->door.open = true;
 		cast_rays(game);
 	}
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
 	{
 		game->door.closed = false;
+		game->door.open = false;
 		cast_rays(game);
 	}
 	draw_minimap(game);

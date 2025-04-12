@@ -32,7 +32,9 @@ ADS := -fsanitize=address -g
 
 all: libmlx $(NAME)
 
-bonus: libmlx $(BONUS_OBJS_FILES) $(LIBFT) $(BONUS_HEADER)
+bonus: libmlx $(LIBFT) $(BONUS_NAME)
+
+$(BONUS_NAME) : $(BONUS_OBJS_FILES) $(BONUS_HEADER)
 	$(CC) $(ADS) $(CFLAGS) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $(BONUS_NAME)
 
 libmlx:
