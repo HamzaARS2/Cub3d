@@ -23,7 +23,6 @@ t_player	*init_player(t_game *game, mlx_image_t *img ,t_point pos)
 	object->position.y = pos.y * TILE_SIZE + (TILE_SIZE / 2) - (OBJ_SIZE / 2);
 	object->speed = 3.0f;
 	object->direction = (t_Dvector) {0};
-	//object->direction.rotatin_angle = 270;
 	if (!img)
 		object->image = gfx_create_image(game->mlx, &game->world->graphics, OBJ_SIZE, OBJ_SIZE);
 	else
@@ -47,7 +46,8 @@ void	obj_update_mvdirection(t_game *game, double rotation)
 		
 	new_x = game->player->position.x - (OBJ_SIZE / 2) + distance_x;
 	new_y = game->player->position.y - (OBJ_SIZE / 2) + distance_y;
-	if (mv_check_collusion(new_x, new_y, game->mapscan->map, game))
+	if (mv_check_collusion(new_x, new_y, game->mapscan->map, '1') &&
+		check_door_collusion(new_x, new_y, game->mapscan->map, game))
 		mv_move_player(game->player, new_x, new_y);
 	cast_rays(game);
 }

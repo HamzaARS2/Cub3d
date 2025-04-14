@@ -1,5 +1,4 @@
 # include "../include/raycaster_bonus.h"
-#define next_tile 1.0E-8
 
 int	check_wall(t_game *game, t_vector2 *hitp, char **map, t_point map_size)
 {
@@ -55,77 +54,65 @@ void    find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 
 t_vector2 horizontal_intersection(t_game *game, double ray_angle, int *v_d)
 {
-    t_vector2 hit;
-    t_player *player;
-    double Ax;
-    double Ay;
-    double Xa;
-    double Ya;
+    t_data data;
     
-    hit = (t_vector2){0};
+    data.hit = (t_vector2){0};
     game->door.door_ray.hitp = (t_vector2){-1};
-    player = game->player;
+    data.player = game->player;
     if (v_d[0] == looking_up)
     {
-        Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE - next_tile;
-        Ya = -TILE_SIZE;
+        data.py = floor(data.player->position.y / TILE_SIZE) * TILE_SIZE - next_tile;
+        data.ya = -TILE_SIZE;
     }
     else
     {
-        Ay = floor(player->position.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
-        Ya = TILE_SIZE;
+        data.py = floor(data.player->position.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
+        data.ya = TILE_SIZE;
     }
-    Xa = fabs(Ya / tan(ray_angle));
+    data.xa = fabs(data.ya / tan(ray_angle));
     if (v_d[1] == looking_right)
-        Ax = player->position.x + fabs((Ay - player->position.y) / tan(ray_angle))  - next_tile;
+        data.px = data.player->position.x + fabs((data.py - data.player->position.y) / tan(ray_angle))  - next_tile;
     else
     {
-        Ax = player->position.x - fabs((Ay - player->position.y) / tan(ray_angle)) + next_tile;
-        Xa *= -1;
+        data.px = data.player->position.x - fabs((data.py - data.player->position.y) / tan(ray_angle)) + next_tile;
+        data.xa *= -1;
     }   
-    hit.x = Ax;
-    hit.y = Ay;
-    find_wall_hit(game, &hit, Xa, Ya);
-    game->door.door_ray.ver_hor = 'H';
-    return hit;
+    data.hit.x = data.px;
+    data.hit.y = data.py;
+    find_wall_hit(game, &data.hit, data.xa, data.ya);
+    return data.hit;
 }
 
 t_vector2 vertical_intersection(t_game *game, double ray_angle, int *v_d)
 {
-    t_vector2 hit;
-    t_player *player;
-    double Bx;
-    double By;
-    double Xa;
-    double Ya;
+    t_data data;
     
-    hit = (t_vector2){0};
+    data.hit = (t_vector2){0};
     game->door.door_ray.hitp = (t_vector2){-1};
-    player = game->player;
+    data.player = game->player;
     if (v_d[1] == looking_right)
     {
-        Bx = floor(player->position.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
-        Xa = TILE_SIZE;
+        data.px = floor(data.player->position.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE + next_tile;
+        data.xa = TILE_SIZE;
     }
     else
     {
-        Bx = floor(player->position.x / TILE_SIZE) * TILE_SIZE - next_tile;
-        Xa = -TILE_SIZE;
+        data.px = floor(data.player->position.x / TILE_SIZE) * TILE_SIZE - next_tile;
+        data.xa = -TILE_SIZE;
     }
     
-    Ya = fabs(Xa * tan(ray_angle));
+    data.ya = fabs(data.xa * tan(ray_angle));
     if (v_d[0] == looking_down)
-        By = player->position.y + fabs((player->position.x - Bx) * tan(ray_angle)) - next_tile;
+        data.py = data.player->position.y + fabs((data.player->position.x - data.px) * tan(ray_angle)) - next_tile;
     else
     {
-        By = player->position.y - fabs((player->position.x - Bx) * tan(ray_angle)) + next_tile;
-        Ya *= -1;
+        data.py = data.player->position.y - fabs((data.player->position.x - data.px) * tan(ray_angle)) + next_tile;
+        data.ya *= -1;
     }
-    hit.x = Bx;
-    hit.y = By;
-    find_wall_hit(game, &hit, Xa, Ya);
-    game->door.door_ray.ver_hor = 'V';
-    return hit;
+    data.hit.x = data.px;
+    data.hit.y = data.py;
+    find_wall_hit(game, &data.hit, data.xa, data.ya);
+    return data.hit;
 }
 
 t_ray_dat get_ray_data(t_vector2 hit, int *v_d, char c)
@@ -160,7 +147,6 @@ t_ray_dat find_nearest_hit(t_game *game, double ray_angle)
     int v_d[2];
     double h_dist;
     double v_dist;
-    //t_ray_dat ray_data;
 
     player = game->player;
     vision_derction(ray_angle, v_d);
@@ -202,17 +188,17 @@ void	cast_rays(t_game *game)
 	int x;
 
 	x = 0;
-	ray_angle = RADIANS(-30);
-	angle_shift = ((double)RADIANS(60) / WIDTH );
+	ray_angle = radians(-30);
+	angle_shift = ((double)radians(60) / WIDTH );
     board_clean(game->world->door_img);
 	board_clean(game->world->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
 	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle
      + ray_angle);
 
-    while (ray_angle < RADIANS(30)&& x < WIDTH)
+    while (ray_angle < radians(30)&& x < WIDTH)
 	{
-		bresenham_line(game, x, ray_angle);
+		send_ray(game, x, ray_angle);
 		game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle
          +  angle_shift);
 		ray_angle += angle_shift;

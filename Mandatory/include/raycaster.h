@@ -23,7 +23,7 @@ typedef enum e_direction {
 		looking_left,
 } t_direction;
 
-# define RADIANS(d) (d * (M_PI / 180))
+# define radians(d) (d * (M_PI / 180))
 # define FOV 60
 # define RES 4
 # define NUM_RAYS (WIDTH / RES)

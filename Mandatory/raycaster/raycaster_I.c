@@ -179,15 +179,15 @@ void	cast_rays(t_game *game)
 
 	// printf("x: %f, y: %f\n", game->player->position.x, game->player->position.y);
 	x = 0;
-	ray_angle = RADIANS((FOV / 2) * -1);
-	angle_shift = (double)RADIANS(FOV) / WIDTH;
+	ray_angle = radians((FOV / 2) * -1);
+	angle_shift = (double)radians(FOV) / WIDTH;
 	// printf("ang: %f, angle_sh: %f\n", game->player->direction.rotatin_angle, angle_shift);
 	board_clean(game->world->drawing_board);
 	rotate_angle = game->player->direction.rotatin_angle;
 	game->player->direction.rotatin_angle = normalizeAngle(game->player->direction.rotatin_angle + ray_angle);
 
     // printf("angle SHIFT value: %f\n", ray_angle);
-    while (ray_angle < RADIANS(30)&& x < WIDTH)
+    while (ray_angle < radians(30)&& x < WIDTH)
 	{
 		// printf("/////cast angle : %f\n", game->player->direction.rotatin_angle);
 		bresenham_line(game, x, ray_angle);

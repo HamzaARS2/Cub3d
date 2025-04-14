@@ -39,3 +39,21 @@ bool	load_resources(t_game *game)
 		 return (false);
 	return (true);
 }
+
+void	init_angle(t_game *game)
+{
+	double angle;
+	char c_dir;
+
+	c_dir = game->mapscan->c_direction;
+	if (c_dir == 'N')
+		angle = radians(270);
+	else if (c_dir == 'E')
+		angle = radians(0);
+	else if (c_dir == 'S')
+		angle = radians(90);
+	else if (c_dir == 'W')
+		angle = radians(180);
+	game->player->direction.rotatin_angle = angle;
+	
+}

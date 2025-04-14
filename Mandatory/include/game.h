@@ -29,7 +29,7 @@
 #define MAP_HEIGHT 250
 
 #define ROTATION_SPEED 2
-# define RADIANS(d) (d * (M_PI / 180))
+# define radians(d) (d * (M_PI / 180))
 
 
 typedef struct s_Dvector  {

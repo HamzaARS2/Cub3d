@@ -28,9 +28,9 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
 	game->animator = init_animator(game->mlx, true);
+	init_angle(game);
 	game->door.closed = true;
 	game->door.open = false;
-	game->door.disp_ratio = 100;
 	if (!load_resources(game))
 		return (false);
 	return (true);

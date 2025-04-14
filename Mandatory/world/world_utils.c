@@ -32,7 +32,7 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
 	t_render_info render_info;
 	double offset_x;
 	
-	projection = (WIDTH / 2) / tan(RADIANS(FOV / 2));
+	projection = (WIDTH / 2) / tan(radians(FOV / 2));
 	// wall strip height
 	render_info.wall_strip_height = (TILE_SIZE / rays_info.distance) * projection;
 	// wall top pixel
