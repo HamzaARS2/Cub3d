@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/15 10:02:32 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:20:30 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	wd_clear(t_world *world)
 	ft_clear_array((void **)world->textures.south_texture.pixels);
 	ft_clear_array((void **)world->textures.east_texture.pixels);
 	ft_clear_array((void **)world->textures.west_texture.pixels);
+	ft_clear_array((void **)world->textures.door_texture.pixels);
 	free(world);
 }

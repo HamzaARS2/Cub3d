@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.c                                            :+:      :+:    :+:   */
+/*   world_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:15:50 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 15:03:19 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:20:58 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	wd_load_textures(t_world *world, t_texpath texpaths)
 	ft_memset(&world->textures.east_texture, 0, sizeof(t_wd_texture));
 	ft_memset(&world->textures.south_texture, 0, sizeof(t_wd_texture));
 	ft_memset(&world->textures.west_texture, 0, sizeof(t_wd_texture));
+	ft_memset(&world->textures.door_texture, 0, sizeof(t_wd_texture));
 	world->crosshair = gfx_create_teximage(world->mlx, &world->graphics, CROSSHAIR_PATH);
 	if (!world->crosshair)
 		return (false);
@@ -51,6 +52,9 @@ bool	wd_load_textures(t_world *world, t_texpath texpaths)
 	world->textures.west_texture.img = gfx_create_teximage(world->mlx, &world->graphics, texpaths.west_tex);
 	if (!world->textures.west_texture.img)
 		return (false);
+	world->textures.door_texture.img = gfx_create_teximage(world->mlx, &world->graphics, "Bonus/textures/doors/door.png");
+	if (!world->textures.door_texture.img)
+		return (false);
 	return (true);
 }
 
@@ -60,6 +64,7 @@ void	wd_prepare_colors(t_world *world)
 	world->textures.east_texture.pixels = wd_get_color_buffer(world->textures.east_texture.img);
 	world->textures.south_texture.pixels = wd_get_color_buffer(world->textures.south_texture.img);
 	world->textures.west_texture.pixels = wd_get_color_buffer(world->textures.west_texture.img);
+	world->textures.door_texture.pixels = wd_get_color_buffer(world->textures.door_texture.img);
 }
 
 void	wd_render_cf(t_world *world)
@@ -99,6 +104,25 @@ void	wd_render_walls(t_world *world, t_ray_dat rays_info)
 	}
 }
 
+void	wd_render_doors(t_world *world, t_ray_dat rays_info)
+{
+	int y;
+	int color;
+	double scale_factor;
+	t_wd_texture texture;
+	t_render_info info;
+
+	texture = world->textures.door_texture;
+	info = wd_calc_render_info(rays_info, texture);
+	scale_factor = ((double)texture.img->height / info.wall_strip_height);
+	y = info.wall_top_pixel;
+	while (y < info.wall_bot_pixel - 1)
+	{
+		info.tex_offset_y = (info.pixel_offset++) * scale_factor;
+		color = texture.pixels[info.tex_offset_y][info.tex_offset_x];
+		mlx_put_pixel(world->door_img, rays_info.current_column, y++, color);
+	}
+}
 /*
 texture size = 32 | wall height = 128
 0
