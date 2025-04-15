@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   game_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 16:27:52 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/15 09:36:00 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 #include "world_bonus.h"
 #include "animator_bonus.h"
 
-#define WIDTH 800
-#define HEIGHT 500
+#define WIDTH 1400
+#define HEIGHT 900
 
 #define MAP_WIDTH 300
 #define MAP_HEIGHT 250

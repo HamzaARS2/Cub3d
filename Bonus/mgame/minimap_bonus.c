@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:12:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 16:46:48 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/15 09:44:28 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	get_color(t_mapscan *mapscan, t_point p)
 		return (255);
 	if (mapscan->map[y][x] == '1')
 		return get_rgba(51,175,255,255);
+	if (mapscan->map[y][x] == 'D')
+		return get_rgba(235,52,110,255);
 	if (ump_is_mpcomponent(mapscan->map[y][x]))
 		return get_rgba(252,250,255,255);
 	return (255);
