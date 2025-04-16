@@ -39,7 +39,7 @@ void	send_ray(t_game *game, int x, double angle)
 	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
 	hit = ray_dat.hitp;
 	ray_dat.current_column = x;
-	ray_dat.distance = get_distance(hit, player);
+	ray_dat.distance = get_distance(hit, player) * cos(angle);
 	wd_render_walls(game->world, ray_dat);
 }
 

@@ -64,8 +64,8 @@ void	send_ray(t_game *game, int x, double angle)
 	hit = ray_dat.hitp;
 	ray_dat.current_column = x;
 	game->door.door_ray.current_column = x;
-	ray_dat.distance = get_distance(hit, player);
-	game->door.door_ray.distance = get_distance(game->door.door_ray.hitp, player);
+	ray_dat.distance = get_distance(hit, player)* cos(angle);
+	game->door.door_ray.distance = get_distance(game->door.door_ray.hitp, player)* cos(angle);
 	if (ray_dat.distance < game->door.door_ray.distance)
 		game->door.door_ray.hitp.x = INVALID_DATA;
 	if (game->door.door_ray.hitp.x != INVALID_DATA)

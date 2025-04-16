@@ -97,12 +97,3 @@ void	wd_render_walls(t_world *world, t_ray_dat rays_info)
 		mlx_put_pixel(world->drawing_board, rays_info.current_column, y++, color);
 	}
 }
-
-/*
-texture size = 32 | wall height = 128
-0
-0
-0
-0
-1
-*/
