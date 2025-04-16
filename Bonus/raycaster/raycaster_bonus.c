@@ -1,105 +1,62 @@
 # include "../include/raycaster_bonus.h"
 
-void draw_wall(t_game *game, double distance, double angle, int x);
-
-double  radians(double angle)
+t_vector2 vertical_intersection(t_game *game, double ray_angle, int *v_d)
 {
-	return (angle * (M_PI / 180));
+    t_data h_data;
+    
+    h_data.hit = (t_vector2){0};
+    game->door.door_ray.hitp = (t_vector2){-1};
+    h_data.player = game->player;
+    get_vert_x(&h_data, ray_angle, v_d);
+    get_vert_y(&h_data, ray_angle, v_d);
+    h_data.hit.x = h_data.px;
+    h_data.hit.y = h_data.py;
+    find_wall_hit(game, &h_data.hit, h_data.xa, h_data.ya);
+    return h_data.hit;
 }
 
-void	board_clean(mlx_image_t *drawing_board)
+void       get_door_ray(t_game *game, t_player *player, t_vector2 h_hit, t_vector2 v_hit)
 {
-	unsigned int	color;
-	int x;
-	int y;
+    double h_door_dist;
+    double v_door_dist;
 
-	y = -1;
-	x = -1;
-	color = 0x00000000;
-	while (++x < WIDTH)
-	{
-		y = -1;
-		while (++y < HEIGHT)
-			mlx_put_pixel(drawing_board, x, y, color);
-	}
+    h_door_dist = get_distance(h_hit, player);
+    v_door_dist = get_distance(v_hit, player);
+
+    if (h_hit.x != INVALID_DATA && (v_hit.x == INVALID_DATA || h_door_dist < v_door_dist))
+    {
+        game->door.door_ray.hitp = h_hit;
+        game->door.door_ray.ver_hor = 'H';
+    }
+    else if (v_hit.x != INVALID_DATA && (h_hit.x == INVALID_DATA || v_door_dist < h_door_dist))
+    {
+        game->door.door_ray.hitp = v_hit;
+        game->door.door_ray.ver_hor = 'V';
+    }
+}
+ 
+double  get_distance(t_vector2 hit, t_player *player)
+{
+    return (sqrt(powf(player->position.x - hit.x, 2) + 
+    powf(player->position.y - hit.y, 2)));
 }
 
-double normalizeAngle(double angle) 
+t_ray_dat find_nearest_hit(t_game *game, double ray_angle)
 {
-	double two_pi;
-
-	two_pi = 2 * M_PI;
-	while (angle < 0)
-		angle += two_pi;
-	while (angle >= two_pi)
-		angle -= two_pi;
-	return (angle);
-}
-
-void	send_ray(t_game *game, int x, double angle)
-{
+    t_vector2   h_hit[2];
+    t_vector2   v_hit[2];
     t_player    *player;
-	t_vector2 	hit;
-	t_ray_dat	ray_dat;
+    int         v_d[2];
 
     player = game->player;
-	ray_dat = find_nearest_hit(game, game->player->direction.rotatin_angle);
-	hit = ray_dat.hitp;
-	ray_dat.current_column = x;
-	game->door.door_ray.current_column = x;
-	ray_dat.distance = (sqrt(powf(player->position.x - hit.x, 2) + 
-    powf(player->position.y - hit.y, 2)) * cos(angle));
-	game->door.door_ray.distance = (sqrt(powf(player->position.x - game->door.door_ray.hitp.x, 2) + 
-	powf(player->position.y - game->door.door_ray.hitp.y, 2)) * cos(angle));
-	if (ray_dat.distance >= game->door.door_ray.distance)
-		draw_wall(game, game->door.door_ray.distance, angle, x);
-	// 	game->door.door_ray.hitp.x = -1.0;
-	// if (game->door.door_ray.hitp.x != -1.0) 
-	wd_render_walls(game->world, ray_dat);
-}
-
-
-void draw_wall(t_game *game, double distance, double angle, int x)
-{
-	 double focal;
-	 double wall_h;
-	 double start;
-	 int 	pixel_offset;
-
-	if (game->door.closed || (game->door.open && mv_check_collusion(
-		game->player->position.x, game->player->position.y, game->mapscan->map, 'D')))
-	{
-		//DELET this code and replace it with door texture function.
-		////////////////////////////////////////////
-		wd_render_doors(game->world, game->door.door_ray);
-		game->door.closed =true;
-		// focal = (double) (WIDTH / 2) / tan(radians((FOV / 2)));
-		// distance *= cos(angle);
-		// wall_h = (32 / distance) * focal;
-		// start = (HEIGHT / 2) - (wall_h / 2);
-		// if (start < 0)
-		// 	start = 0;
-		// pixel_offset = (wall_h - HEIGHT) / 2;
-		// if (pixel_offset < 0)
-		// 	pixel_offset = 0;
-
-		// while(pixel_offset < wall_h && start < HEIGHT)
-		// {
-		// 	mlx_put_pixel(game->world->door_img, x, 
-		// 		start, get_rgba(51,175,255,255));
-		// 	pixel_offset++;
-		// 	start++;
-		// }
-		///////////////////////////////////
-	}
-	else if (!game->door.closed && game->door.door_ray.distance > TILE_SIZE *5 
-		&& mv_check_collusion(game->player->position.x, game->player->position.y,
-			 game->mapscan->map, 'D'))
-		game->door.closed = true;
-	else if (!game->door.closed)
-	{
-		game->door.open = false;
-	 	return;
-	}
-
+    vision_dierction(ray_angle, v_d);
+    h_hit[0] = horizontal_intersection(game, ray_angle, v_d);
+    h_hit[1] = game->door.door_ray.hitp;
+    v_hit[0] = vertical_intersection(game, ray_angle, v_d);
+    v_hit[1] = game->door.door_ray.hitp;
+    get_door_ray(game, player, h_hit[1], v_hit[1]);
+    if (v_hit[0].y != INVALID_DATA && (h_hit[0].y == INVALID_DATA ||
+        get_distance(h_hit[0], player) > get_distance(v_hit[0], player)))
+        return (get_ray_data(v_hit[0], v_d, 'V'));
+    return (get_ray_data(h_hit[0], v_d, 'H'));
 }

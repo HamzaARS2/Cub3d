@@ -29,7 +29,6 @@
 #define MAP_HEIGHT 250
 
 #define ROTATION_SPEED 2
-# define radians(d) (d * (M_PI / 180))
 
 
 typedef struct s_Dvector  {
@@ -54,9 +53,6 @@ typedef struct s_game {
 	mlx_t		*mlx;
 	t_player	*player;
 } t_game;
-
-
-void	bresenham_line(t_game *game, int x, double angle);
 
 bool	init_game(t_game *game, char *mapfile);
 void	run_game(t_game *game);
@@ -83,5 +79,6 @@ void	board_clean(mlx_image_t *drawing_board);
 void	cast_rays(t_game *game);
 
 double normalizeAngle(double angle);
+double	radians(double angle);
 
 #endif

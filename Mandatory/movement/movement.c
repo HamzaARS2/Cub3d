@@ -51,47 +51,34 @@ void	mv_handle_moves(t_game *game)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W) && mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		player->direction.walkDirection = 1;
-		obj_update_mvdirection(game, radians(45));
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_W) && mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		player->direction.walkDirection = 1;
-		obj_update_mvdirection(game, radians(-45));
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{	
 		player->direction.walkDirection = 1;
 		obj_update_mvdirection(game, 0);
 	}
-
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{	
-		player->direction.walkDirection = 1;
-		obj_update_mvdirection(game, radians(90));
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{	
-		player->direction.walkDirection = -1;
-		obj_update_mvdirection(game, radians(90));
-	}
-
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{	
 		player->direction.walkDirection = -1;
 		obj_update_mvdirection(game, 0);
 	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	{	
+		player->direction.walkDirection = 1;
+		obj_update_mvdirection(game, radians(90));
+	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	{	
+		player->direction.walkDirection = -1;
+		obj_update_mvdirection(game, radians(90));
+	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
-		player->direction.rotatin_angle -= radians(ROTATION_SPEED);
+		player->direction.rotatin_angle = normalizeAngle(player->direction.rotatin_angle - radians(ROTATION_SPEED));
 		cast_rays(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
-		player->direction.rotatin_angle += radians(ROTATION_SPEED);
+		player->direction.rotatin_angle = normalizeAngle(player->direction.rotatin_angle + radians(ROTATION_SPEED));
 		cast_rays(game);
 	}
-
 }
