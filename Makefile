@@ -3,7 +3,8 @@ MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 MLX := MLX42
 MLX_BUILD := $(MLX)/build
-MLX_LIB = $(MLX)/build/libmlx42.a -Iinclude -lglfw -lm
+GLFW := $(shell pkg-config --libs glfw3)
+MLX_LIB = $(MLX)/build/libmlx42.a -Iinclude $(GLFW) -lm
 
 LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a

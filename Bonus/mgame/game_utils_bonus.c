@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_utils.c                                       :+:      :+:    :+:   */
+/*   game_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:31:47 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 16:28:37 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:48:24 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,11 @@ void	init_angle(t_game *game)
 		angle = radians(180);
 	game->player->direction.rotatin_angle = angle;
 	
+}
+
+bool	check_door_collusion(int new_x, int new_y, char **map, t_game *game)
+{
+	if (!mv_check_collusion(new_x, new_y, map, 'D') && game->door.closed)
+		return (false);
+	return (true);
 }

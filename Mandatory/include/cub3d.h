@@ -1,11 +1,20 @@
-#ifndef CUB4D_H
-# define CUB4D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 15:33:48 by nhimad            #+#    #+#             */
+/*   Updated: 2025/04/17 17:55:59 by nhimad           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include "mapscan.h"
-#include "game.h"
-#include "raycaster.h"
-
-
+# include "game.h"
+# include "mapscan.h"
+# include "raycaster.h"
 
 #endif

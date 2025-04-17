@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/15 10:03:08 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/17 17:23:38 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ void handle_cursor_movement(double xpos, double ypos, void* param)
 	int x_d;
 
 	game = param;
-	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	angle = game->player->direction.rotatin_angle;
 	x_d = xpos - game->mouse_pos.x;
-	angle = normalizeAngle(angle + x_d * 0.0015);
+	angle = normalize_angle(angle + x_d * 0.0015);
 	game->player->direction.rotatin_angle = angle;
 	game->mouse_pos.x = xpos;
 	game->mouse_pos.y = -1;
