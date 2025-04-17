@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 14:18:47 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:11:37 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path)
 	
 	texture = mlx_load_png(tex_path);
 	if (!texture)
+	{
+		mp_post_error(ERR_FILE_READ);
 		return (NULL);
+	}
 	image = mlx_texture_to_image(mlx, texture);
 	ft_lstadd_back(graphics, ft_lstnew(image));
 	mlx_delete_texture(texture);
