@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gfx_manager.c                                      :+:      :+:    :+:   */
+/*   gfx_manager_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/12 14:18:47 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:04:38 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path)
 	mlx_image_t		*image;
 	
 	texture = mlx_load_png(tex_path);
-	if (!texture)
+	if (!texture) {
+		ft_putstr_fd("Error\nLoading png failed!\n", 2);
 		return (NULL);
+	}
 	image = mlx_texture_to_image(mlx, texture);
 	ft_lstadd_back(graphics, ft_lstnew(image));
 	mlx_delete_texture(texture);
