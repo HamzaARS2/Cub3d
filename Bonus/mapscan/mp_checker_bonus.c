@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mp_checker.c                                       :+:      :+:    :+:   */
+/*   mp_checker_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 16:21:11 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:27:47 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ bool	chk_position(char **map, t_point v2)
 		return (mp_post_error(ERR_INVALID_CHAR));
 	if (!ump_is_mpcomponent(map[v2.y][v2.x + 1]))
 		return (mp_post_error(ERR_INVALID_CHAR));
+	if (map[v2.y][v2.x] == 'D' && ((map[v2.y - 1][v2.x] == '1' && map[v2.y + 1][v2.x] == '1') || 
+	(map[v2.y][v2.x - 1] == '1' && map[v2.y][v2.x + 1] == '1')))
+		return (true);
+	else if (map[v2.y][v2.x] == 'D')
+		return (mp_post_error(ERR_INVALID_DATA));
 	return (true);
 }
 
