@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 18:16:49 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/18 11:19:42 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 1440
-# define HEIGHT 800
+# define WIDTH 350
+# define HEIGHT 700
 
 # define MAP_WIDTH 300
 # define MAP_HEIGHT 250

@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/15 09:36:22 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:44:46 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d_bonus.h"
 
-void	foo() {
+void	foo(void)
+{
 	system("leaks -q cub3D");
 }
 
-int	main(int ac, char **av) {
-	t_game		game;
+int	main(int ac, char **av)
+{
+	t_game	game;
 
 	atexit(foo);
 	if (!init_game(&game, av[1]))
@@ -32,5 +34,3 @@ int	main(int ac, char **av) {
 	cleanup_game(game);
 	return (EXIT_SUCCESS);
 }
-
-

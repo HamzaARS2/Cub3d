@@ -1,4 +1,4 @@
-CFLAGS = 
+CFLAGS = #-Wall -Wextra -Werror
 MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 MLX := MLX42
@@ -46,10 +46,10 @@ libmlx:
 $(LIBFT):
 	@make -C $(LIBFT_DIR) all bonus
 
-%.o: %.c $(H)
+%.o: %.c $(HEADER) $(BONUS_HEADER)
 	$(CC) $(ADS) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS_FILES) $(LIBFT) $(HEADER)
+$(NAME): $(OBJS_FILES) $(LIBFT)
 	$(CC) $(ADS) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $@
 
 clean:

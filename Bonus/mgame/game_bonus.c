@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 17:23:38 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/18 10:40:36 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->animator = init_animator(game->mlx, true);
 	init_angle(game);
 	game->door.closed = true;
-	game->door.open = false;
+	game->door.close_cmd = false;
 	if (!load_resources(game))
 		return (false);
 	return (true);
@@ -67,8 +67,6 @@ void handle_cursor_movement(double xpos, double ypos, void* param)
 	game->player->direction.rotatin_angle = angle;
 	game->mouse_pos.x = xpos;
 	game->mouse_pos.y = -1;
-	//printf("xpos: %f-----mpx: %d \n", xpos, game->mouse_pos.x);
-	
 }
 
 void	update(void *param) {
@@ -77,7 +75,6 @@ void	update(void *param) {
 	
 	game = param;
 	mlx = game->mlx;
-	
 	if (game->mouse_pos.y == -1)
 	{
 		game->mouse_pos.y = 0;
@@ -88,13 +85,13 @@ void	update(void *param) {
 	mv_handle_moves(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_C))
 	{
-		game->door.open = true;
+		game->door.close_cmd = true;
 		cast_rays(game);
 	}
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
 	{
 		game->door.closed = false;
-		game->door.open = false;
+		game->door.close_cmd = false;
 		cast_rays(game);
 	}
 	draw_minimap(game);

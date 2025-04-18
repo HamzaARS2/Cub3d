@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub4d.c                                            :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 14:48:28 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:51:33 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
 
-void	foo() {
+void	foo(void)
+{
 	system("leaks -q cub3D");
 }
 
-int	main(int ac, char **av) {
-	t_game		game;
+int	main(int ac, char **av)
+{
+	t_game	game;
 
+	(void) ac;
 	atexit(foo);
 	if (!init_game(&game, av[1]))
 	{
@@ -29,5 +32,3 @@ int	main(int ac, char **av) {
 	cleanup_game(game);
 	return (EXIT_SUCCESS);
 }
-
-

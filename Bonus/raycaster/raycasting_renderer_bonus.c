@@ -6,7 +6,7 @@
 /*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:41:53 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/17 17:04:18 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/18 10:40:36 by nhimad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render_doors(t_game *game, double distance, double angle, int x)
 	double	start;
 	int		pixel_offset;
 
-	if (game->door.closed || (game->door.open
+	if (game->door.closed || (game->door.close_cmd
 			&& mv_check_collusion(game->player->position.x,
 				game->player->position.y, game->mapscan->map, 'D')))
 	{
@@ -61,7 +61,7 @@ void	render_doors(t_game *game, double distance, double angle, int x)
 		game->door.closed = true;
 	else if (!game->door.closed)
 	{
-		game->door.open = false;
+		game->door.close_cmd = false;
 		return ;
 	}
 }
