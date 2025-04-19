@@ -14,9 +14,9 @@
 
 int	ft_lstcontent_max(t_list *lst)
 {
-	int size;
-	int current;
-	
+	int	size;
+	int	current;
+
 	size = 0;
 	while (lst)
 	{

@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 22:06:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 11:34:59 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:13:10 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ typedef struct s_list
 #  define BUFFER_SIZE 10
 # endif
 
-char	*get_next_line(int fd);
-// size_t	ft_strlen(char *str);
-size_t	is_exists(char *str, char c);
-char	*sclear(char **s);
-char	*strcombine(char *s1, char *s2);
+char				*get_next_line(int fd);
+size_t				is_exists(char *str, char c);
+char				*sclear(char **s);
+char				*strcombine(char *s1, char *s2);
 
 int					ft_isalpha(int c);
 int					ft_toupper(int c);

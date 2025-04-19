@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 12:29:22 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:14:36 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 
-	if (ac != 2) {
+	if (ac != 2)
+	{
 		ft_putstr_fd("Error\nOne argument required!", 2);
 		return (EXIT_FAILURE);
 	}
