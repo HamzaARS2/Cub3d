@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mapscan_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:10:09 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 18:45:39 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:31:05 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAPSCAN_H
-# define MAPSCAN_H
+#ifndef MAPSCAN_BONUS_H
+# define MAPSCAN_BONUS_H
 
 # include "../../libft/libft.h"
 # include <fcntl.h>
@@ -20,21 +20,21 @@
 
 typedef enum e_mperror
 {
-	NO_ERROR,            // Map is valid
-	ERR_EMPTY,           // Map is empty
-	ERR_INVALID_CHAR,    // Map contains invalid characters
-	ERR_DUPLICATED_DATA, // duplicated data.
-	ERR_INVALID_DATA,    // Invalid texture path format
-	ERR_MISSING_DATA,    // Missing data (Texture, Color)
-	ERR_MISSING_COLOR,   // Missing floor or ceiling color definition
-	ERR_INVALID_COLOR,   // Invalid color format (e.g., incorrect RGB values)
-	ERR_MAP_NOT_CLOSED,  // Map is not surrounded by walls
-	ERR_MULTIPLE_START,  // Multiple player start positions
-	ERR_NO_START,        // No player start position
-	ERR_INVALID_MAP,     // General invalid map layout or format
-	ERR_MAP_NOT_FOUND,   // No map can be found
-	ERR_FILE_READ,       // Error reading the map file
-	ERR_FILE_FORMAT      // Incorrect map file format
+	NO_ERROR,
+	ERR_EMPTY,
+	ERR_INVALID_CHAR,
+	ERR_DUPLICATED_DATA,
+	ERR_INVALID_DATA,
+	ERR_MISSING_DATA,
+	ERR_MISSING_COLOR,
+	ERR_INVALID_COLOR,
+	ERR_MAP_NOT_CLOSED,
+	ERR_MULTIPLE_START,
+	ERR_NO_START,
+	ERR_INVALID_MAP,
+	ERR_MAP_NOT_FOUND,
+	ERR_FILE_READ,
+	ERR_FILE_FORMAT
 }				t_mperror;
 
 typedef struct s_point

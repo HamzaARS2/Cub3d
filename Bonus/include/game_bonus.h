@@ -96,5 +96,5 @@ void			board_clean(mlx_image_t *drawing_board);
 void			cast_rays(t_game *game);
 double			radians(double angle);
 double			normalize_angle(double angle);
-void 			handle_cursor_movement(double xpos, double ypos, void* param);
+void			handle_cursor_movement(double xpos, double ypos, void *param);
 #endif
