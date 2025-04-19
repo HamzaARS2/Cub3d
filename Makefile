@@ -35,7 +35,7 @@ all: libmlx $(NAME)
 bonus: libmlx $(LIBFT) $(BONUS_NAME)
 
 $(BONUS_NAME) : $(BONUS_OBJS_FILES) $(BONUS_HEADER)
-	$(CC) $(ADS) $(CFLAGS) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $(BONUS_NAME)
+	$(CC) $(CFLAGS) $(BONUS_OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $(BONUS_NAME)
 
 libmlx:
 	@cmake $(MLX) -B $(MLX_BUILD)
@@ -45,10 +45,10 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR) all bonus
 
 %.o: %.c $(HEADER) $(BONUS_HEADER)
-	$(CC) $(ADS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS_FILES) $(LIBFT)
-	$(CC) $(ADS) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $@
+	$(CC) $(CFLAGS) $(OBJS_FILES) $(LIBFT) $(MLX_LIB)  -o $@
 
 clean:
 	rm -rf $(OBJS_FILES)
