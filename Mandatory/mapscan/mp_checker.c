@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:34:07 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 16:21:11 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 10:43:51 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 bool	chk_format(char *mapfile)
 {
-	char *ext;
-	
+	char	*ext;
+
 	if (!mapfile || mapfile[0] == 0)
 		return (mp_post_error(ERR_FILE_READ));
 	ext = ft_strnstr(mapfile, ".cub", ft_strlen(mapfile));
 	if (!(ext && ext[4] == 0))
-		return (mp_post_error(ERR_FILE_FORMAT));	
+		return (mp_post_error(ERR_FILE_FORMAT));
 	return (true);
 }
-
-
 
 bool	chk_color(char *color_str, int *color)
 {
 	char	**rgb;
-	int i;
-	int k;
-	int d;
-	
+	int		i;
+	int		k;
+	int		d;
+
 	i = 0;
 	k = 0;
 	rgb = ft_split(color_str, ',');
@@ -50,7 +48,7 @@ bool	chk_color(char *color_str, int *color)
 			k = -1;
 	}
 	if (!ump_color_toint(color_str, rgb, color))
-		return (false);		
+		return (false);
 	return (i == 3 && k >= 0);
 }
 
@@ -58,9 +56,9 @@ bool	chk_color(char *color_str, int *color)
 // Checks for duplicate/not exist player position.
 static t_mperror	chk_map_comp(char **map)
 {
-	int y;
-	int x;
-	int count;
+	int	y;
+	int	x;
+	int	count;
 
 	y = 0;
 	count = 0;
@@ -73,7 +71,7 @@ static t_mperror	chk_map_comp(char **map)
 				return (mp_post_error(ERR_INVALID_CHAR));
 			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
 				|| map[y][x] == 'W')
-					count++;
+				count++;
 		}
 		y++;
 	}
@@ -84,15 +82,16 @@ static t_mperror	chk_map_comp(char **map)
 	return (true);
 }
 
-
 bool	chk_position(char **map, t_point v2)
 {
 	if (v2.y == 0 || v2.x == 0 || !map[v2.y] || !map[v2.y + 1] || !map[v2.y - 1]
 		|| !map[v2.y][v2.x + 1])
 		return (mp_post_error(ERR_MAP_NOT_CLOSED));
-	if (ft_strlen(map[v2.y - 1]) <= v2.x || !ump_is_mpcomponent(map[v2.y - 1][v2.x]))
+	if (ft_strlen(map[v2.y - 1]) <= v2.x || !ump_is_mpcomponent(map[v2.y
+				- 1][v2.x]))
 		return (mp_post_error(ERR_MAP_NOT_CLOSED));
-	if (ft_strlen(map[v2.y + 1]) <= v2.x || !ump_is_mpcomponent(map[v2.y + 1][v2.x]))
+	if (ft_strlen(map[v2.y + 1]) <= v2.x || !ump_is_mpcomponent(map[v2.y
+				+ 1][v2.x]))
 		return (mp_post_error(ERR_MAP_NOT_CLOSED));
 	if (!ump_is_mpcomponent(map[v2.y][v2.x - 1]))
 		return (mp_post_error(ERR_INVALID_CHAR));
@@ -103,8 +102,8 @@ bool	chk_position(char **map, t_point v2)
 
 bool	chk_map(t_mapscan *mapscan)
 {
-	t_point v2;
-	
+	t_point	v2;
+
 	v2.y = 0;
 	if (!chk_map_comp(mapscan->map))
 		return (false);
@@ -115,12 +114,13 @@ bool	chk_map(t_mapscan *mapscan)
 			return (false);
 		while (mapscan->map[v2.y][++v2.x])
 		{
-			if (ump_is_mpcomponent(mapscan->map[v2.y][v2.x]) && mapscan->map[v2.y][v2.x] != '1')
+			if (ump_is_mpcomponent(mapscan->map[v2.y][v2.x])
+				&& mapscan->map[v2.y][v2.x] != '1')
 			{
 				if (!chk_position(mapscan->map, v2))
 					return (false);
 				if (mapscan->map[v2.y][v2.x] != '0')
-					mapscan->start_pos = (t_point) {v2.x, v2.y};
+					mapscan->start_pos = (t_point){v2.x, v2.y};
 			}
 		}
 		v2.y++;

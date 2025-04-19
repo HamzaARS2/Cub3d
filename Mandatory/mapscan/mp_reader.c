@@ -17,7 +17,7 @@
 // Return -1 if it couldnt find id or an index it it did.
 int	rdr_checkid(t_mapscan *mapscan, char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!line)
@@ -38,11 +38,11 @@ int	rdr_checkid(t_mapscan *mapscan, char *line)
 // Can post duplication error.
 bool	rdr_readtex(t_mapscan *mapscan, char *line)
 {
-	int id;
+	int	id;
 
 	id = rdr_checkid(mapscan, line);
-	if (id < 0 || (line[id] != 'N' && line[id] != 'S'
-		&& line[id] != 'E' && line[id] != 'W'))
+	if (id < 0 || (line[id] != 'N' && line[id] != 'S' && line[id] != 'E'
+			&& line[id] != 'W'))
 		return (false);
 	if ((line[id + 2] < 9 || line[id + 2] > 13) && line[id + 2] != 32)
 		return (false);
@@ -61,7 +61,7 @@ bool	rdr_readtex(t_mapscan *mapscan, char *line)
 
 bool	rdr_readsurfs(t_mapscan *mapscan, char *line)
 {
-	int id;
+	int	id;
 
 	id = rdr_checkid(mapscan, line);
 	if (id < 0 || (line[id] != 'F' && line[id] != 'C'))
@@ -81,7 +81,7 @@ bool	rdr_read_data(t_mapscan *mapscan)
 {
 	char	*line;
 	int		count;
-	
+
 	count = 6;
 	while (count && !mapscan->error)
 	{
@@ -108,18 +108,18 @@ char	**rdr_readmap(t_mapscan *mapscan)
 	t_list	*maplst;
 	char	*line;
 	bool	mapstarted;
-	
+
 	maplst = NULL;
 	mapstarted = false;
 	while (true)
 	{
 		line = get_next_line(mapscan->mapfd);
 		if (!line)
-			break;
+			break ;
 		if (!mapstarted && ump_is_empty_line(line))
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		mapstarted = true;
 		ft_lstadd_back(&maplst, ft_lstnew(ft_strtrim(line, "\n")));
@@ -129,4 +129,3 @@ char	**rdr_readmap(t_mapscan *mapscan)
 	mapscan->mapsize.x = ft_lstcontent_max(maplst);
 	return (ump_create_map(maplst, mapscan->mapsize));
 }
-

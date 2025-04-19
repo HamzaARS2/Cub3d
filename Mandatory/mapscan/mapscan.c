@@ -12,9 +12,9 @@
 
 #include "../include/mapscan.h"
 
-t_mapscan	*init_mapscan(char *mapfile)	
+t_mapscan	*init_mapscan(char *mapfile)
 {
-	t_mapscan *mapscan;
+	t_mapscan	*mapscan;
 
 	mapscan = malloc(sizeof(t_mapscan));
 	if (!mapscan)
@@ -32,17 +32,17 @@ t_mapscan	*init_mapscan(char *mapfile)
 		return (NULL);
 	}
 	mapscan->map = NULL;
-	mapscan->mapsize = (t_point) {0};
-	mapscan->texpaths = (t_texpath) {NULL};
+	mapscan->mapsize = (t_point){0};
+	mapscan->texpaths = (t_texpath){NULL};
 	mapscan->error = NO_ERROR;
-	mapscan->colors = (t_colors) {0};
+	mapscan->colors = (t_colors){0};
 	return (mapscan);
 }
 
 void	mp_loadmap(t_mapscan *mapscan)
 {
 	char	*line;
-	
+
 	if (!rdr_read_data(mapscan))
 	{
 		mp_post_error(mapscan->error);
@@ -58,14 +58,14 @@ void	mp_loadmap(t_mapscan *mapscan)
 
 bool	mp_verifymap(t_mapscan *mapscan)
 {
-	t_point start_pos;
-	
+	t_point	start_pos;
+
 	if (!chk_color(mapscan->colors.fcolor_str, &mapscan->colors.fcolor)
 		|| !chk_color(mapscan->colors.ccolor_str, &mapscan->colors.ccolor))
-		{
-			mp_post_error(ERR_INVALID_COLOR);
-			return (false);
-		}
+	{
+		mp_post_error(ERR_INVALID_COLOR);
+		return (false);
+	}
 	if (!chk_map(mapscan))
 		return (false);
 	start_pos = mapscan->start_pos;
@@ -104,8 +104,8 @@ bool	mp_post_error(t_mperror error)
 
 void	mp_clearmap(t_mapscan *mapscan)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (!mapscan)
 		return ;
@@ -124,4 +124,3 @@ void	mp_clearmap(t_mapscan *mapscan)
 	ft_memset(mapscan, 0, sizeof(t_mapscan));
 	free(mapscan);
 }
-
