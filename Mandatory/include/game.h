@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:09:35 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/18 11:19:42 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 11:53:36 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 350
-# define HEIGHT 700
+# define WIDTH 1440
+# define HEIGHT 900
 
 # define MAP_WIDTH 300
 # define MAP_HEIGHT 250

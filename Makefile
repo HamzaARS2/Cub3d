@@ -1,4 +1,4 @@
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit
 
 MLX := MLX42

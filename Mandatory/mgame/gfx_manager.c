@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 10:46:51 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:36:12 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width,
 	return (image);
 }
 
-void	gfx_clear(mlx_t *mlx, t_list **graphics)
+void	gfx_clear(t_list **graphics)
 {
 	t_list	*temp;
 	t_list	*current;

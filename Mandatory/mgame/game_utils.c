@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:31:47 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 10:45:48 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:55:56 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_angle(t_game *game)
 	double	angle;
 	char	c_dir;
 
+	angle = 0.0;
 	c_dir = game->mapscan->c_direction;
 	if (c_dir == 'N')
 		angle = radians(270);

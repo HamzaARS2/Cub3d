@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 11:07:28 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:45:09 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ uint32_t	**wd_get_color_buffer(mlx_image_t *texture)
 	if (!pixels)
 		return (NULL);
 	y = -1;
-	while (++y < texture->height)
+	while (++y < (int)texture->height)
 	{
 		pixels[y] = malloc(texture->width * sizeof(uint32_t));
 		if (!pixels[y])
 			return (free_array((void **)pixels, y - 1));
 		x = 0;
-		while (x < texture->width)
+		while (x < (int)texture->width)
 		{
 			pixels[y][x++] = get_rgba(texture->pixels[i], texture->pixels[i
 					+ 1], texture->pixels[i + 2], texture->pixels[i + 3]);
@@ -100,7 +100,7 @@ void	wd_clear(t_world *world)
 {
 	if (!world)
 		return ;
-	gfx_clear(world->mlx, &world->graphics);
+	gfx_clear(&world->graphics);
 	ft_clear_array((void **)world->textures.north_texture.pixels);
 	ft_clear_array((void **)world->textures.south_texture.pixels);
 	ft_clear_array((void **)world->textures.east_texture.pixels);

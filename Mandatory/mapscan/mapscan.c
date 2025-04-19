@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:09:53 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/15 16:22:20 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:33:42 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_mapscan	*init_mapscan(char *mapfile)
 	}
 	mapscan->map = NULL;
 	mapscan->mapsize = (t_point){0};
-	mapscan->texpaths = (t_texpath){NULL};
+	mapscan->texpaths = (t_texpath){0};
 	mapscan->error = NO_ERROR;
 	mapscan->colors = (t_colors){0};
 	return (mapscan);
@@ -41,8 +41,6 @@ t_mapscan	*init_mapscan(char *mapfile)
 
 void	mp_loadmap(t_mapscan *mapscan)
 {
-	char	*line;
-
 	if (!rdr_read_data(mapscan))
 	{
 		mp_post_error(mapscan->error);

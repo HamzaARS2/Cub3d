@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:34:25 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/17 15:36:57 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 11:37:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double	radians(double angle)
 	return (angle * (M_PI / 180));
 }
 
-int	check_wall(t_game *game, t_vector2 *hitp, char **map, t_point map_size)
+int	check_wall(t_vector2 *hitp, char **map, t_point map_size)
 {
 	int	x_tile;
 	int	y_tile;
@@ -56,7 +56,7 @@ void	find_wall_hit(t_game *game, t_vector2 *hit, double Xa, double Ya)
 
 	map = game->mapscan->map;
 	map_size = game->mapscan->mapsize;
-	while (check_wall(game, hit, map, map_size))
+	while (check_wall(hit, map, map_size))
 	{
 		hit->x = hit->x + Xa;
 		hit->y = hit->y + Ya;
