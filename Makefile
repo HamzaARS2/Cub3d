@@ -26,11 +26,9 @@ OBJS_FILES = $(MAIN_FILES:.c=.o)
 BONUS_OBJS_FILES = $(BONUS_FILES:.c=.o)
 
 HEADER = ./Mandatory/include/game.h ./Mandatory/include/raycaster.h
-BONUS_HEADER = ./Bonus/include/game_bonus.h ./Mandatory/include/raycaster_bonus.h
+BONUS_HEADER = ./Bonus/include/game_bonus.h ./Bonus/include/raycaster_bonus.h
 NAME = cub3D
 BONUS_NAME = cub3D_bonus
-
-# ADS := -fsanitize=address -g 
 
 all: libmlx $(NAME)
 

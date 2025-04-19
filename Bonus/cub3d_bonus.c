@@ -6,16 +6,11 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 13:14:17 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:02:48 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d_bonus.h"
-
-void	foo(void)
-{
-	system("leaks -q cub3D");
-}
 
 int	main(int ac, char **av)
 {
@@ -23,10 +18,9 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_putstr_fd("Error\nOne argument required!", 2);
+		ft_putstr_fd("Error\nOne argument required!\n", 2);
 		return (EXIT_FAILURE);
 	}
-	atexit(foo);
 	if (!init_game(&game, av[1]))
 	{
 		cleanup_game(game);
