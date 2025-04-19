@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 17:14:26 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 10:46:15 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-bool	 init_game(t_game *game, char *mapfile)
+bool	init_game(t_game *game, char *mapfile)
 {
-	mlx_image_t *obj_img;
-	
+	mlx_image_t	*obj_img;
+
 	ft_memset(game, 0, sizeof(t_game));
 	game->mapscan = readmap(mapfile);
 	if (!game->mapscan)
@@ -31,7 +31,6 @@ bool	 init_game(t_game *game, char *mapfile)
 	return (true);
 }
 
-
 void	run_game(t_game *game)
 {
 	wd_prepare_colors(game->world);
@@ -40,18 +39,17 @@ void	run_game(t_game *game)
 	wd_render_cf(game->world);
 	draw_player(game);
 	mlx_loop_hook(game->mlx, update, game);
-	// game loop.
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }
 
-void	update(void *param) {
+void	update(void *param)
+{
 	t_game	*game;
 	mlx_t	*mlx;
-	
+
 	game = param;
 	mlx = game->mlx;
-	
 	mv_handle_moves(game);
 }
 

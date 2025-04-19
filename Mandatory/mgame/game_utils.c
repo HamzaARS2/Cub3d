@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:31:47 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 17:15:05 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 10:45:48 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ bool	load_resources(t_game *game)
 
 void	init_angle(t_game *game)
 {
-	double angle;
-	char c_dir;
+	double	angle;
+	char	c_dir;
 
 	c_dir = game->mapscan->c_direction;
 	if (c_dir == 'N')
@@ -50,5 +50,4 @@ void	init_angle(t_game *game)
 	else if (c_dir == 'W')
 		angle = radians(180);
 	game->player->direction.rotatin_angle = angle;
-	
 }
