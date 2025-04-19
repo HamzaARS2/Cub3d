@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 22:06:03 by helarras          #+#    #+#             */
-/*   Updated: 2025/03/01 15:19:43 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 11:03:42 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void				ft_clear_array(void **arr);
 int					ft_charcount(char *str, int c);
 int					get_rgba(int r, int g, int b, int a);
 int					ft_lstcontent_max(t_list *lst);
+void				*free_array(void **array, int i);
 #endif

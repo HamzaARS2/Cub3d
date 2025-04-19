@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 18:44:26 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 11:04:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,6 @@ t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
 	}
 	return (render_info);
 }
-
-static void	*free_array(void **array, int i)
-{
-	while (i >= 0 && array[i])
-		free(array[i--]);
-	free(array);
-	return (NULL);
-}
-
 
 uint32_t **wd_get_color_buffer(mlx_image_t *texture)
 {

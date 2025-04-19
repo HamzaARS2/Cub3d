@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:29:18 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/17 18:56:56 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 11:07:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void				wd_render_cf(t_world *world);
 t_wd_texture		wd_texture_bydirection(t_world *world, char direction);
 t_render_info		wd_calc_render_info(t_ray_dat rays_info,
 						t_wd_texture texture);
+void				wd_calc_wall_bounds(t_render_info *render_info);
 void				wd_render_walls(t_world *world, t_ray_dat rays_info);
 uint32_t			**wd_get_color_buffer(mlx_image_t *texture);
 void				wd_prepare_colors(t_world *world);
