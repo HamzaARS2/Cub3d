@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animator_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 19:04:01 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/17 19:04:05 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:22:33 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_animator
 	bool		is_hidden;
 }				t_animator;
 
-t_animator		*init_animator(mlx_t *mlx, bool is_looping);
+t_animator		*init_animator(mlx_t *mlx);
 
 void			anim_update(t_animator *animator);
 

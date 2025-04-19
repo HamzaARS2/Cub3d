@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:23:56 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/18 10:44:46 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:11:07 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 
+	if (ac != 2) {
+		ft_putstr_fd("Error\nOne argument required!", 2);
+		return (EXIT_FAILURE);
+	}
 	atexit(foo);
 	if (!init_game(&game, av[1]))
 	{

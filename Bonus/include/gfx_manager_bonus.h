@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gfx_manager_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:31:20 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 19:02:58 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:15:52 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width,
 				int height);
 void		gfx_draw_rect(mlx_image_t *img, t_point start, t_point end,
 				int color);
-void		gfx_clear(mlx_t *mlx, t_list **graphics);
+void		gfx_clear(t_list **graphics);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:41:37 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/17 16:41:38 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:21:24 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_vector2	vertical_intersection(t_game *game, double ray_angle, int *v_d)
 	t_data	h_data;
 
 	h_data.hit = (t_vector2){0};
-	game->door.door_ray.hitp = (t_vector2){-1};
+	game->door.door_ray.hitp = (t_vector2){-1, -1};
 	h_data.player = game->player;
-	get_vert_x(&h_data, ray_angle, v_d);
+	get_vert_x(&h_data, v_d);
 	get_vert_y(&h_data, ray_angle, v_d);
 	h_data.hit.x = h_data.px;
 	h_data.hit.y = h_data.py;

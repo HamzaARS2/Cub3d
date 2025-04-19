@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_math_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:41:42 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/17 17:54:28 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:16:55 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/raycaster_bonus.h"
 
-void	get_hori_y(t_data *data, double ray_angle, int *v_d)
+void	get_hori_y(t_data *data, int *v_d)
 {
 	if (v_d[0] == looking_up)
 	{
@@ -47,9 +47,9 @@ t_vector2	horizontal_intersection(t_game *game, double ray_angle, int *v_d)
 	t_data	h_data;
 
 	h_data.hit = (t_vector2){0};
-	game->door.door_ray.hitp = (t_vector2){-1};
+	game->door.door_ray.hitp = (t_vector2){-1, -1};
 	h_data.player = game->player;
-	get_hori_y(&h_data, ray_angle, v_d);
+	get_hori_y(&h_data, v_d);
 	geth_hori_x(&h_data, ray_angle, v_d);
 	h_data.hit.x = h_data.px;
 	h_data.hit.y = h_data.py;
@@ -57,7 +57,7 @@ t_vector2	horizontal_intersection(t_game *game, double ray_angle, int *v_d)
 	return (h_data.hit);
 }
 
-void	get_vert_x(t_data *data, double ray_angle, int *v_d)
+void	get_vert_x(t_data *data, int *v_d)
 {
 	if (v_d[1] == looking_right)
 	{

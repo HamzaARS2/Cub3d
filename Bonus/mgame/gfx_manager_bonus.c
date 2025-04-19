@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/17 15:09:40 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:15:37 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int heig
 	return (image);
 }
 
-// TODO: function to clear allocated images.
-void    gfx_clear(mlx_t *mlx, t_list **graphics)
+void    gfx_clear(t_list **graphics)
 {
 	t_list *temp;
 	t_list *current;

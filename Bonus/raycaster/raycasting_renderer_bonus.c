@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_renderer_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:41:53 by nhimad            #+#    #+#             */
-/*   Updated: 2025/04/18 10:40:36 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:20:59 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,8 @@ double	normalize_angle(double angle)
 	return (angle);
 }
 
-void	render_doors(t_game *game, double distance, double angle, int x)
+void	render_doors(t_game *game)
 {
-	double	focal;
-	double	wall_h;
-	double	start;
-	int		pixel_offset;
-
 	if (game->door.closed || (game->door.close_cmd
 			&& mv_check_collusion(game->player->position.x,
 				game->player->position.y, game->mapscan->map, 'D')))
@@ -85,7 +80,7 @@ void	send_ray(t_game *game, int x, double angle)
 	if (ray_dat.distance < game->door.door_ray.distance)
 		game->door.door_ray.hitp.x = INVALID_DATA;
 	if (game->door.door_ray.hitp.x != INVALID_DATA)
-		render_doors(game, game->door.door_ray.distance, angle, x);
+		render_doors(game);
 	wd_render_walls(game->world, ray_dat);
 }
 

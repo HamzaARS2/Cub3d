@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhimad <nhimad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:21:46 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/18 10:40:36 by nhimad           ###   ########.fr       */
+/*   Updated: 2025/04/19 12:23:23 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game_bonus.h"
 
-void handle_cursor_movement(double xpos, double ypos, void* param);
-
 bool	 init_game(t_game *game, char *mapfile)
-{
-	mlx_image_t *obj_img;
-	
+{	
 	ft_memset(game, 0, sizeof(t_game));
 	game->mapscan = readmap(mapfile);
 	if (!game->mapscan)
@@ -28,7 +24,7 @@ bool	 init_game(t_game *game, char *mapfile)
 	game->world = init_world(game->mlx, game->mapscan->colors);
 	game->player = init_player(game, NULL, game->mapscan->start_pos);
 	game->map_img = gfx_create_image(game->mlx, &game->world->graphics, MAP_WIDTH, MAP_HEIGHT);
-	game->animator = init_animator(game->mlx, true);
+	game->animator = init_animator(game->mlx);
 	init_angle(game);
 	game->door.closed = true;
 	game->door.close_cmd = false;
@@ -60,6 +56,7 @@ void handle_cursor_movement(double xpos, double ypos, void* param)
 	double angle;
 	int x_d;
 
+	(void)ypos;
 	game = param;
 	angle = game->player->direction.rotatin_angle;
 	x_d = xpos - game->mouse_pos.x;
