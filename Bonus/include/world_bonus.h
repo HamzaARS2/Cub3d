@@ -18,7 +18,7 @@
 
 # define TILE_SIZE 32
 # define OBJ_SIZE 4
-# define CROSSHAIR_PATH "Mandatory/textures/crosshair/crosshair_64.png"
+# define CP "Mandatory/textures/crosshair/crosshair_64.png"
 
 typedef struct s_vector2
 {
@@ -79,6 +79,7 @@ void				wd_render_cf(t_world *world);
 t_wd_texture		wd_texture_bydirection(t_world *world, char direction);
 t_render_info		wd_calc_render_info(t_ray_dat rays_info,
 						t_wd_texture texture);
+void				wd_calc_wall_bounds(t_render_info *render_info);
 void				wd_render_walls(t_world *world, t_ray_dat rays_info);
 void				wd_render_doors(t_world *world, t_ray_dat rays_info);
 uint32_t			**wd_get_color_buffer(mlx_image_t *texture);

@@ -6,14 +6,14 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:28:25 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 12:21:51 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:06:26 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/world_bonus.h"
 #include "../include/raycaster_bonus.h"
+#include "../include/world_bonus.h"
 
-t_wd_texture wd_texture_bydirection(t_world *world, char direction)
+t_wd_texture	wd_texture_bydirection(t_world *world, char direction)
 {
 	if (direction == 'N')
 		return (world->textures.north_texture);
@@ -26,46 +26,53 @@ t_wd_texture wd_texture_bydirection(t_world *world, char direction)
 	return (world->textures.north_texture);
 }
 
-t_render_info wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
+void	wd_calc_wall_bounds(t_render_info *render_info)
 {
-	int projection;
-	t_render_info render_info;
-	double offset_x;
-	
-	projection = (WIDTH / 2) / tan(radians(FOV / 2));
-	// wall strip height
-	render_info.wall_strip_height = (TILE_SIZE / rays_info.distance) * projection;
-	// wall top pixel
-	render_info.wall_top_pixel = (HEIGHT / 2) - (render_info.wall_strip_height / 2);
-	render_info.pixel_offset = 0;
-	if (render_info.wall_top_pixel < 0)
+	render_info->wall_top_pixel = (HEIGHT / 2) - (render_info->wall_strip_height
+			/ 2);
+	render_info->pixel_offset = 0;
+	if (render_info->wall_top_pixel < 0)
 	{
-		render_info.pixel_offset = -render_info.wall_top_pixel;
-		render_info.wall_top_pixel = 0;
+		render_info->pixel_offset = -render_info->wall_top_pixel;
+		render_info->wall_top_pixel = 0;
 	}
-	// wall bot pixel
-	render_info.wall_bot_pixel = (HEIGHT / 2) + (render_info.wall_strip_height / 2);
-	if (render_info.wall_bot_pixel > HEIGHT)
-		render_info.wall_bot_pixel = HEIGHT;
-	
-	// texture offset x
-	if (rays_info.ver_hor == 'V') {
+	render_info->wall_bot_pixel = (HEIGHT / 2) + (render_info->wall_strip_height
+			/ 2);
+	if (render_info->wall_bot_pixel > HEIGHT)
+		render_info->wall_bot_pixel = HEIGHT;
+}
+
+t_render_info	wd_calc_render_info(t_ray_dat rays_info, t_wd_texture texture)
+{
+	int				projection;
+	t_render_info	render_info;
+	double			offset_x;
+
+	projection = (WIDTH / 2) / tan(radians(FOV / 2));
+	render_info.wall_strip_height = (TILE_SIZE / rays_info.distance)
+		* projection;
+	wd_calc_wall_bounds(&render_info);
+	if (rays_info.ver_hor == 'V')
+	{
 		offset_x = (rays_info.hitp.y / TILE_SIZE);
-		render_info.tex_offset_x = (offset_x - floor(offset_x)) * texture.img->width;
+		render_info.tex_offset_x = (offset_x - floor(offset_x))
+			* texture.img->width;
 	}
-	else {
+	else
+	{
 		offset_x = (rays_info.hitp.x / TILE_SIZE);
-		render_info.tex_offset_x = (offset_x - floor(offset_x)) * texture.img->width;
+		render_info.tex_offset_x = (offset_x - floor(offset_x))
+			* texture.img->width;
 	}
 	return (render_info);
 }
 
-uint32_t **wd_get_color_buffer(mlx_image_t *texture)
+uint32_t	**wd_get_color_buffer(mlx_image_t *texture)
 {
-	int i;
-	int y;
-	int x;
-	uint32_t **pixels;
+	int			i;
+	int			y;
+	int			x;
+	uint32_t	**pixels;
 
 	i = 0;
 	pixels = malloc((texture->height + 1) * sizeof(uint32_t *));
@@ -80,7 +87,8 @@ uint32_t **wd_get_color_buffer(mlx_image_t *texture)
 		x = 0;
 		while (x < (int)texture->width)
 		{
-			pixels[y][x++] = get_rgba(texture->pixels[i], texture->pixels[i + 1], texture->pixels[i + 2], texture->pixels[i + 3]);
+			pixels[y][x++] = get_rgba(texture->pixels[i], texture->pixels[i
+					+ 1], texture->pixels[i + 2], texture->pixels[i + 3]);
 			i += 4;
 		}
 	}
