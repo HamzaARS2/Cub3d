@@ -6,7 +6,7 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 08:31:47 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 12:15:27 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:36:20 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_mapscan	*readmap(char *mapfile)
 {
-	t_mapscan *mapscan;
+	t_mapscan	*mapscan;
 
 	mapscan = init_mapscan(mapfile);
 	if (!mapscan)
@@ -27,23 +27,24 @@ t_mapscan	*readmap(char *mapfile)
 	}
 	return (mapscan);
 }
+
 bool	load_resources(t_game *game)
 {
 	if (!wd_load_textures(game->world, game->mapscan->texpaths))
-		 return (false);
+		return (false);
 	if (!anim_load_idle(game->animator, &game->world->graphics))
-		 return (false);
+		return (false);
 	if (!anim_load_attack1(game->animator, &game->world->graphics))
-		 return (false);
+		return (false);
 	if (!anim_load_attack2(game->animator, &game->world->graphics))
-		 return (false);
+		return (false);
 	return (true);
 }
 
 void	init_angle(t_game *game)
 {
-	double angle;
-	char c_dir;
+	double	angle;
+	char	c_dir;
 
 	angle = 0.0;
 	c_dir = game->mapscan->c_direction;
@@ -56,7 +57,6 @@ void	init_angle(t_game *game)
 	else if (c_dir == 'W')
 		angle = radians(180);
 	game->player->direction.rotatin_angle = angle;
-	
 }
 
 bool	check_door_collusion(int new_x, int new_y, char **map, t_game *game)

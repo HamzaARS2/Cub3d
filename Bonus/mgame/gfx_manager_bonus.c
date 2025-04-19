@@ -6,17 +6,16 @@
 /*   By: helarras <helarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 10:42:49 by helarras          #+#    #+#             */
-/*   Updated: 2025/04/19 12:15:37 by helarras         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:36:37 by helarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/game_bonus.h"
 
-void	gfx_draw_rect(mlx_image_t *img, t_point start, t_point end , int color)
+void	gfx_draw_rect(mlx_image_t *img, t_point start, t_point end, int color)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = start.y;
 	while (y < end.y)
@@ -32,9 +31,10 @@ mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
-	
+
 	texture = mlx_load_png(tex_path);
-	if (!texture) {
+	if (!texture)
+	{
 		mp_post_error(ERR_FILE_READ);
 		return (NULL);
 	}
@@ -44,7 +44,8 @@ mlx_image_t	*gfx_create_teximage(mlx_t *mlx, t_list **graphics, char *tex_path)
 	return (image);
 }
 
-mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int height)
+mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width,
+		int height)
 {
 	mlx_image_t	*image;
 
@@ -55,11 +56,11 @@ mlx_image_t	*gfx_create_image(mlx_t *mlx, t_list **graphics, int width, int heig
 	return (image);
 }
 
-void    gfx_clear(t_list **graphics)
+void	gfx_clear(t_list **graphics)
 {
-	t_list *temp;
-	t_list *current;
-	
+	t_list	*temp;
+	t_list	*current;
+
 	current = *graphics;
 	while (current)
 	{
